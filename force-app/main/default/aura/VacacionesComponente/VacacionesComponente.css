@@ -1,0 +1,79 @@
+.THIS .contenedor_card{
+    margin: 0;
+    padding: 0;
+    background: gainsboro;
+    max-height: 100px;
+}
+.THIS .firma{
+    width: 100%;
+    height: 200px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    border: 1px solid #ccc;
+    cursor: crosshair;
+}
+.THIS .contenedor_botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.THIS .btn_aceptar_firma{
+    background-color: rgb(25, 136, 25);
+    color: white;
+    font-family: 'Arial', sans-serif;
+}
+.THIS .btn_aceptar_firma:hover{
+    background-color: rgb(20, 113, 20);
+}
+.THIS .btn_aceptar_firma:active{
+    background-color: rgb(15, 90, 15);
+}
+.THIS .btn_normal{
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: rgb(0, 78, 160);
+    border-color: aqua;
+}
+.THIS .btn_normal:hover{
+    background-color: rgb(53, 130, 255);
+    color: white;
+}
+.THIS .btn_normal:active{
+    background: rgb(83, 122, 163);
+}
+
+.THIS .preview-container {
+    border: 1px dashed #dddbda;
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+
+
+/* Estilos para el componente */
+.THIS .slds-is-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.THIS .firma_contenedor {
+    border: 1px dashed #dddbda;
+    border-radius: .25rem;
+    margin-bottom: 1rem;
+    background: white;
+}
+
+.THIS .preview-image-container {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.THIS .preview-image {
+    max-width: 100%;
+    max-height: 200px;
+    border: 1px solid #dddbda;
+    border-radius: .25rem;
+}

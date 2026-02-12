@@ -1,0 +1,57 @@
+<!-- recordDeletionFormKWE.html -->
+<template>
+    <lightning-card title="Eliminar Registros En Un Objeto" icon-name="utility:delete">
+        
+        <!-- CUERPO DE LA CARD (solo inputs) -->
+        <div class="slds-p-around_medium">
+            <!-- Input para nombre del objeto -->
+            <lightning-input 
+                label="Nombre del Objeto" 
+                value={nombreObjeto} 
+                onchange={handleNombreObjetoChange}
+                required
+                class="slds-m-bottom_medium">
+            </lightning-input>
+
+            <!-- Input para límite -->
+            <lightning-input 
+                label="Límite" 
+                type="number" 
+                value={limite} 
+                onchange={handleLimiteChange} 
+                min="1"
+                max="50000" 
+                required
+                class="slds-m-bottom_medium">
+            </lightning-input>
+
+            <!-- Mostrar resultados (en el cuerpo) -->
+            <template if:true={resultado}>
+                <div class="slds-m-top_medium slds-text-color_success slds-border_top slds-p-top_medium">
+                    {resultado}
+                </div>
+            </template>
+        </div>
+
+        <!-- FOOTER DE LA CARD (solo botones) -->
+        <div slot="footer">
+            <lightning-button 
+                label="Eliminar Registros" 
+                variant="destructive" 
+                onclick={eliminarRegistros}
+                disabled={isLoading}
+                class="slds-m-left_x-small">
+            </lightning-button>
+
+            <!-- Indicador de carga en el footer -->
+            <template if:true={isLoading}>
+                <lightning-spinner 
+                    alternative-text="Eliminando registros" 
+                    size="small"
+                    class="slds-m-left_medium">
+                </lightning-spinner>
+            </template>
+        </div>
+        
+    </lightning-card>
+</template>

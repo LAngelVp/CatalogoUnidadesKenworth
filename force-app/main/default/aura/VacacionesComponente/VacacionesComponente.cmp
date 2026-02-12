@@ -1,0 +1,54 @@
+<aura:component controller="AlmacenamientoFirmaApex" implements="force:hasRecordId,flexipage:availableForAllPageTypes,
+                           forceCommunity:availableForAllPageTypes,
+                           lightning:availableForFlowScreens" access="global">
+    <aura:attribute name="recordId" type="String" access="global" />
+    <aura:attribute name="hasError" type="Boolean" default="false"/>
+    <aura:attribute name="errorMessage" type="String" default=""/>
+    <aura:attribute name="firmaValida" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="imagenPrevia" type="String" description="URL de datos para la vista previa de la imagen" default=""/>
+    <aura:attribute name="firmaDataURL" type="String" default=""/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <lightning:card 
+        title="AGREGA TU FIRMA"
+        footer="Al ingresar la firma esta aceptando el uso de su firma para el formato de vacaciones"
+        class="contenedor_card"
+    >
+        
+        <div class="firma_contenedor">
+            <!-- <aura:if isTrue="{!not(v.firmaValida)}"> -->
+            <aura:if isTrue="{!(empty(v.imagenPrevia))}">
+                <canvas aura:id="firma_lienzo" class="firma"></canvas>
+            </aura:if>
+        </div>
+
+        <aura:if isTrue="{!v.hasError}">
+            <div class="slds-text-color_error">
+                <strong>Error: {!v.errorMessage}</strong>
+            </div>
+        </aura:if>
+        
+        <div class="contenedor_botones">
+            <aura:if isTrue="{!(empty(v.firmaDataURL))}">
+                <lightning:button label="Aceptar Firma" iconName="utility:new_direct_message" class="btn_normal" onclick="{!c.aceptarFirma}"/>
+            </aura:if>
+            <lightning:button class="btn_normal" label="Limpiar" onclick="{!c.limpiar_campo}"/>
+            <lightning:button iconName="action:new_custom38" class="btn_normal" label="Imagen" onclick="{!c.agregar_imagen_firma}"/>
+            <aura:if  isTrue="{!not(empty(v.firmaDataURL))}">
+                <lightning:button iconName="action:new_custom38" class="btn_aceptar_firma" label="Firmar" onclick="{!c.almacenamiento_firma}"/>
+            </aura:if>
+        </div>
+        <!-- MOSTRAMOS LA IMAGEN -->
+        <input type="file" aura:id="fileInput" 
+                style="display: none;" 
+                accept="image/jpeg, image/png, image/gif"
+                onchange="{!c.handleImageSelected}"/>
+
+        <aura:if isTrue="{!not(empty(v.imagenPrevia))}">
+            <div class="preview-image-container">
+                <div class="slds-text-heading_small slds-m-bottom_x-small">Vista previa</div>
+                <img src="{!v.imagenPrevia}" class="preview-image" 
+                    alt="Vista previa de la firma cargada"/>
+            </div>
+        </aura:if>
+    </lightning:card>
+</aura:component>

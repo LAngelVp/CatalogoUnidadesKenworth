@@ -1,0 +1,447 @@
+<apex:page standardController="Vacacion__c" renderAs="" showHeader="false" applyHtmlTag="false" applyBodyTag="false" sidebar="false">
+    <script>
+        window.onload = function () {
+            setTimeout(function() {
+                window.print();
+            }, 500); // Da tiempo a que se renderice la página antes de imprimir
+        };
+        window.onload = function() {
+            var img = document.getElementById("firma");
+            img.src = "data:image/png;base64,{!JSENCODE(Vacacion__c.FirmaEmpleado__c)}";
+
+            setTimeout(function(){
+                window.print();
+                img.removeAttribute("src");
+            }, 500);
+        };
+        // Bloquear F12
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I")) {
+                e.preventDefault();
+            }
+        });
+        // Bloquear clic derecho
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        });
+    </script>
+    <head>
+        <style type="text/css" media="all">
+            @font-face {
+                font-family: 'saira';
+                src: url({!URLFOR($Resource.fuente_saira_regular)}) format('truetype');
+            }
+            *{font-family: 'saira', sans-serif; font-size: 13px; margin: 0px; padding: 0px; box-sizing: border-box;}
+            @page{margin-top: 50px; @top-center{width: 100%; content: element(header);}}
+            .header{position: running(header); width: 100%;}
+            .tabla_cabecera{height: 150px;}
+            .bordes_tabla{border-collapse: separate; border-spacing: 0;}
+            .bordes_tabla td{border: 1px solid black;}
+            .img_logo_size{width: 6cm; height: 3.5cm;}
+            .espacio_logos{text-align: center; width: 6cm;}
+            .alto_ancho_celdas_cabecera{width: 110px; min-width: 110px; height: 40px; min-height: 40px;}
+            .contenido{position: relative; margin-bottom: 45px; margin-top:20px;}
+            .txt_centrado{text-align: center;}
+            .txt_h1{font-size: 20px;}
+            .txt_bold{font-weight: bold;}
+            .txt_normal{font-weight: normal;}
+            .pl_5px{padding-left: 5px;}
+            .fs_11{font-size: 11px;}
+            .text_bold{font-weight: bold;}
+            .margen_vertical{margin-bottom: 10px; margin-top: 10px;}
+            .subrayado_bajo{text-decoration: underline}
+            .borde_inferior{border-bottom: 0.5px solid black;}
+            .posicion_vertical_txt_top{vertical-align: top;}
+            /* Numero de paginas */
+            .pagenumber::before{content: counter(page);}
+            .pagecount::before{content: counter(pages);}
+            /* ESTILOS PARA LA TABLA SUPERIOR DE LOS DATOS DEL EMPLEADO */
+            .padding_dentro_celda{padding-left:3px; padding-top: 2.5px; padding-bottom: 2.5px; padding-right: 3px;}
+            .col_datos_titulo{max-width: 4.5cm; min-width: 4.5cm;width: 4.5cm;background-color: #001d7f; color:#ffffff;}
+            .col_datos_titulo_estilos{background-color: #001d7f; color:#ffffff;}
+            .col_datos_contenido{min-width:3cm;max-width:3cm;}
+            .col_separadora_pequeña{width: 0.5cm; min-width: 0.5cm; max-width: 0.5cm;}
+            .col_separadora_larga{width: 1.5cm;min-width: 1.5cm;max-width: 1.5cm;}
+            .fila_separadora{height: 5px; min-height: 5px; maxheight: 5px;}
+            .color_dias_restantes{background-color: #679ed8;}
+            .borde_celda{border: 0.5px solid black;}
+            /* APARTADO DE LA FIRMA DEL DOCUMENTO */
+            .fila_postura_firma{height: 50px; min-height: 50px; max-height: 50px;}
+        </style>
+    </head>
+    <html>
+        <body>
+            <div class="header">
+                <table width="100%" class="bordes_tabla tabla_cabecera">
+                    <tbody>
+                        <tr>
+                            <td rowspan="4" colspan="1" class="espacio_logos">
+                                <!-- <div class="dimenciones_contenedor_logo_membrete"> -->
+                                    <apex:image styleClass="img_logo_size" url="{!URLFOR($Resource.logos_para_fondos_claros, 'LOGOS_FONDO_CLARO/l_vertical_razon.png')}"/>
+                            </td>
+                            <td colspan="4" >
+                                <p class="txt_centrado txt_h1 text_bold">
+                                    SISTEMA DE GESTIÓN DE CALIDAD
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="alto_ancho_celdas_cabecera">
+                                <strong class="fs_11 pl_5px">
+                                    Área de control:
+                                </strong>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                                <p class="fs_11 ">
+                                    Control individual de vacaciones
+                                </p>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                                <strong class="fs_11">
+                                    Clave:
+                                </strong>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                                <p class="fs_11">
+                                        F-RH-04
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="alto_ancho_celdas_cabecera pl_5px">
+                                <strong class="fs_11">
+                                    Fecha de elaboración:
+                                </strong>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                                <p class="fs_11">
+                                    16 febrero 2023
+                                </p>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                                <strong class="fs_11">
+                                    Hoja:
+                                </strong>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                                <p style="margin:0; padding:0;">1 de 1</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="alto_ancho_celdas_cabecera pl_5px">
+                                <strong class="fs_11">
+                                    Fecha de revisión:
+                                </strong>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                                <p class="fs_11">
+                                    <!-- <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Tipo__c))}">
+                                        
+                                    </apex:outputPanel>
+                                    <apex:outputText value="{!Formato_Calidad__c.Fecha_de_revisi_n_F__c}"/> -->
+                                    21 julio 2025
+                                </p>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                                <strong class="fs_11">
+                                    No. De revisión:
+                                </strong>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                                <p class="fs_11">
+                                    <!-- <apex:outputText value="{0, number, ###,###}">
+                                        <apex:param value="{!Formato_Calidad__c.No_de_revisi_n__c}" />
+                                    </apex:outputText> -->
+                                    1
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="contenido">
+                <table width="100%">
+                    <tr>
+                        <td class="col_datos_titulo padding_dentro_celda"><p class="col_datos_titulo_estilos txt_bold">Nombre del colaborador:</p></td>
+                        <td class="col_separadora_pequeña"></td>
+                        <td colspan="5" class="col_datos_contenido padding_dentro_celda borde_celda">
+                            <p>
+                                <apex:outputText value="{!Vacacion__c.Trabajador__c}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr class="fila_separadora"></tr>
+                    <tr>
+                        <td class="col_datos_titulo padding_dentro_celda"><p class="col_datos_titulo_estilos txt_bold">Departamento:</p></td>
+                        <td class="col_separadora_pequeña"></td>
+                        <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                            <p class="txt_centrado">
+                                <apex:outputText value="{!Vacacion__c.Empleado__r.Departamento_RH__c}"/>
+                            </p>
+                        </td>
+                        <td class="col_separadora_larga"></td>
+                        <td class="col_datos_titulo padding_dentro_celda"><p class="col_datos_titulo_estilos txt_centrado txt_bold">Sucursal:</p></td>
+                        <td class="col_separadora_pequeña"></td>
+                        <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                            <p class="txt_centrado">
+                                <apex:outputText value="{!Vacacion__c.Empleado__r.Sucursal__c}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr class="fila_separadora"></tr>
+                    <tr>
+                        <td class="col_datos_titulo padding_dentro_celda borde_celda"><p class="col_datos_titulo_estilos txt_bold">Periodo de disfrute:</p></td>
+                        <td class="col_separadora_pequeña"></td>
+                        <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                            <p class="txt_centrado">
+                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!Vacacion__c.Empleado__r.Antepasada_Antiguedad__c}" />
+                                </apex:outputText>
+                            </p>
+                        </td>
+                        <td class="col_separadora_larga padding_dentro_celda"><p class="txt_centrado">al</p></td>
+                        <td class="padding_dentro_celda borde_celda">
+                            <p class="txt_centrado">
+                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!Vacacion__c.Empleado__r.Anterior_Antiguedad__c}" />
+                                </apex:outputText>
+                            </p>
+                        </td>
+                        <td class="col_separadora_pequeña"></td>
+                        <td class="col_datos_contenido"><p></p></td>
+                    </tr>
+                    <tr class="fila_separadora"></tr>
+                    <tr>
+                        <td class="col_datos_titulo padding_dentro_celda"><p class="col_datos_titulo_estilos txt_bold">Fecha de ingreso:</p></td>
+                        <td class="col_separadora_pequeña"></td>
+                        <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                            <p class="txt_centrado">
+                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!Vacacion__c.Empleado__r.Fecha_de_ingreso__c}" />
+                                </apex:outputText>
+                            </p>
+                            </td>
+                        <td class="col_separadora_larga"><p class="txt_centrado"></p></td>
+                        <td class="col_datos_titulo padding_dentro_celda"><p class="col_datos_titulo_estilos txt_centrado txt_bold">No. Trabajador</p></td>
+                        <td class="col_separadora_pequeña"></td>
+                        <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                            <p class="txt_centrado">
+                                <apex:outputText value="{!Vacacion__c.Empleado__r.N_mero_Trabajador__c}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr class="fila_separadora"></tr>
+                    <tr>
+                        <td class="col_datos_titulo padding_dentro_celda"><p class="col_datos_titulo_estilos txt_bold">Fecha de solicitud:</p></td>
+                        <td class="col_separadora_pequeña"></td>
+                        <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                            <p class="txt_centrado">
+                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!Vacacion__c.Fecha_de_solicitud__c}" />
+                                </apex:outputText>
+                            </p>
+                        </td>
+                        <td class="col_separadora_larga"><p class="txt_centrado"></p></td>
+                        <td class="col_datos_titulo padding_dentro_celda"><p class="col_datos_titulo_estilos txt_centrado txt_bold">No. Días vacaciones dignas:</p></td>
+                        <td class="col_separadora_pequeña"></td>
+                        <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                            <p class="txt_centrado">
+                                <apex:outputText value="{!Vacacion__c.Empleado__r.Vacaciones_dignas__c}"/>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <div class="margen_vertical">
+                    <strong>
+                        Anexo calendario de mis días programados por concepto de vacaciones, acorde a 
+                        <apex:outputPanel rendered="{!Vacacion__c.Empleado__r.A_os_de_antiguedad__c == 1}" layout="none">
+                            <span>
+                                <apex:outputText value="{0, number, ###,###}">
+                                    <apex:param value="{!Vacacion__c.Empleado__r.A_os_de_antiguedad__c}" />
+                                </apex:outputText>
+                                año laboral cumplido
+                            </span>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!Vacacion__c.Empleado__r.A_os_de_antiguedad__c > 1}" layout="none">
+                            mis 
+                            <span>
+                                <apex:outputText value="{0, number, ###,###}">
+                                    <apex:param value="{!Vacacion__c.Empleado__r.A_os_de_antiguedad__c}" />
+                                </apex:outputText>
+                            </span> años laborales cumplidos
+                        </apex:outputPanel>, manifestando que a la fecha no se me adeuda días pendientes de vacaciones.
+                    </strong>
+                </div>
+                <div style="margin: auto;">
+                    <table width="60%" style="margin: auto;">
+                        <tr>
+                            <td class="col_datos_titulo padding_dentro_celda"><p class="col_datos_titulo_estilos txt_centrado txt_bold">Días solicitados</p></td>
+                            <td class="col_separadora_pequeña"></td>
+                            <td class="col_datos_contenido padding_dentro_celda col_datos_titulo_estilos"><p class="txt_centrado txt_bold">Fechas solicitadas</p></td>
+                        </tr>
+                        <tr class="fila_separadora"></tr>
+                        <apex:outputPanel rendered="{!NOT(ISBLANK(Vacacion__c.D_as_solicitados__c))}" layout="none">
+                            <tr>
+                                <td class="padding_dentro_celda borde_celda">
+                                    <p class="txt_centrado">
+                                        <apex:outputText value="{0, number, ###,###}">
+                                            <apex:param value="{!Vacacion__c.D_as_solicitados__c}" />
+                                        </apex:outputText>
+                                    </p>
+                                </td>
+                                <td class="col_separadora_pequeña"></td>
+                                <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                                    <p class="txt_centrado">
+                                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                            <apex:param value="{!Vacacion__c.Fecha__c}" />
+                                        </apex:outputText>
+                                    </p>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!NOT(ISBLANK(Vacacion__c.D_as_solicitados2__c))}" layout="none">
+                            <tr class="fila_separadora"></tr>
+                            <tr>
+                                <td class="padding_dentro_celda borde_celda">
+                                    <p class="txt_centrado">
+                                        <apex:outputText value="{0, number, ###,###}">
+                                            <apex:param value="{!Vacacion__c.D_as_solicitados2__c}" />
+                                        </apex:outputText>
+                                    </p>
+                                </td>
+                                <td class="col_separadora_pequeña"></td>
+                                <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                                    <p class="txt_centrado">
+                                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                            <apex:param value="{!Vacacion__c.Fecha2__c}" />
+                                        </apex:outputText>
+                                    </p>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!NOT(ISBLANK(Vacacion__c.D_as_solicitados3__c))}" layout="none">
+                            <tr class="fila_separadora"></tr>
+                            <tr>
+                                <td class="padding_dentro_celda borde_celda">
+                                    <p class="txt_centrado">
+                                        <apex:outputText value="{0, number, ###,###}">
+                                            <apex:param value="{!Vacacion__c.D_as_solicitados3__c}" />
+                                        </apex:outputText>
+                                    </p>
+                                </td>
+                                <td class="col_separadora_pequeña"></td>
+                                <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                                    <p class="txt_centrado">
+                                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                            <apex:param value="{!Vacacion__c.Fecha3__c}" />
+                                        </apex:outputText>
+                                    </p>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!NOT(ISBLANK(Vacacion__c.D_as_solicitados4__c))}" layout="none">
+                            <tr class="fila_separadora"></tr>
+                            <tr>
+                                <td class="padding_dentro_celda borde_celda">
+                                    <p class="txt_centrado">
+                                        <apex:outputText value="{0, number, ###,###}">
+                                            <apex:param value="{!Vacacion__c.D_as_solicitados4__c}" />
+                                        </apex:outputText>
+                                    </p>
+                                </td>
+                                <td class="col_separadora_pequeña"></td>
+                                <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                                    <p class="txt_centrado">
+                                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                            <apex:param value="{!Vacacion__c.Fecha4__c}" />
+                                        </apex:outputText>
+                                    </p>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!NOT(ISBLANK(Vacacion__c.D_as_solicitados5__c))}" layout="none">
+                            <tr class="fila_separadora"></tr>
+                            <tr>
+                                <td class="padding_dentro_celda borde_celda">
+                                    <p class="txt_centrado">
+                                        <apex:outputText value="{0, number, ###,###}">
+                                            <apex:param value="{!Vacacion__c.D_as_solicitados5__c}" />
+                                        </apex:outputText>
+                                    </p>
+                                </td>
+                                <td class="col_separadora_pequeña"></td>
+                                <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                                    <p class="txt_centrado">
+                                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                            <apex:param value="{!Vacacion__c.Fecha5__c}" />
+                                        </apex:outputText>
+                                    </p>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!NOT(ISBLANK(Vacacion__c.D_as_solicitados6__c))}" layout="none">
+                            <tr class="fila_separadora"></tr>
+                            <tr>
+                                <td class="padding_dentro_celda borde_celda">
+                                    <p class="txt_centrado">
+                                        <apex:outputText value="{0, number, ###,###}">
+                                            <apex:param value="{!Vacacion__c.D_as_solicitados6__c}" />
+                                        </apex:outputText>
+                                    </p>
+                                </td>
+                                <td class="col_separadora_pequeña"></td>
+                                <td class="col_datos_contenido padding_dentro_celda borde_celda">
+                                    <p class="txt_centrado">
+                                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                            <apex:param value="{!Vacacion__c.Fecha6__c}" />
+                                        </apex:outputText>
+                                    </p>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                    </table>
+                </div>
+                <div class="margen_vertical">
+                    <table width="100%">
+                        <td class="col_datos_titulo padding_dentro_celda"><p class="txt_centrado txt_bold">Días restantes</p></td>
+                        <td class="col_separadora_pequeña"></td>
+                        <td class="padding_dentro_celda borde_celda">
+                            <p class="txt_centrado">
+                                <apex:outputText value="{!Vacacion__c.Empleado__r.D_as_restantes_del_periodo__c}">
+                                </apex:outputText>
+                            </p>
+                        </td>
+                        <td class="col_separadora_pequeña"></td>
+                        <td class="padding_dentro_celda">
+                            <p class="txt_centrado subrayado_bajo txt_bold">
+                                Formato aprobado desde Salesforce por 
+                                <span>
+                                    <apex:outputText value="{!Vacacion__c.Aprobador_de_Vacaciones__r.CommunityNickname}"/>
+                                </span>
+                            </p>
+                        </td>
+                    </table>
+                </div>
+                <div class="" style="margin-top: 1cm;">
+                    <table width="50%" style="margin:auto;">
+                        <tr>
+                            <td class="fila_postura_firma borde_inferior txt_centrado">
+                                <apex:outputPanel rendered="{!NOT(ISBLANK(Vacacion__c.FirmaEmpleado__c))}">
+                                    <!--<img src="data:image/png;base64,{!Vacacion__c.FirmaEmpleado__c}" width="200" height="100"/> -->
+                                    <img id="firma" width="200" height="100"/>
+                                </apex:outputPanel>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="nombre_firmante posicion_vertical_txt_top">
+                                <p class="txt_centrado txt_bold">
+                                    <apex:outputText value="{!Vacacion__c.Trabajador__c}"/>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </body>
+    </html>
+</apex:page>

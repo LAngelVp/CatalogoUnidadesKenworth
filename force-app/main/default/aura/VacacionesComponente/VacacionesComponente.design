@@ -1,0 +1,4 @@
+<design:component >
+    <!-- <design:attribute name="recordId" label="Record ID" description="ID del registro asociado" />
+    <design:attribute name="firmaValida" label="Firma Válida" description="Indica si la firma es válida"/> -->
+</design:component>

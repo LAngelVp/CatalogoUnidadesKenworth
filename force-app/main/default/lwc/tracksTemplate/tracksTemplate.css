@@ -1,0 +1,29 @@
+.general-container {
+    display: flex;
+    width: 100%;
+    min-height: 100%;
+    max-height: 100vh;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.general-container div {
+    border-radius: 0.5rem;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Asegurar que el mapa ocupe todo el espacio */
+.general-container div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.columna1 {
+    flex: 1;
+}
+
+.columna2 {
+    flex: 4;
+}

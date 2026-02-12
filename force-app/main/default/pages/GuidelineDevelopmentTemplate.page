@@ -1,0 +1,773 @@
+<apex:page standardController="Formato_Calidad__c" renderAs="PDF" showHeader="false" applyHtmlTag="false" applyBodyTag="false" sidebar="false">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <meta name="pdf-page-size" content="letter"/>
+            <meta name="pdf-page-margin" content="15mm"/>
+            <meta name="pdf-font-embed" content="embed"/>
+            <meta name="pdf-font-encoding" content="Identity-H"/>
+            <style type="text/css" media="all">
+                @font-face {
+                    font-family: 'saira';
+                    src: url({!URLFOR($Resource.fuente_saira_regular)});
+                    -fs-pdf-font-embed: embed;
+                    -fs-pdf-font-encoding: cp1252;
+                    panose-1: 2 0 5 0 0 0 0 0 0 0;
+                    font-display: block;
+                }
+                *{
+                font-family: 'saira', sans-serif !important; 
+                -fs-font-subsetting: complete;
+                font-size: 13px;
+                margin: 0px;
+                padding: 0px;
+                box-sizing: border-box;
+                }
+                @page{
+                margin-top: 200px;
+                @top-center {
+                width:100%;
+                content: element(header);
+                }
+                .w100{width:100% !important;}}
+                .header{position: running(header);width:100%;margin-top: 40px;}
+                .img_logo_size{    width: 6cm;height: 3.5cm;}
+                .espacio_logos{
+                        text-align: center;
+                        width: 6cm;
+                }
+                .bordes_tabla{border-collapse: separate;border-spacing: 0;}
+                .bordes_tabla td{border: 1px solid black;}
+                .contenido{position: relative; margin-bottom: 45px;}
+                .txt_centrado{text-align:center;}
+                .txt_h1{font-size: 20px;}
+                .alto_ancho_celdas_cabecera{
+                    width: 110px;
+                    min-width: 110px;
+                    height: 40px;
+                    min-height: 40px;
+                }
+                .pl_5px{padding-left: 5px;}
+                .pt_cm{padding-top: 0.3cm;}
+                .text_bold{font-weight: bold;}
+                .fs_11{font-size: 11px;}
+                .interlineado{line-height: 1.5;}
+                .pagenumber::before{content: counter(page);}
+                .pagecount::before{content: counter(pages);}
+                <!-- CONFIGURACION PARA EL APARTADO DE FIRMAS -->
+                .no_romper {page-break-inside: avoid;-fs-table-paginate: paginate;}
+                .lista_no_romper {page-break-inside: avoid;-fs-keep-with-inline: keep;}
+                .fila-no-romper {page-break-inside: avoid;-fs-keep-with-inline: keep;}
+                .col-firma {width: 40%;vertical-align: top;padding: 10px;}
+                .col-espacio {width: 20%;}
+                .contenedor-firma {height: 100%;}
+                .linea-firma {border-bottom: 1px solid #000;margin: 12px auto;height: 45px;}
+                .tabla-subfirma {width: 100%;border-collapse: collapse;margin-top: 10px;}
+                .espacio-subfirma {width: 30%;}
+                .texto_saltos {white-space: pre-wrap;word-wrap: break-word;}
+                .paginar_tabla{-fs-table-paginate: paginate; page-break-inside: avoid;}
+                .paginar_tabla .fila {page-break-inside: avoid;}
+                .pt_firmas{padding-top: 38pt;}
+                <!-- ESTILOS PARA EL APARTADO DEL DESARROLLO -->
+                .sangria{padding-left: 0.30cm;}
+                ol, ul {list-style-type: none;padding-left: 30px;}            
+                /* Primer nivel - Números (1., 2., 3.) */
+                ol {list-style-type: none;counter-reset: level1;padding-left: 20px;position: relative;}
+                /* Primer nivel - Números (1., 2., 3.) */
+                ol > li {counter-increment: level1;position: relative;margin-bottom: 5px;page-break-inside:avoid;}
+                ol > li:before {content: counter(level1) ". ";position: absolute;left: -25px;}
+                /* Segundo nivel - Letras minúsculas (a., b., c.) */
+                ol ol {counter-reset: level2;margin-left: 15px;}
+                ol ol > li {counter-increment: level2; page-break-inside:avoid;}
+                ol ol > li:before {content: counter(level2, lower-alpha) ". ";position: absolute;left: -25px;font-weight: normal;}
+                /* Tercer nivel - Números romanos (i., ii., iii.) */
+                ol ol ol {counter-reset: level3;margin-left: 15px;}
+                ol ol ol > li {counter-increment: level3;page-break-inside:avoid;}
+                ol ol ol > li:before {content: "• ";position: absolute;left: -25px;}
+                /*Cuarto nivel - Palomitas (✓) */
+                ol ol ol ol {counter-reset: level4;margin-left: 15px;}
+                ol ol ol ol > li {font-family: "Arial Unicode MS", sans-serif;counter-increment: level4;page-break-inside:avoid;}
+                ol ol ol ol > li:before {content: "✓ ";position: absolute;left: -25px;color: #000000;font-weight: bold;}
+                /* QUINTO NIVEL */
+                ol ol ol ol ol {counter-reset: level5;margin-left: 15px;}
+                ol ol ol ol ol > li {counter-increment: level5;page-break-inside:avoid;}
+                ol ol ol ol ol > li:before {content: "• ";position: absolute;left: -25px;}
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <table width="100%" class="bordes_tabla">
+                    <tbody>
+                    	<tr>
+                        	<td rowspan="5" class="espacio_logos">
+                            	<apex:image styleClass="img_logo_size" url="{!URLFOR($Resource.logos_para_fondos_claros, 'LOGOS_FONDO_CLARO/l_vertical_razon.png')}"/>
+                            </td>
+                            <td colspan="4" >
+                                <p class="txt_centrado txt_h1 text_bold">
+                                    SISTEMA DE GESTIÓN DE CALIDAD
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td style="alto_ancho_celdas_cabecera">
+                                <strong class="fs_11 pl_5px">
+                                    <apex:outputText value="{!Formato_Calidad__c.RecordType.Name}"/>
+                                </strong>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                            	<p class="fs_11 ">
+                                    <apex:outputText value="{!Formato_Calidad__c.Guia__c}"/>
+                                </p>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                            	<strong class="fs_11">
+                                	Clave:
+                                </strong>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                            	<p class="fs_11">
+                                        <apex:outputField value="{!Formato_Calidad__c.Clave__c}"/>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td class="alto_ancho_celdas_cabecera pl_5px">
+                            	<strong class="fs_11">
+                                	Fecha de elaboración:
+                                </strong>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                            	<p class="fs_11">
+                                    <apex:outputText value="{!Formato_Calidad__c.Fecha_de_elaboracion_F__c}"/>
+                                </p>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                            	<strong class="fs_11">
+                                	Hoja:
+                                </strong>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                            	<p style="margin:0; padding:0;"><span class="pagenumber"></span> de <span class="pagecount"></span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td class="alto_ancho_celdas_cabecera pl_5px">
+                            	<strong class="fs_11">
+                                	Fecha de revisión:
+                                </strong>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                            	<p class="fs_11">
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Tipo__c))}">
+                                        
+                                    </apex:outputPanel>
+                                    <apex:outputText value="{!Formato_Calidad__c.Fecha_de_revisi_n_F__c}"/>
+                                </p>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                            	<strong class="fs_11">
+                                	No. De revisión:
+                                </strong>
+                            </td>
+                            <td class="alto_ancho_celdas_cabecera txt_centrado">
+                            	<p class="fs_11">
+                                    <apex:outputText value="{0, number, ###,###}">
+                                        <apex:param value="{!Formato_Calidad__c.No_de_revisi_n__c}" />
+                                    </apex:outputText>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="contenido">
+                <div id="objetivo" class="pt_cm interlineado">
+                    <table class="w100">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <strong>
+                                        Objetivo:
+                                    </strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p>
+                                       <apex:outputText value="{!Formato_Calidad__c.Objetivo__c}"/>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="alcance" class="pt_cm interlineado">
+                    <table class="w100">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <strong>
+                                        Alcance:
+                                    </strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p class="texto_saltos">
+                                        <apex:outputText value="{!Formato_Calidad__c.Alcance__c}" escape="false"/>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="referencias" class="pt_cm interlineado">
+                     <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Referencia__c))}">
+                         <table class="w100">
+                             <thead>
+                                 <tr>
+                                     <th>
+                                         <strong>
+                                             Referencias:
+                                         </strong>
+                                     </th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 <tr>
+                                     <td>
+                                         <p class="texto_saltos">
+                                             <apex:outputText value="{!Formato_Calidad__c.Referencia__c}" escape="false"/>
+                                         </p>
+                                     </td>
+                                 </tr>
+                             </tbody>
+                         </table>
+                     </apex:outputPanel>
+                </div>
+                <div id="definiciones" class="pt_cm interlineado">
+                    <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Definiciones__c))}">
+                        <table class="w100">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <strong>
+                                            Definiciones:
+                                        </strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <pre class="texto_saltos">
+                                            <apex:outputText value="{!Formato_Calidad__c.Definiciones__c}" escape="false"/>
+                                        </pre>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </apex:outputPanel>
+                </div>
+                <div id="desarrollo" class="interlineado">
+                    <table class="w100">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <strong>
+                                        Desarrollo:
+                                    </strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="sangria"  style="padding-left: 20px;">
+                                                <apex:outputText 
+                                                    value="{!SUBSTITUTE(
+                                                        Formato_Calidad__c.Desarrollo__c, 
+                                                        '<img', 
+                                                        '<img style=\"width:80%; max-width:350px; min-width:100px; height:auto; display:block; margin:0 auto; page-break-inside:avoid;\"'
+                                                    )}" 
+                                                    escape="false"
+                                                />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="anexos" class="interlineado">
+                    <table class="w100">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <strong>
+                                        Anexos:
+                                    </strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <pre class="texto_saltos">
+                                        <apex:outputText value="{!Formato_Calidad__c.Anexos__c}" escape="false"/>
+                                    </pre>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="mantenimiento_responsabilidades" class="interlineado">
+                    <table class="w100">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <strong>
+                                        Mantenimiento/Responsabilidades:
+                                    </strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p class="">
+                                        Es responsabilidad del área de <span><apex:outputText value="{!Formato_Calidad__c.rea__c} "/></span>informar a calidad cambios en la operación que afecten el contenido <span>
+                                                de la presente guía
+                                        </span> a fin de mantener actualizado el sistema de gestión de calidad y para efectos de futuras auditorías.
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="firmas" class="pt_cm">
+                    <table width="100%" class="paginar_tabla">
+                        <thead>
+                        	<tr class="fila-no-romper">
+                            	<th colspan="3">
+                                    <p style="padding-bottom: 4pt;">
+                                        Aprobaciones para el documento  <apex:outputText value=" {!Formato_Calidad__c.Clave__c}"/>:
+                                    </p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="fila-no-romper">
+                                <!-- Firma Izquierda -->
+                                <td class="ancho_col_firma pt_firmas">
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Tipo__c))}">
+                                         <div>
+                                             <p class="txt_centrado">
+                                                <apex:outputText value="{!Formato_Calidad__c.Tipo__c}"/>
+                                            </p>
+                                             <p class="linea-firma"></p>
+                                             <p class="text_bold txt_centrado">
+                                                <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Cargo__c)}">
+                                                    <apex:outputText value="Blanco" style="color:white;"/>
+                                                </apex:outputPanel>
+
+                                                <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Cargo__c))}">
+                                                    <apex:outputText value="{!Formato_Calidad__c.Cargo__c}" />
+                                                </apex:outputPanel>
+                                             </p>
+                                             <!-- Subfirma izquierda (si es necesaria) -->
+                                             <table class="tabla-subfirma">
+                                                 <tr>
+                                                     <td>
+                                                         <p class=" txt_centrado">
+                                                            <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Nombre__c)}">
+                                                                <apex:outputText value="Blanco" style="color:white;"/>
+                                                            </apex:outputPanel>
+
+                                                            <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                            <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Nombre__c))}">
+                                                                <apex:outputText value="{!Formato_Calidad__c.Nombre__c}" />
+                                                            </apex:outputPanel>
+                                                         </p>
+                                                     </td>
+                                                 </tr>
+                                             </table>
+                                         </div>
+                                        </apex:outputPanel>
+                                    </td>
+                                <!-- Espacio central -->
+                                <td class="col-espacio"></td>
+                                <!-- Firma Derecha -->
+                                <td class="col-firma pt_firmas">
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Tipo2__c))}">
+                                        <div class="contenedor-firma">
+                                            <p class="txt_centrado">
+                                                <apex:outputText value="{!Formato_Calidad__c.Tipo2__c}"/>
+                                            </p>
+                                            <p class="linea-firma"></p>
+                                            <p class="text_bold txt_centrado">
+                                                <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Cargo2__c)}">
+                                                    <apex:outputText value="Blanco" style="color:white;"/>
+                                                </apex:outputPanel>
+
+                                                <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Cargo2__c))}">
+                                                    <apex:outputText value="{!Formato_Calidad__c.Cargo2__c}" />
+                                                </apex:outputPanel>
+                                            </p>
+                                            
+                                            <!-- Subfirma derecha -->
+                                            <table class="tabla-subfirma">
+                                                <tr>
+                                                    <td class="txt_centrado">
+                                                        <p class="">
+                                                            <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Nombre2__c)}">
+                                                                <apex:outputText value="Blanco" style="color:white;"/>
+                                                            </apex:outputPanel>
+
+                                                            <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                            <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Nombre2__c))}">
+                                                                <apex:outputText value="{!Formato_Calidad__c.Nombre2__c}" />
+                                                            </apex:outputPanel>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </apex:outputPanel>
+                                </td>
+                            </tr>
+                            <tr class="fila-no-romper">
+                                <!-- Firma Izquierda -->
+                                <td class="ancho_col_firma pt_firmas">
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Tipo3__c))}">
+                                         <div>
+                                             <p class="txt_centrado">
+                                                <apex:outputText value="{!Formato_Calidad__c.Tipo3__c}"/>
+                                            </p>
+                                             <p class="linea-firma"></p>
+                                             <p class="text_bold txt_centrado">
+                                                <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Cargo3__c)}">
+                                                    <apex:outputText value="Blanco" style="color:white;"/>
+                                                </apex:outputPanel>
+
+                                                <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Cargo3__c))}">
+                                                    <apex:outputText value="{!Formato_Calidad__c.Cargo3__c}" />
+                                                </apex:outputPanel>
+                                             </p>
+                                             <!-- Subfirma izquierda (si es necesaria) -->
+                                             <table class="tabla-subfirma">
+                                                 <tr>
+                                                     <td>
+                                                         <p class=" txt_centrado">
+                                                            <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Nombre3__c)}">
+                                                                <apex:outputText value="Blanco" style="color:white;"/>
+                                                            </apex:outputPanel>
+
+                                                            <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                            <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Nombre3__c))}">
+                                                                <apex:outputText value="{!Formato_Calidad__c.Nombre3__c}" />
+                                                            </apex:outputPanel>
+                                                         </p>
+                                                     </td>
+                                                 </tr>
+                                             </table>
+                                         </div>
+                                        </apex:outputPanel>
+                                    </td>
+                                <!-- Espacio central -->
+                                <td class="col-espacio"></td>
+                                <!-- Firma Derecha -->
+                                <td class="col-firma pt_firmas">
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Tipo4__c))}">
+                                        <div class="contenedor-firma">
+                                            <p class="txt_centrado">
+                                                <apex:outputText value="{!Formato_Calidad__c.Tipo4__c}"/>
+                                            </p>
+                                            <p class="linea-firma"></p>
+                                            <p class="text_bold txt_centrado">
+                                                <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Cargo4__c)}">
+                                                    <apex:outputText value="Blanco" style="color:white;"/>
+                                                </apex:outputPanel>
+
+                                                <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Cargo4__c))}">
+                                                    <apex:outputText value="{!Formato_Calidad__c.Cargo4__c}" />
+                                                </apex:outputPanel>
+                                            </p>
+                                            
+                                            <!-- Subfirma derecha -->
+                                            <table class="tabla-subfirma">
+                                                <tr>
+                                                    <td class="txt_centrado">
+                                                        <p class="">
+                                                           <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Nombre4__c)}">
+                                                                <apex:outputText value="Blanco" style="color:white;"/>
+                                                            </apex:outputPanel>
+
+                                                            <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                            <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Nombre4__c))}">
+                                                                <apex:outputText value="{!Formato_Calidad__c.Nombre4__c}" />
+                                                            </apex:outputPanel>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </apex:outputPanel>
+                                </td>
+                            </tr>
+                            <tr class="fila-no-romper">
+                                <!-- Firma Izquierda -->
+                                <td class="ancho_col_firma pt_firmas">
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Tipo5__c))}">
+                                         <div>
+                                             <p class="txt_centrado">
+                                                <apex:outputText value="{!Formato_Calidad__c.Tipo5__c}"/>
+                                            </p>
+                                             <p class="linea-firma"></p>
+                                             <p class="text_bold txt_centrado">
+                                                <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Cargo5__c)}">
+                                                    <apex:outputText value="Blanco" style="color:white;"/>
+                                                </apex:outputPanel>
+
+                                                <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Cargo5__c))}">
+                                                    <apex:outputText value="{!Formato_Calidad__c.Cargo5__c}" />
+                                                </apex:outputPanel>
+                                             </p>
+                                             <!-- Subfirma izquierda (si es necesaria) -->
+                                             <table class="tabla-subfirma">
+                                                 <tr>
+                                                     <td>
+                                                         <p class=" txt_centrado">
+                                                            <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Nombre5__c)}">
+                                                                <apex:outputText value="Blanco" style="color:white;"/>
+                                                            </apex:outputPanel>
+
+                                                            <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                            <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Nombre5__c))}">
+                                                                <apex:outputText value="{!Formato_Calidad__c.Nombre5__c}" />
+                                                            </apex:outputPanel>
+                                                         </p>
+                                                     </td>
+                                                 </tr>
+                                             </table>
+                                         </div>
+                                        </apex:outputPanel>
+                                    </td>
+                                <!-- Espacio central -->
+                                <td class="col-espacio"></td>
+                                <!-- Firma Derecha -->
+                                <td class="col-firma pt_firmas">
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Tipo6__c))}">
+                                        <div class="contenedor-firma">
+                                            <p class="txt_centrado">
+                                                <apex:outputText value="{!Formato_Calidad__c.Tipo6__c}"/>
+                                            </p>
+                                            <p class="linea-firma"></p>
+                                            <p class="text_bold txt_centrado">
+                                                <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Cargo6__c)}">
+                                                    <apex:outputText value="Blanco" style="color:white;"/>
+                                                </apex:outputPanel>
+
+                                                <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Cargo6__c))}">
+                                                    <apex:outputText value="{!Formato_Calidad__c.Cargo6__c}" />
+                                                </apex:outputPanel>
+                                            </p>
+                                            
+                                            <!-- Subfirma derecha -->
+                                            <table class="tabla-subfirma">
+                                                <tr>
+                                                    <td class="txt_centrado">
+                                                        <p class="">
+                                                           <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Nombre6__c)}">
+                                                                <apex:outputText value="Blanco" style="color:white;"/>
+                                                            </apex:outputPanel>
+
+                                                            <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                            <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Nombre6__c))}">
+                                                                <apex:outputText value="{!Formato_Calidad__c.Nombre6__c}" />
+                                                            </apex:outputPanel>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </apex:outputPanel>
+                                </td>
+                            </tr>
+                            <tr class="fila-no-romper">
+                                <!-- Firma Izquierda -->
+                                <td class="ancho_col_firma pt_firmas">
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Tipo7__c))}">
+                                         <div>
+                                             <p class="txt_centrado">
+                                                <apex:outputText value="{!Formato_Calidad__c.Tipo7__c}"/>
+                                            </p>
+                                             <p class="linea-firma"></p>
+                                             <p class="text_bold txt_centrado">
+                                                <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Cargo7__c)}">
+                                                    <apex:outputText value="Blanco" style="color:white;"/>
+                                                </apex:outputPanel>
+
+                                                <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Cargo7__c))}">
+                                                    <apex:outputText value="{!Formato_Calidad__c.Cargo7__c}" />
+                                                </apex:outputPanel>
+                                             </p>
+                                             <!-- Subfirma izquierda (si es necesaria) -->
+                                             <table class="tabla-subfirma">
+                                                 <tr>
+                                                     <td>
+                                                         <p class=" txt_centrado">
+                                                            <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Nombre7__c)}">
+                                                                <apex:outputText value="Blanco" style="color:white;"/>
+                                                            </apex:outputPanel>
+
+                                                            <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                            <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Nombre7__c))}">
+                                                                <apex:outputText value="{!Formato_Calidad__c.Nombre7__c}" />
+                                                            </apex:outputPanel>
+                                                         </p>
+                                                     </td>
+                                                 </tr>
+                                             </table>
+                                         </div>
+                                        </apex:outputPanel>
+                                    </td>
+                                <!-- Espacio central -->
+                                <td class="col-espacio"></td>
+                                <!-- Firma Derecha -->
+                                <td class="col-firma pt_firmas">
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Tipo8__c))}">
+                                        <div class="contenedor-firma">
+                                            <p class="txt_centrado">
+                                                <apex:outputText value="{!Formato_Calidad__c.Tipo8__c}"/>
+                                            </p>
+                                            <p class="linea-firma"></p>
+                                            <p class="text_bold txt_centrado">
+                                                <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Cargo8__c)}">
+                                                    <apex:outputText value="Blanco" style="color:white;"/>
+                                                </apex:outputPanel>
+
+                                                <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Cargo8__c))}">
+                                                    <apex:outputText value="{!Formato_Calidad__c.Cargo8__c}" />
+                                                </apex:outputPanel>
+                                            </p>
+                                            
+                                            <!-- Subfirma derecha -->
+                                            <table class="tabla-subfirma">
+                                                <tr>
+                                                    <td class="txt_centrado">
+                                                        <p class="">
+                                                           <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Nombre8__c)}">
+                                                                <apex:outputText value="Blanco" style="color:white;"/>
+                                                            </apex:outputPanel>
+
+                                                            <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                            <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Nombre8__c))}">
+                                                                <apex:outputText value="{!Formato_Calidad__c.Nombre8__c}" />
+                                                            </apex:outputPanel>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </apex:outputPanel>
+                                </td>
+                            </tr>
+                            <tr class="fila-no-romper">
+                                <!-- Firma Izquierda -->
+                                <td class="ancho_col_firma pt_firmas">
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Tipo9__c))}">
+                                         <div>
+                                             <p class="txt_centrado">
+                                                <apex:outputText value="{!Formato_Calidad__c.Tipo9__c}"/>
+                                            </p>
+                                             <p class="linea-firma"></p>
+                                             <p class="text_bold txt_centrado">
+                                                <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Cargo9__c)}">
+                                                    <apex:outputText value="Blanco" style="color:white;"/>
+                                                </apex:outputPanel>
+
+                                                <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Cargo9__c))}">
+                                                    <apex:outputText value="{!Formato_Calidad__c.Cargo9__c}" />
+                                                </apex:outputPanel>
+                                             </p>
+                                             <!-- Subfirma izquierda (si es necesaria) -->
+                                             <table class="tabla-subfirma">
+                                                 <tr>
+                                                     <td>
+                                                         <p class=" txt_centrado">
+                                                            <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Nombre9__c)}">
+                                                                <apex:outputText value="Blanco" style="color:white;"/>
+                                                            </apex:outputPanel>
+
+                                                            <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                            <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Nombre9__c))}">
+                                                                <apex:outputText value="{!Formato_Calidad__c.Nombre9__c}" />
+                                                            </apex:outputPanel>
+                                                         </p>
+                                                     </td>
+                                                 </tr>
+                                             </table>
+                                         </div>
+                                        </apex:outputPanel>
+                                    </td>
+                                <!-- Espacio central -->
+                                <td class="col-espacio"></td>
+                                <!-- Firma Derecha -->
+                                <td class="col-firma pt_firmas">
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Tipo10__c))}">
+                                        <div class="contenedor-firma">
+                                            <p class="txt_centrado">
+                                                <apex:outputText value="{!Formato_Calidad__c.Tipo10__c}"/>
+                                            </p>
+                                            <p class="linea-firma"></p>
+                                            <p class="text_bold txt_centrado">
+                                                <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Cargo10__c)}">
+                                                    <apex:outputText value="Blanco" style="color:white;"/>
+                                                </apex:outputPanel>
+
+                                                <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Cargo10__c))}">
+                                                    <apex:outputText value="{!Formato_Calidad__c.Cargo10__c}" />
+                                                </apex:outputPanel>
+                                            </p>
+                                            
+                                            <!-- Subfirma derecha -->
+                                            <table class="tabla-subfirma">
+                                                <tr>
+                                                    <td class="txt_centrado">
+                                                        <p class="">
+                                                           <apex:outputPanel rendered="{!ISBLANK(Formato_Calidad__c.Nombre10__c)}">
+                                                                <apex:outputText value="Blanco" style="color:white;"/>
+                                                            </apex:outputPanel>
+
+                                                            <!-- Si NO está en blanco, mostrar el valor del campo -->
+                                                            <apex:outputPanel rendered="{!NOT(ISBLANK(Formato_Calidad__c.Nombre10__c))}">
+                                                                <apex:outputText value="{!Formato_Calidad__c.Nombre10__c}" />
+                                                            </apex:outputPanel>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </apex:outputPanel>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+				</div> 
+            </div>
+        </body>
+    </html>
+</apex:page>
