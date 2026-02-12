@@ -1,16 +1,13 @@
 .scroll {
-    /* Altura máxima para activar el scroll */
-    max-height: 100vh; /* Ajusta según tus necesidades */
+    max-height: 100vh; 
     height: 100%;
-    
-    /* Scroll */
-    overflow-y: auto; /* Cambia de 'scroll' a 'auto' para que solo aparezca cuando sea necesario */
+    overflow-y: auto; 
     overflow-x: hidden;
-    
-    /* Espaciado interno */
     padding: 0.5rem;
-    
-    /* Estilos de scrollbar */
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: #0176d3 #f3f2f2; /* Firefox */
+    scrollbar-width: thin; 
+    scrollbar-color: #0176d3 #f3f2f2; 
+    width: 100%;
 }
+/* .mi-icono-personalizado {
+    --slds-c-icon-color-foreground: #FF5733;
+} */

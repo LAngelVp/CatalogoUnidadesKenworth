@@ -1,21 +1,28 @@
 <template>
-    <div class="general-container">
-        <div class="columna1">
-            <template if:true={renderizarHijos}>
-                <section>
-                    <c-filters-tracts tracks={allTracks}></c-filters-tracts>
-                </section>
-                <section class="scroll-container">
-                    <c-producto-tract all-tracts-child={allTracks}></c-producto-tract>
-                </section>
-            </template>
+    <div class="contenedor_global">
+        <div class="slds-text-heading_large slds-m-around_medium centrar slds-p-around_medium">
+            <h1>TruckLocator 360</h1>
         </div>
-        <div class="columna2">
-            <template if:true={renderizarHijos}>
-                <section>
-                    <c-mapa-leaflet tracks-for-map={allTracks}></c-mapa-leaflet>
-                </section>
-            </template>
+        <div class="general-container">
+            <!-- CONTENEDOR DE LOS TRACTOS Y FILTROS -->
+            <div class="columna1">
+                <template if:true={renderizarHijos}>
+                    <section>
+                        <c-filters-tracts tracks={allTracks}></c-filters-tracts>
+                    </section>
+                    <section class="scroll-container">
+                        <c-producto-tract all-tracts-child={allTracks}></c-producto-tract>
+                    </section>
+                </template>
+            </div>
+            <!-- CONTENEDOR DEL MAPA -->
+            <div class="columna2">
+                <template if:true={renderizarHijos}>
+                    <section>
+                        <c-mapa-leaflet tracks-for-map={allTracks}></c-mapa-leaflet>
+                    </section>
+                </template>
+            </div>
         </div>
     </div>
 </template>

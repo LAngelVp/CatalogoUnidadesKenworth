@@ -1,7 +1,8 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 
 export default class FiltersTracts extends LightningElement {
     @api tracks = [];
+    @track isModalOpen = false;
     get modelOptions() {
         if (!this.tracks || this.tracks.length === 0) {
             return [];
@@ -26,5 +27,15 @@ export default class FiltersTracts extends LightningElement {
     });
     
     return optionsUnicas;
+    }
+    openModal() {
+        this.isModalOpen = true;
+    }
+    closeModal() {
+        this.isModalOpen = false;
+    }
+    aplicarFiltros() {
+        console.log('Aplicando filtros...');
+        this.closeModal();
     }
 }

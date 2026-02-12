@@ -1,5 +1,55 @@
 <template>
-    <section class="slds-card">
-        <lightning-combobox label="Modelo" options={modelOptions} placeholder="Selecciona un modelo"></lightning-combobox>
-    </section>
+    <lightning-button 
+        label="Filtros" 
+        icon-name="utility:filterList" 
+        onclick={openModal}>
+    </lightning-button>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">Filtros de Búsqueda</h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input type="text" label="Marca" placeholder="Ej. Kenworth"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-combobox label="Modelo" options={modelOptions} placeholder="Selecciona"></lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input type="number" label="Año" placeholder="2024"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input type="checkbox" label="Solo Disponibles" class="slds-m-top_large"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input type="number" label="Precio Mínimo" placeholder="0"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input type="number" label="Precio Máximo" placeholder="0"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input type="text" label="Marca de motor" placeholder="Ej. Cummins"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input type="text" label="Modelo de motor" placeholder="Ej. ISX"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input type="number" label="Cant. Ejes" placeholder="0"></lightning-input>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModal}>Cancelar</button>
+                    <button class="slds-button slds-button_brand" onclick={aplicarFiltros}>Aplicar Filtros</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
 </template>
