@@ -3,33 +3,29 @@ import getTractos from '@salesforce/apex/TractosController.getTractos';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class TracksTemplate extends LightningElement {
-    allTracks = []; // Backup de todos los datos
+    allTracks = [];
     renderizarHijos = false;
-    @track displayedTracks = []; // Lo que se ve en pantalla
+    @track displayedTracks = [];
 
     @wire(getTractos, { busqueda: '' })
     wiredResultado({ error, data }) {
         if (data) {
             this.allTracks = data;
-            // IMPORTANTE: Asignar aquí para que se vean datos al cargar la página
             this.displayedTracks = [...data]; 
-            
-            console.log('Datos recibidos:', this.allTracks);
-            this.mensaje('Éxito', `Elementos encontrados ${data.length}`, 'success');
+            this.mensaje('Éxito', `Se encontraron ${data.length} unidades`, 'success');
             this.renderizarHijos = true;
         } else if (error) {
-            this.mensaje("Error", "Error al consultar los datos", "error");
-            console.error(error);
+            this.mensaje("Error", `No se encontraron unidades: ${error}`, "error");
         }
     }
-
-    // Escucha el evento del hijo c-filters-tracts
     handleFilteredData(event) {
-        // Actualizamos la lista que se renderiza con lo que mandó el hijo
         this.displayedTracks = event.detail.data;
-        console.log('Registros después del filtro:', this.displayedTracks.length);
+        if (event.detail.data.length === 0) {
+            this.mensaje('Éxito', `No se encontraron unidades`, 'warning');
+        } else {
+            this.mensaje('Éxito', `Se encontraron ${event.detail.data.length} unidades`, 'success');
+        }
     }
-
     mensaje(titulo, mensaje, variante) {
         const contenido = new ShowToastEvent({
             title: titulo,
