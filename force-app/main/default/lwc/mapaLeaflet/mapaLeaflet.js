@@ -3,134 +3,116 @@ import { loadStyle, loadScript } from 'lightning/platformResourceLoader';
 import LEAFLET_RESOURCE from '@salesforce/resourceUrl/leaflet';
 
 export default class MapaLeaflet extends LightningElement {
-    @api tracksForMap = [];
+    _tracksForMap = [];
     map;
-    mapaTerminado = false;
-    
-    renderedCallback() {
-        console.log('✅ DEBUGUEANDO EL MAPA, CREADO CON EXITO');
-        console.log(`Total tracks recibidos: ${this.tracksForMap.length}`);
-        if (this.map) return;
-        this.initMap();
+    markerLayer; 
+    isMapInitialized = false;
+    marcaColorMap = new Map();
+    @api 
+    get tracksForMap() {
+        return this._tracksForMap;
     }
-    
-    async initMap() {
-        try {
-            await loadStyle(this, LEAFLET_RESOURCE + '/leaflet/leaflet.css');
-            await loadScript(this, LEAFLET_RESOURCE + '/leaflet/leaflet.js');
-            this.createMap();
-        } catch (error) {
-            console.error('Error cargando mapa:', error);
+    set tracksForMap(value) {
+        this._tracksForMap = value;
+        if (this.isMapInitialized) {
+            this.refreshMarkers();
         }
     }
-    
-    createMap() {
-        const checkMapContainer = () => {
-            const mapContainer = this.template.querySelector('.map-container');
-            console.log('🔍 Buscando .map-container:', mapContainer);
-            if (mapContainer) {
-                this.map = L.map(mapContainer,{
-                    maxBounds: [
-                    [10.397963, -125.154309],  // Esquina suroeste (lat, lng)
-                    [40.046243, -83.929856]    // Esquina noreste (lat, lng)
-                ],
-                maxBoundsViscosity: 1.0 
-                }).setView([23.6345, -102.5528], 5);
-                this.map.attributionControl.setPrefix('Propiedad de Kenworth DAF del Este');
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    minZoom: 5,
-                    subdomains: ['a', 'b', 'c']
-                }).addTo(this.map);
-                console.log('✅ DEBUGUEANDO EL MAPA, CREADO CON EXITO');
-                this.agregarPuntos();
-                setTimeout(() => this.map.invalidateSize(), 100);
-            } else {
-                setTimeout(checkMapContainer, 50);
-            }
-        };
-        checkMapContainer();
+
+    renderedCallback() {
+        if (this.isMapInitialized) return;
+        this.initMap();
     }
 
-    agregarPuntos() {
-        const colors = ['#0176d3', '#2e844a', '#ba0517', '#f88962', '#906068'];
-        let tracksConCoordenadas = 0;
-        
-        console.log('=== INICIO DEBUG TRACKS ===');
-        console.log('Total tracks recibidos:', this.tracksForMap.length);
-    
-        this.tracksForMap.forEach((punto, index) => {
-            // Para debug: ver todo el objeto
-            console.log(`Track ${index}:`, punto);
+    async initMap() {
+        try {
+            await Promise.all([
+                loadStyle(this, LEAFLET_RESOURCE + '/leaflet/leaflet.css'),
+                loadScript(this, LEAFLET_RESOURCE + '/leaflet/leaflet.js')
+            ]);
+            this.createMap();
+        } catch (error) {
+            console.error('Error cargando recursos de Leaflet:', error);
+        }
+    }
+
+    createMap() {
+        const mapContainer = this.template.querySelector('.map-container');
+        if (mapContainer) {
+            this.map = L.map(mapContainer, {
+                maxBounds: [
+                    [10.397963, -125.154309],
+                    [40.046243, -83.929856]
+                ],
+                maxBoundsViscosity: 1.0 
+            }).setView([23.6345, -102.5528], 5);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                minZoom: 5,
+                attribution: '© OpenStreetMap'
+            }).addTo(this.map);
+
+            this.map.attributionControl.setPrefix('Kenworth DAF del Este');
+
+            this.markerLayer = L.layerGroup().addTo(this.map);
             
-            if (!punto || !punto.tracto) {
-                console.log(`  ⚠️ Track ${index} no tiene objeto tracto`);
-                return;
-            }
-            
-            // Obtener valores como texto
-            const latText = punto.tracto.Latitud_tracto__c;
-            const lngText = punto.tracto.Longitud_tracto__c;
-            
-            console.log(`  Track "${punto.tracto.Name}":`);
-            console.log(`    Latitud_tracto__c (texto): "${latText}"`);
-            console.log(`    Longitud_tracto__c (texto): "${lngText}"`);
-            console.log(`    Tipo lat: ${typeof latText}, Tipo lng: ${typeof lngText}`);
-            
-            // Convertir de texto a número
-            const lat = parseFloat(latText);
-            const lng = parseFloat(lngText);
-            
-            console.log(`    Latitud (número): ${lat}`);
-            console.log(`    Longitud (número): ${lng}`);
-            console.log(`    ¿Es NaN lat?: ${isNaN(lat)}`);
-            console.log(`    ¿Es NaN lng?: ${isNaN(lng)}`);
-            
-            // Validar conversión
-            const tieneCoordenadas = !isNaN(lat) && !isNaN(lng);
-            
-            if (tieneCoordenadas) {
-                tracksConCoordenadas++;
-                console.log(`    ✅ Coordenadas válidas: ${lat}, ${lng}`);
-                
-                L.circleMarker([lat, lng], {
-                    color: colors[index % colors.length],
-                    fillColor: colors[index % colors.length],
+            this.isMapInitialized = true;
+            this.refreshMarkers();
+
+            setTimeout(() => {
+                this.map.invalidateSize();
+            }, 200);
+        }
+    }
+
+    refreshMarkers() {
+        if (!this.map || !this.markerLayer) return;
+        this.markerLayer.clearLayers();
+        const palette = ['#0176d3', '#2e844a', '#ba0517', '#f88962', '#906068', '#54698d', '#706e6b'];
+        let colorIndex = 0;
+        this._tracksForMap.forEach((punto) => {
+            const lat = parseFloat(punto.tracto?.Latitud_tracto__c);
+            const lng = parseFloat(punto.tracto?.Longitud_tracto__c);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                const marca = punto.tracto.Name || 'Desconocida';
+                if (!this.marcaColorMap.has(marca)) {
+                    this.marcaColorMap.set(marca, palette[colorIndex % palette.length]);
+                    colorIndex++;
+                }
+                const markerColor = this.marcaColorMap.get(marca);
+                const marker = L.circleMarker([lat, lng], {
+                    color: markerColor,
+                    fillColor: markerColor,
                     fillOpacity: 0.8,
                     radius: 8,
                     weight: 2
-                })
-                .addTo(this.map)
-                .bindPopup(`
-                    <div class="salesforce-popup">
-                        <div class="popup-header" style="background: #0176d3;">
-                            <h3 style="margin: 0; color: white; padding: 10px; font-size: 16px;">
-                                📍 ${punto.tracto.Name}
-                            </h3>
-                        </div>
-                        <div class="popup-content" style="padding: 15px;">
-                            <div style="margin-bottom: 10px;">
-                                <strong>Modelo:</strong> ${punto.tracto.modelo__c || 'N/A'}<br>
-                                <strong>Estado:</strong> ${punto.tracto.status__c || 'N/A'}<br>
-                                <strong>Precio:</strong> ${punto.tracto.price__c ? '$' + punto.tracto.price__c : 'N/A'}
-                            </div>
-                            <div style="background: #f3f2f2; padding: 8px; border-radius: 4px; font-size: 12px; color: #706e6b;">
-                                📍 Coordenadas: ${lat}, ${lng}
-                            </div>
-                        </div>
-                    </div>
-                `);
-            } else {
-                console.log(`    ❌ Coordenadas inválidas o vacías`);
+                }).bindPopup(this.getPopupContent(punto, lat, lng));
+                this.markerLayer.addLayer(marker);
             }
         });
-        
-        console.log('=== FIN DEBUG TRACKS ===');
-        console.log(`Se encontraron ${tracksConCoordenadas} tracks con coordenadas válidas de ${this.tracks.length} totales`);
-        this.mapaTerminado = true;
-        console.log('✅ DEBUGUEANDO EL MAPA, CREADO CON EXITO');
-        if (tracksConCoordenadas === 0) {
-            console.warn('⚠️ No se pudo mostrar ningún track en el mapa');
+        this.ajustarVistaMapa();
+    }
+    getPopupContent(punto, lat, lng) {
+        return `
+            <div class="salesforce-popup">
+                <div class="popup-header" style="background: #0176d3; color: white; padding: 8px; border-radius: 4px 4px 0 0;">
+                    <h3 style="margin: 0; font-size: 14px;">📍 ${punto.tracto.Name}</h3>
+                </div>
+                <div class="popup-content" style="padding: 10px; border: 1px solid #ccc; border-top: none;">
+                    <strong>Modelo:</strong> ${punto.tracto.modelo__c || 'N/A'}<br>
+                    <strong>Estado:</strong> ${punto.tracto.status__c || 'N/A'}<br>
+                    <strong>Precio:</strong> ${punto.tracto.price__c ? '$' + punto.tracto.price__c : 'N/A'}<br>
+                    <div style="font-size: 10px; color: #777; margin-top: 5px;">Coord: ${lat.toFixed(4)}, ${lng.toFixed(4)}</div>
+                </div>
+            </div>
+        `;
+    }
+    ajustarVistaMapa() {
+        const markers = this.markerLayer.getLayers();
+        if (markers.length > 0) {
+            const group = new L.featureGroup(markers);
+            this.map.fitBounds(group.getBounds(), { padding: [50, 50] });
         }
     }
 }

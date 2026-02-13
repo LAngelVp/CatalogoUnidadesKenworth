@@ -1,10 +1,21 @@
 <template>
-    <lightning-button 
-        label="Filtros" 
-        icon-name="utility:filterList" 
-        onclick={openModal}>
-    </lightning-button>
-
+    <div class="slds-grid slds-align_absolute-center slds-p-around_x-small">
+        <div>
+            <lightning-button 
+                class="slds-m-right_x-small"
+                label="Filtros" 
+                icon-name="utility:filterList" 
+                onclick={openModal}>
+            </lightning-button>
+        </div>
+        <div>
+            <lightning-button 
+                label="Limpiar" 
+                icon-name="utility:refresh" 
+                onclick={handleReset}>
+            </lightning-button>
+        </div>
+    </div>
     <template if:true={isModalOpen}>
         <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container">
@@ -15,10 +26,10 @@
                 <div class="slds-modal__content slds-p-around_medium">
                     <div class="slds-grid slds-wrap slds-gutters">
                         <div class="slds-col slds-size_1-of-2">
-                            <lightning-input type="text" label="Marca" placeholder="Ej. Kenworth"></lightning-input>
+                            <lightning-combobox label="Marca" options={brandOptions} placeholder="Selecciona una marca" onchange={handleBrandChange}></lightning-combobox>
                         </div>
                         <div class="slds-col slds-size_1-of-2">
-                            <lightning-combobox label="Modelo" options={modelOptions} placeholder="Selecciona"></lightning-combobox>
+                            <lightning-combobox label="Modelo" options={modelOptions} placeholder="Selecciona un modelo" disabled={isModelDisabled}></lightning-combobox>
                         </div>
                         <div class="slds-col slds-size_1-of-2">
                             <lightning-input type="number" label="Año" placeholder="2024"></lightning-input>

@@ -8,10 +8,13 @@
             <div class="columna1">
                 <template if:true={renderizarHijos}>
                     <section>
-                        <c-filters-tracts tracks={allTracks}></c-filters-tracts>
+                        <c-filters-tracts 
+                            tracks={allTracks} 
+                            onfilterapplied={handleFilteredData}
+                        ></c-filters-tracts>
                     </section>
                     <section class="scroll-container">
-                        <c-producto-tract all-tracts-child={allTracks}></c-producto-tract>
+                        <c-producto-tract all-tracts-child={displayedTracks}></c-producto-tract>
                     </section>
                 </template>
             </div>
@@ -19,7 +22,7 @@
             <div class="columna2">
                 <template if:true={renderizarHijos}>
                     <section>
-                        <c-mapa-leaflet tracks-for-map={allTracks}></c-mapa-leaflet>
+                        <c-mapa-leaflet tracks-for-map={displayedTracks}></c-mapa-leaflet>
                     </section>
                 </template>
             </div>
