@@ -6,6 +6,17 @@ export default class TracksTemplate extends LightningElement {
     allTracks = [];
     renderizarHijos = false;
     @track displayedTracks = [];
+    @track isModalOpen = false;
+    @track tractoSeleccionado;
+
+    handleShowModal(event) {
+        this.tractoSeleccionado = event.detail;
+        this.isModalOpen = true;
+    }
+
+    handleCloseModal() {
+        this.isModalOpen = false;
+    }
 
     @wire(getTractos, { busqueda: '' })
     wiredResultado({ error, data }) {

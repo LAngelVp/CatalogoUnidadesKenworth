@@ -14,7 +14,12 @@
                         <p><strong>Año:</strong> {tracto.tracto.Year_Modelo__c}</p>
                     </div>
                     <div slot="footer">
-                        <lightning-button label="Detalles" variant="brand"></lightning-button>
+                        <lightning-button 
+                            label="Detalles" 
+                            variant="brand" 
+                            onclick={handleOpenDetails} 
+                            data-id={tracto.tracto.Id}>
+                        </lightning-button>
                     </div>
                 </lightning-card>
             </div>

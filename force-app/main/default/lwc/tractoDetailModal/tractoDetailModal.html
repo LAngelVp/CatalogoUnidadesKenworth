@@ -1,0 +1,72 @@
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <h2 class="slds-text-heading_medium">Detalles del Tracto: {selectedTracto.tracto.Name}</h2>
+            </header>
+
+            <div class="slds-modal__content slds-p-around_medium">
+                <div class="slds-grid slds-wrap slds-gutters">
+                    
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_medium slds-align_absolute-center">
+                        <div class="rich-text-container">
+                            <lightning-formatted-rich-text value={selectedTracto.tracto.Imagen__c}>
+                            </lightning-formatted-rich-text>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                        <h3 class="slds-section-title_divider">Información General</h3>
+                        <div class="slds-grid slds-wrap slds-p-top_small">
+                            <div class="slds-col slds-size_1-of-2"><strong>Modelo:</strong> {selectedTracto.tracto.Modelo__c}</div>
+                            <div class="slds-col slds-size_1-of-2"><strong>Año:</strong> {selectedTracto.tracto.Year_Modelo__c}</div>
+                            <div class="slds-col slds-size_1-of-2"><strong>Precio:</strong> ${selectedTracto.tracto.Precio_Venta__c}</div>
+                            <div class="slds-col slds-size_1-of-2"><strong>Estado:</strong> {selectedTracto.tracto.Estado_de_la_Unidad__c}</div>
+                            <div class="slds-col slds-size_1-of-1"><strong>VIN:</strong> {selectedTracto.tracto.NumeroVIN__c}</div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+                        <h3 class="slds-section-title_divider">Especificaciones Técnicas</h3>
+                        <div class="slds-grid slds-wrap slds-p-around_small">
+                            <div class="slds-col slds-size_1-of-3"><strong>Motor:</strong> {selectedTracto.tracto.Marca_de_Motor__c} ({selectedTracto.tracto.Modelo_del_Motor__c})</div>
+                            <div class="slds-col slds-size_1-of-3"><strong>Potencia (HP):</strong> {selectedTracto.tracto.Caballos_de_fuerza_HP__c}</div>
+                            <div class="slds-col slds-size_1-of-3"><strong>Kilometraje:</strong> {selectedTracto.tracto.Kilometraje__c}</div>
+                            <div class="slds-col slds-size_1-of-3"><strong>Transmisión:</strong> {selectedTracto.tracto.Transmision__c}</div>
+                            <div class="slds-col slds-size_1-of-3"><strong>Camarote:</strong> {selectedTracto.tracto.Camarote__c}</div>
+                            <div class="slds-col slds-size_1-of-3"><strong>Suspensión:</strong> {selectedTracto.tracto.Capacidad_de_Suspension__c}</div>
+                            <div class="slds-col slds-size_1-of-3"><strong>Eje Delantero:</strong> {selectedTracto.tracto.Capacidad_Ejes_Delanteros__c}</div>
+                            <div class="slds-col slds-size_1-of-3"><strong>Eje Trasero:</strong> {selectedTracto.tracto.Capacidad_Ejes_Traseros__c}</div>
+                            <div class="slds-col slds-size_1-of-3"><strong>Paso Diferencial:</strong> {selectedTracto.tracto.Paso_de_Diferenciales__c}</div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+                        <h3 class="slds-section-title_divider">Observaciones Generales</h3>
+                        <div class="slds-p-around_small">
+                            <p>{selectedTracto.tracto.Observaciones_Generales__c}</p>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+                        <h3 class="slds-section-title_divider">Contacto y Ubicación</h3>
+                        <div class="slds-grid slds-wrap slds-p-around_small">
+                            <div class="slds-col slds-size_1-of-3"><strong>Contacto:</strong> {selectedTracto.tracto.Nombre_Contacto__c}</div>
+                            <div class="slds-col slds-size_1-of-3"><strong>Teléfono:</strong> {selectedTracto.tracto.Numero_del_Contacto__c}</div>
+                            <div class="slds-col slds-size_1-of-3"><strong>Email:</strong> {selectedTracto.tracto.Correo_Contacto__c}</div>
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <strong>Coordenadas:</strong> Lat {selectedTracto.tracto.Coordenada_Latitud__c} , Lon {selectedTracto.tracto.Coordenada_Longitud__c}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <footer class="slds-modal__footer">
+                <lightning-button label="Cerrar" onclick={closeModal}></lightning-button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

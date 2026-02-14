@@ -14,7 +14,7 @@
                         ></c-filters-tracts>
                     </section>
                     <section class="scroll-container">
-                        <c-producto-tract all-tracts-child={displayedTracks}></c-producto-tract>
+                        <c-producto-tract all-tracts-child={displayedTracks} onviewdetails={handleShowModal}></c-producto-tract>
                     </section>
                 </template>
             </div>
@@ -28,4 +28,10 @@
             </div>
         </div>
     </div>
+    <template if:true={isModalOpen}>
+        <c-tracto-detail-modal 
+            selected-tracto={tractoSeleccionado} 
+            onclose={handleCloseModal}>
+        </c-tracto-detail-modal>
+    </template>
 </template>

@@ -16,4 +16,15 @@ export default class ProductoTract extends LightningElement {
             console.log('Todos los elementos:', JSON.parse(JSON.stringify(this.allTractsChild)));
         }
     }
+    handleOpenDetails(event) {
+        // Obtenemos el ID del botón clickeado
+        const tractoId = event.target.dataset.id;
+        // Buscamos el objeto completo en nuestra lista
+        const selectedTracto = this.allTractsChild.find(item => item.tracto.Id === tractoId);
+
+        // Despachamos el evento hacia el padre
+        this.dispatchEvent(new CustomEvent('viewdetails', {
+            detail: selectedTracto
+        }));
+    }
 }
