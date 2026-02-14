@@ -26,31 +26,44 @@
                 <div class="slds-modal__content slds-p-around_medium">
                     <div class="slds-grid slds-wrap slds-gutters">
                         <div class="slds-col slds-size_1-of-2">
-                            <lightning-combobox label="Marca" options={brandOptions} placeholder="Selecciona una marca" onchange={handleBrandChange}></lightning-combobox>
+                            <lightning-combobox name="marca" label="Marca" options={brandOptions} value={filtros.marca} onchange={handleFilterChange}></lightning-combobox>
                         </div>
                         <div class="slds-col slds-size_1-of-2">
-                            <lightning-combobox label="Modelo" options={modelOptions} placeholder="Selecciona un modelo" disabled={isModelDisabled}></lightning-combobox>
+                            <lightning-combobox name="modelo" label="Modelo" options={modelOptions} value={filtros.modelo} onchange={handleFilterChange} disabled={isModelDisabled}></lightning-combobox>
                         </div>
                         <div class="slds-col slds-size_1-of-2">
-                            <lightning-input type="number" label="Año" placeholder="2024"></lightning-input>
+                            <lightning-input name="anio" type="number" label="Año" value={filtros.anio} onchange={handleFilterChange}></lightning-input>
                         </div>
                         <div class="slds-col slds-size_1-of-2">
-                            <lightning-input type="checkbox" label="Solo Disponibles" class="slds-m-top_large"></lightning-input>
+                            <lightning-combobox 
+                                name="estado" 
+                                label="Estado de la Unidad" 
+                                options={statusOptions} 
+                                value={filtros.estado} 
+                                onchange={handleFilterChange}
+                                placeholder="Todos los estados">
+                            </lightning-combobox>
                         </div>
                         <div class="slds-col slds-size_1-of-2">
-                            <lightning-input type="number" label="Precio Mínimo" placeholder="0"></lightning-input>
+                            <lightning-input name="precioMin" type="number" label="Precio Mínimo" value={filtros.precioMin} onchange={handleFilterChange}></lightning-input>
                         </div>
                         <div class="slds-col slds-size_1-of-2">
-                            <lightning-input type="number" label="Precio Máximo" placeholder="0"></lightning-input>
+                            <lightning-input name="precioMax" type="number" label="Precio Máximo" value={filtros.precioMax} onchange={handleFilterChange}></lightning-input>
                         </div>
                         <div class="slds-col slds-size_1-of-2">
-                            <lightning-input type="text" label="Marca de motor" placeholder="Ej. Cummins"></lightning-input>
+                            <lightning-input name="marcaMotor" type="text" label="Marca de motor" value={filtros.marcaMotor} onchange={handleFilterChange}></lightning-input>
                         </div>
                         <div class="slds-col slds-size_1-of-2">
-                            <lightning-input type="text" label="Modelo de motor" placeholder="Ej. ISX"></lightning-input>
+                            <lightning-input name="modeloMotor" type="text" label="Modelo de motor" value={filtros.modeloMotor} onchange={handleFilterChange}></lightning-input>
                         </div>
                         <div class="slds-col slds-size_1-of-2">
-                            <lightning-input type="number" label="Cant. Ejes" placeholder="0"></lightning-input>
+                            <lightning-combobox 
+                                name="transmision" 
+                                label="Transmisión" 
+                                options={transmissionOptions} 
+                                value={filtros.transmision} 
+                                onchange={handleFilterChange}>
+                            </lightning-combobox>
                         </div>
                     </div>
                 </div>

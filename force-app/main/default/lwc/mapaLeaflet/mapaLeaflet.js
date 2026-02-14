@@ -72,8 +72,8 @@ export default class MapaLeaflet extends LightningElement {
         const palette = ['#0176d3', '#2e844a', '#ba0517', '#f88962', '#906068', '#54698d', '#706e6b'];
         let colorIndex = 0;
         this._tracksForMap.forEach((punto) => {
-            const lat = parseFloat(punto.tracto?.Latitud_tracto__c);
-            const lng = parseFloat(punto.tracto?.Longitud_tracto__c);
+            const lat = parseFloat(punto.tracto?.Coordenada_Latitud__c);
+            const lng = parseFloat(punto.tracto?.Coordenada_Longitud__c);
             if (!isNaN(lat) && !isNaN(lng)) {
                 const marca = punto.tracto.Name || 'Desconocida';
                 if (!this.marcaColorMap.has(marca)) {
@@ -100,9 +100,9 @@ export default class MapaLeaflet extends LightningElement {
                     <h3 style="margin: 0; font-size: 14px;">📍 ${punto.tracto.Name}</h3>
                 </div>
                 <div class="popup-content" style="padding: 10px; border: 1px solid #ccc; border-top: none;">
-                    <strong>Modelo:</strong> ${punto.tracto.modelo__c || 'N/A'}<br>
-                    <strong>Estado:</strong> ${punto.tracto.status__c || 'N/A'}<br>
-                    <strong>Precio:</strong> ${punto.tracto.price__c ? '$' + punto.tracto.price__c : 'N/A'}<br>
+                    <strong>Modelo:</strong> ${punto.tracto.Modelo__c || 'N/A'}<br>
+                    <strong>Estado:</strong> ${punto.tracto.Estado_de_la_Unidad__c || 'N/A'}<br>
+                    <strong>Precio:</strong> ${punto.tracto.Precio_Venta__c ? '$' + punto.tracto.Precio_Venta__c : 'N/A'}<br>
                     <div style="font-size: 10px; color: #777; margin-top: 5px;">Coord: ${lat.toFixed(4)}, ${lng.toFixed(4)}</div>
                 </div>
             </div>
