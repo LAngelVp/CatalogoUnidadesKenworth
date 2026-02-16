@@ -4,3 +4,24 @@
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
+/* Esto asegura que las imágenes se adapten al contenedor del modal */
+.main-image :host img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.thumbnail :host img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

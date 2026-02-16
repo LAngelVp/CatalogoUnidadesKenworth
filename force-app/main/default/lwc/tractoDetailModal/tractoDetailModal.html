@@ -10,8 +10,13 @@
                     
                     <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_medium slds-align_absolute-center">
                         <div class="rich-text-container">
-                            <lightning-formatted-rich-text value={selectedTracto.tracto.Imagen__c}>
-                            </lightning-formatted-rich-text>
+                            <template if:true={firstImage}>
+                                <lightning-formatted-rich-text value={firstImage}>
+                                </lightning-formatted-rich-text>
+                            </template>
+                            <template if:false={firstImage}>
+                                <span>Sin imagen disponible</span>
+                            </template>
                         </div>
                     </div>
 
@@ -60,6 +65,19 @@
                         </div>
                     </div>
 
+                    <template if:true={hasRemainingImages}>
+                        <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+                            <h3 class="slds-section-title_divider">Más Imágenes Complementarias</h3>
+                            <div class="slds-grid slds-wrap slds-p-around_small">
+                                <template for:each={remainingImages} for:item="imgHtml">
+                                        <div key={imgHtml} class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+                                            <lightning-formatted-rich-text value={imgHtml}>
+                                            </lightning-formatted-rich-text>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                    </template>
                 </div>
             </div>
 
