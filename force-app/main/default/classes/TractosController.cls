@@ -33,22 +33,18 @@ public with sharing class TractosController {
                 ];
             }
             
-            // 1. Initialize the return list
             List<TractoWrapper> wrappers = new List<TractoWrapper>();
             
-            // 2. Map the SObject records to your Wrapper class
             for (TractoCamionTractoLocator__c t : tractos) {
                 TractoWrapper tw = new TractoWrapper();
                 tw.tracto = t;
                 wrappers.add(tw);
             }
             
-            // 3. RETURN the list
             return wrappers;
             
         } catch (Exception e) {
             System.debug('Error: ' + e.getMessage());
-            // Re-throwing as AuraHandledException is correct for LWC/Aura components
             throw new AuraHandledException(e.getMessage());
         }
     }

@@ -1,0 +1,5 @@
+<apex:page standardController="Quote" renderAs="PDF" showHeader="false" applyHtmlTag="false" applyBodyTag="false" sidebar="false">
+    <h1>
+        Hola...
+    </h1>
+</apex:page>
