@@ -1,0 +1,545 @@
+<apex:page standardController="Cotizacion__c" showHeader="false" applyHtmlTag="false" applyBodyTag="false" sidebar="false" language="es">
+    <script>
+        window.onload = function () {
+            setTimeout(function() {
+                window.print();
+            }, 500); // Da tiempo a que se renderice la página antes de imprimir
+        };
+        window.onload = function() {
+            setTimeout(function(){
+                window.print();
+            }, 500);
+        };
+        // Bloquear F12
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I")) {
+                e.preventDefault();
+            }
+        });
+        // Bloquear clic derecho
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        });
+        window.onafterprint = function() {
+            window.close(); // Intenta cerrar la pestaña automáticamente
+        };
+        document.addEventListener("keydown", function(e) {
+            // Si presionan Escape, cerramos la ventana para que no vean el HTML
+            if (e.key === "Escape") {
+                window.close();
+            }
+        });
+    </script>
+    <head>
+        <style type="text/css" media="all">
+            @font-face {
+                font-family: 'saira';
+                src: url({!URLFOR($Resource.fuente_saira_regular)}) format('truetype');
+            }
+            @page{margin-top: 50px;}
+            *{
+            font-family: 'saira', sans-serif;
+            font-size: 10px;
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            }
+            .imageLogoComplete{}
+            .colorSucursal{color: red;}
+            .maxWidthContent{min-width: 100%; width: 100%; max-width: 100%;border-collapse: collapse;}
+            .widthMedium{width:50%;}
+            .alineRight{text-align: right;}
+            .alineCenterField{text-align: center;}
+            .alineVerticalTopFiel{vertical-align:top;}
+            .alineLeftField{text-align: left;}
+            .thickRowEdgeBottom{border-bottom: 5px solid rgb(27, 27, 117);}
+            .spaceTopCell{padding-top: 10px;}
+            .spaceTopTable{margin-top: 10px;}
+            .textBold{font-weight: bold;}
+            .textMayus{text-transform: uppercase;}
+            .containerWaterMark{display:flex; position: fixed; width: 100%; height: 100dvh; z-index: -1; justify-content: center; align-items: center;}
+            .waterMark{display: flex; opacity: 0.2;}
+            .containerImageIconsSocialNetworks{text-align: start;}
+            .imageIconsSocialNetworks{width: 40%;}
+            .containerImageUrlClic{text-align: end;}
+            .imageUrlClic{width: 40%;}
+            /* formats of internal quote data */
+            .widthColumnLeftData{width: 23%;}
+            .widthColumnRightData{width: 77%;}
+            .spaceTopLatestPrices{margin-top: 50px;}
+            .spaceBottomLatestPrices{margin-bottom: 15px;}
+            .widthPriceTable{width: 40%; margin-left: auto;margin-right: auto;text-align: center;}
+            .thickRowEdgePrices{border-bottom: 5px solid rgb(7, 7, 7);}
+            /* formats of internal att */
+            .paddingBottomAtt{padding-bottom: 25px;}
+            
+
+        </style>
+    </head>
+    <html>
+        <body>
+            <div class="containerWaterMark">
+                <apex:image styleClass="waterMark" url="{!URLFOR($Resource.tractoT680BlueFront)}"/>
+            </div>
+            <table class="maxWidthContent">
+                <tr>
+                    <td class="widthMedium">
+                        <apex:image styleClass="imageLogoComplete" url="{!URLFOR($Resource.todosLogosJuntosEslogan)}"/>
+                    </td>
+                    <td class="widthMedium">
+                        <p class="alineRight">
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'matriz'}">
+                                <span class="textBold colorSucursal">
+                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
+                                - VENTA PARADA
+                                </span><br/>
+                                Km 9 + 700 Carretera Federal Córdoba-Veracruz s/n<br/>
+                                Col. Venta Parada Amatlan de los Reyes,Ver. C.P.94954<br/>
+                                Tel: 2717171414 y 2717171410
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'villahermosa'}">
+                                <span class="textBold colorSucursal">
+                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
+                                - RANCHERÍA LAZARO CARDENAS
+                                </span><br/>
+                                Carretera Villahermosa-Cárdenas Km. 8.5 s/n<br/>
+                                Ranchería Lazaro Cardenas 2da Sección Del municipio del Centro Villahermosa, Tabasco C.P. 86280<br/>
+                                Tel: (993) 317 0071
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'trebol'}">
+                                <span class="textBold colorSucursal">
+                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
+                                - Cordoba
+                                </span><br/>
+                                Autopista Córdoba-México s/n<br/>
+                                La Luz Francisco I. Madero, Córdoba Veracruz. C.P. 94542<br/>
+                                Tels. : 271-714-7727 y 271-714-5533
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'veracruz'}">
+                                <span class="textBold colorSucursal">
+                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
+                                - EX HACIENDA SANTA FE
+                                </span><br/>
+                                Carretera Federal 180 Tramo Náutla-Veracruz<br/>
+                                Col. Ex Hacienda Santa Fe, Veracruz, Ver. C.P. 91808.<br/>
+                                Tels: 229-924-7382 , 229-924-5501
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'orizaba'}">
+                                <span class="textBold colorSucursal">
+                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
+                                - RÍO BLANCO
+                                </span><br/>
+                                Camino Nacional, Número 48-A<br/>
+                                Col. Los Pinos, Río Blanco, Ver. CP. 94732.<br/>
+                                Tel.: 272-727-5422
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'tehuacan'}">
+                                <span class="textBold colorSucursal">
+                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
+                                - SAN LORENZO TEOTIPILCO
+                                </span><br/>
+                                Calz. Adolfo López Mateos No.4210<br/>
+                                Col. San Lorenzo Teotipilco, Tehuacán, Pue. CP. 75855<br/>
+                                Tel.: 238-392-0140
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'coatzacoalcos'}">
+                                <span class="textBold colorSucursal">
+                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
+                                - PALMA SOLA
+                                </span><br/>
+                                Aquiles Serdán No. 612. Entre Constitución y Av. Universidad Veracruzana<br/>
+                                Col. Palma Sola, Coatzacoalcos, Ver. C.P. 96579.<br/>
+                                Tel.: 921-215-5406
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'oaxaca'}">
+                                <span class="textBold colorSucursal">
+                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
+                                - SAN JACINTO AMILPAS
+                                </span><br/>
+                                San Jacinto Amilpas No. 174. Camino a San Jacinto<br/>
+                                Col. Granjas y Huertos Brenamiel. San Jancinto Amilpas, Oaxaca. C.P. 68285.<br/>
+                                Tel.: 951-549-2510
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'merida'}">
+                                <span class="textBold colorSucursal">
+                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
+                                - YUCATÁN
+                                </span><br/>
+                                Calle 32 Numero 600<br/>
+                                Col. El Roble Agricola Mérida, Yucatán. C.P. 97295<br/>
+                                Tel.: 999-689-3552
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'tuxtla1'}">
+                                <span class="textBold colorSucursal">
+                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
+                                - TUXTLA GUTIÉRREZ
+                                </span><br/>
+                                Bosques de la Trinidad S/N<br/>
+                                Col. Plan de Ayala Tuxtla Gutiérrez Chiapas C.P. 29096<br/>
+                                Tel.: 961-125-2233
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'tuxtla2'}">
+                                <span class="textBold colorSucursal">
+                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
+                                - TUXTLA GUTIÉRREZ 2
+                                </span><br/>
+                                Lateral Libramiento Sur Oriente No. 4281<br/>
+                                Col. Los Pájaros Tuxtla Gutiérrez Chiapas C.P. 29096<br/>
+                                Tel.: 961-125-2233
+                            </apex:outputPanel>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="alineRight spaceTopCell">
+                        <p>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'matriz'}">
+                                AMATLAN DE LOS REYES, VER. 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'trebol'}">
+                                CORDOBA, VER. 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'veracruz'}">
+                                VERACRUZ, VER. 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'orizaba'}">
+                                ORIZABA, VER. 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'coatzacoalcos'}">
+                                COATZACOALCOS, VER. 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'tehuacan'}">
+                                TEHUACAN, PUE. 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'oaxaca'}">
+                                SAN JACINTO AMILPAS, OAX. 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'merida'}">
+                                MÉRIDA, YUC. 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'tuxtla1'}">
+                                TUXTLA GUTIÉRREZ, CHIS. 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'tuxtla2'}">
+                                TUXTLA GUTIÉRREZ, CHIS. 
+                            </apex:outputPanel>
+                            <span id="fechaFormateada"></span>
+                            <script>
+                                // Obtener la fecha del registro
+                                var fechaOriginal = '{!Cotizacion__c.CreatedDate}';
+                                
+                                // Crear objeto Date
+                                var fecha = new Date(fechaOriginal);
+                                
+                                // Array con meses en español
+                                var meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
+                                            'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+                                
+                                // Obtener día, mes y año
+                                var dia = fecha.getDate();
+                                var mes = meses[fecha.getMonth()];
+                                var anio = fecha.getFullYear();
+                                
+                                // Formatear la fecha
+                                var fechaFormateada = 'A ' + dia + ' DE ' + mes + ' DEL ' + anio;
+                                
+                                // Mostrar en la página
+                                document.getElementById('fechaFormateada').innerHTML = fechaFormateada;
+                            </script>
+                            
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="widthMedium spaceTopCell">
+                        <p>
+                            <strong class="textMayus">
+                                <apex:outputText value="{!Cotizacion__c.Cliente__r.Name}"/>
+                            </strong><br/>
+                            <apex:outputText value="{!Cotizacion__c.Cliente__r.BillingStreet}"/><br/>
+                            <apex:outputText value="{!Cotizacion__c.Cliente__r.BillingCity}"/><br/>
+                            <apex:outputText value="{!Cotizacion__c.Cliente__r.BillingState}"/><br/>
+                            <apex:outputText value="C.P.{!Cotizacion__c.Cliente__r.BillingPostalCode}"/>
+                        </p>
+                    </td>
+                    <td class="widthMedium">
+                        
+                    </td>
+                </tr>
+            </table>
+            <table class="maxWidthContent spaceTopTable">
+                <thead>
+                    <th>
+                        <td class="alineCenterField thickRowEdgeBottom textBold">
+                            <p class="textMayus">
+                                <apex:outputText value="modelo: {!Cotizacion__c.Modelo__c}"/>
+                            </p>
+                        </td>
+                        <td class="alineCenterField thickRowEdgeBottom textBold">
+                            <p class="textMayus">
+                                cantidad: una
+                            </p>
+                        </td>
+                        <td class="alineCenterField thickRowEdgeBottom textBold">
+                            <p class="textMayus">
+                                <apex:outputText value="cotización: {!Cotizacion__c.Name}"/>
+                            </p>    
+                        </td>
+                    </th>
+                </thead>
+            </table>
+            <table class="maxWidthContent spaceTopTable">
+                <tbody>
+                    <tr>
+                        <td class="widthColumnLeftData alineCenterField textBold">
+                            <p>
+                                MOTOR:
+                            </p>
+                        </td>
+                        <td class="widthColumnRightData">
+                            <p>
+                                <apex:outputText value="{!Cotizacion__c.Motor__c}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="widthColumnLeftData alineCenterField textBold">
+                            <p>
+                                TRANSMISIÓN:
+                            </p>
+                        </td>
+                        <td class="widthColumnRightData">
+                            <p>
+                                <apex:outputText value="{!Cotizacion__c.Transmision__c}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="widthColumnLeftData alineCenterField textBold">
+                            <p>
+                                COLOR:
+                            </p>
+                        </td>
+                        <td class="widthColumnRightData">
+                            <p>
+                                <apex:outputText value="{!Cotizacion__c.Color__c}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="widthColumnLeftData alineCenterField textBold">
+                            <p>
+                                EJES DELANTEROS:
+                            </p>
+                        </td>
+                        <td class="widthColumnRightData">
+                            <p>
+                                <apex:outputText value="{!Cotizacion__c.Ejes_delanteros__c}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="widthColumnLeftData alineCenterField textBold">
+                            <p>
+                                EJES TRASEROS:
+                            </p>
+                        </td>
+                        <td class="widthColumnRightData">
+                            <p>
+                                <apex:outputText value="{!Cotizacion__c.Ejes_traseros__c}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="widthColumnLeftData alineCenterField textBold">
+                            <p>
+                                SUSPENSIÓN:
+                            </p>
+                        </td>
+                        <td class="widthColumnRightData">
+                            <p>
+                                <apex:outputText value="{!Cotizacion__c.Suspension__c}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="widthColumnLeftData alineCenterField textBold">
+                            <p>
+                                RELACIÓN DE EJES:
+                            </p>
+                        </td>
+                        <td class="widthColumnRightData">
+                            <p>
+                                <apex:outputText value="{!Cotizacion__c.Relacion_de_ejes__c}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="widthColumnLeftData alineCenterField textBold">
+                            <p>
+                                SISTEMA DE FRENOS:
+                            </p>
+                        </td>
+                        <td class="widthColumnRightData">
+                            <p>
+                                <apex:outputText value="{!Cotizacion__c.Sistema_de_frenos__c}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="widthColumnLeftData alineVerticalTopFiel alineCenterField textBold">
+                            <p>
+                                VARIOS:
+                            </p>
+                        </td>
+                        <td class="widthColumnRightData">
+                            <p>
+                                <apex:outputText value="{!Cotizacion__c.Varios__c}" escape="false"/>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="widthPriceTable spaceTopLatestPrices spaceBottomLatestPrices">
+                <table class="maxWidthContent">
+                    <tbody>
+                        <tr>
+                            <td class="widthCellLabel">
+                                <p class="textBold">
+                                    SUB-TOTAL:
+                                </p>
+                            </td>
+                            <td class="widthSymbolPrice">
+                                <p class="textBold">
+                                    $
+                                </p>
+                            </td>
+                            <td>
+                                <p class="widthCellLabel alineRight textBold">
+                                    <apex:outputText value="{!Cotizacion__c.Sub_total__c}"/>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="widthCellLabel">
+                                <p class="textBold">
+                                    IVA 16%:
+                                </p>
+                            </td>
+                            <td class="widthSymbolPrice">
+                                <p class="textBold">
+                                    $
+                                </p>
+                            </td>
+                            <td>
+                                <p class="widthCellLabel alineRight textBold">
+                                    <apex:outputText value="{!Cotizacion__c.IVA_16__c}"/>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="thickRowEdgePrices">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="widthCellLabel">
+                                <p class="textBold">
+                                    PRECIO DE UNIDAD:
+                                </p>
+                            </td>
+                            <td class="widthSymbolPrice">
+                                <p class="textBold">
+                                    $
+                                </p>
+                            </td>
+                            <td>
+                                <p class="widthCellLabel alineRight textBold">
+                                    <apex:outputText value="{!Cotizacion__c.Precio__c}"/>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="maxWidthContent thickRowEdgeBottom">
+            </div>
+            <table class="maxWidthContent">
+                <tbody>
+                    <tr>
+                        <td>
+                            <p class="textBold">
+                                EQUIPO OPCIONAL:        
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                - SISTEMA ANTIJAMER E INATALACION $14,500.00 PESOS IVA INCLUIDO
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                - AIRE ACONDICIONADO 3 BATERIAS DE INSTALACION $93,115.00 PESOS IVA INCLUIDO
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                - SE NECESITA $500,000.00 PARA ASIGNAR LA UNIDAD
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="textBold">
+                                - PRECIO SOLO INFORMATIVO
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="maxWidthContent spaceTopTable">
+                <tbody>
+                    <tr>
+                        <td class="alineCenterField paddingBottomAtt">
+                            <p class="textBold">
+                                ATENTAMENTE
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="alineCenterField">
+                            <p class="textBold">
+                                <apex:outputText value="{!Cotizacion__c.Owner.Name}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="alineCenterField">
+                            <p class="textBold">
+                                <apex:outputText value="{!Cotizacion__c.Owner.Title}"/>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="maxWidthContent spaceTopTable">
+                <tbody>
+                    <tr>
+                        <td class="containerImageIconsSocialNetworks">
+                            <apex:image styleClass="imageIconsSocialNetworks" url="{!URLFOR($Resource.logosRedesSocialesEslogan)}"/>
+                        </td>
+                        <td class="containerImageUrlClic">
+                            <apex:image styleClass="imageUrlClic" url="{!URLFOR($Resource.urlImage)}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </body>
+    </html>
+</apex:page>
