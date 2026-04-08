@@ -1,0 +1,193 @@
+/* Reset y Contenedor Principal */
+.containerNavbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rem 5%;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  font-family: 'Inter', sans-serif; /* O cualquier sans-serif limpia */
+}
+
+.logo {
+  height: 60px;
+  width: auto;
+  cursor: pointer;
+}
+.textMayus{
+  text-transform: uppercase;
+}
+
+/* Contenedor de Enlaces */
+.textNavbar {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Estilo Base de los Enlaces */
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 5px 0;
+  
+}
+
+/* Efecto HOVER (Línea sutil que aparece) */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #BF0029; /* Color de acento */
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #BF0029;
+  cursor: pointer;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Efecto PRESS (Escala ligera para feedback táctil) */
+.nav-link:active {
+  transform: scale(0.95);
+  opacity: 0.7;
+}
+
+/* Botón de Contacto (Opcional: resaltado) */
+.contact-btn {
+  background-color: #1a1a1a;
+  color: white !important;
+  padding: 8px 20px !important;
+  border-radius: 5px;
+}
+
+.contact-btn:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+.contact-btn::after {
+  display: none; /* Quitamos la línea para el botón */
+}
+
+.contact-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(3px);
+}
+
+.modal-container {
+    background: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 950px;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: transform 0.2s;
+}
+
+.modal-close:hover {
+    transform: scale(1.1);
+    color: #ff6600;
+}
+
+.modal-body {
+    padding: 0;
+    max-height: calc(90vh - 60px);
+    overflow-y: auto;
+}
+
+/* Scroll personalizado para el modal */
+.modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .textNavbar {
+    display: none; /* Aquí podrías implementar un menú hamburguesa */
+  }
+    
+    .modal-container {
+        width: 95%;
+        max-height: 95vh;
+    }
+    
+    .modal-header h2 {
+        font-size: 1rem;
+    }
+}

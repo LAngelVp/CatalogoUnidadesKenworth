@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "path": "c:/Users/Angel Rodriguez/Microsoft/Salesforce/Desarrollo"
+    }
+  ],
+  "settings": {
+    "eslint.workingDirectories": [
+      "c:/Users/Angel Rodriguez/Microsoft/Salesforce/Desarrollo"
+    ],
+    "eslint.validate": [
+      "javascript",
+      "typescript"
+    ],
+    "eslint.options": {
+      "overrideConfigFile": "c:\\Users\\Angel Rodriguez\\Microsoft\\Salesforce\\Desarrollo\\.eslintrc.json"
+    }
+  }
+}

@@ -1,0 +1,173 @@
+<template>
+    <div class="form-container">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Contáctanos</h2>
+                <p>Completa el siguiente formulario y uno de nuestros asesores Kenworth del Este se comunicará contigo a la brevedad.</p>
+            </div>
+
+            <!-- Mensaje de éxito -->
+            <template if:true={showSuccess}>
+                <div class="alert success">
+                    <lightning-icon icon-name="utility:success" size="small"></lightning-icon>
+                    <span>{successMessage}</span>
+                </div>
+            </template>
+
+            <!-- Mensaje de error -->
+            <template if:true={showError}>
+                <div class="alert error">
+                    <lightning-icon icon-name="utility:error" size="small"></lightning-icon>
+                    <span>{errorMessage}</span>
+                </div>
+            </template>
+
+            <form onsubmit={handleSubmit}>
+                <!-- Datos Personales -->
+                <div class="form-section">
+                    <h3>Datos Personales</h3>
+                    <div class="form-row two-columns">
+                        <div class="form-field">
+                            <label for="firstName">Nombre(s) <span class="required">*</span></label>
+                            <lightning-input type="text" id="firstName" value={firstName} onchange={handleInputChange} required></lightning-input>
+                        </div>
+                        <div class="form-field">
+                            <label for="lastName">Apellidos <span class="required">*</span></label>
+                            <lightning-input type="text" id="lastName" value={lastName} onchange={handleInputChange} required></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="form-row two-columns">
+                        <div class="form-field">
+                            <label for="email">Correo Electrónico <span class="required">*</span></label>
+                            <lightning-input type="email" id="email" value={email} onchange={handleInputChange} required></lightning-input>
+                        </div>
+                        <div class="form-field">
+                            <label for="phone">Teléfono / Celular <span class="required">*</span></label>
+                            <lightning-input type="tel" id="phone" value={phone} onchange={handleInputChange} required></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="form-row two-columns">
+                        <div class="form-field">
+                            <label for="phoneAlternate">Teléfono Alternativo</label>
+                            <lightning-input type="tel" id="phoneAlternate" value={phoneAlternate} onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="form-field">
+                            <label for="birthDate">Fecha de Nacimiento</label>
+                            <lightning-input type="date" id="birthDate" value={birthDate} onchange={handleInputChange}></lightning-input>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Datos de Ubicación -->
+                <div class="form-section">
+                    <h3>Ubicación</h3>
+                    <div class="form-row two-columns">
+                        <div class="form-field">
+                            <label for="state">Estado <span class="required">*</span></label>
+                            <lightning-combobox id="state" label="" value={state} options={stateOptions} onchange={handleComboboxChange} placeholder="Selecciona un estado" required></lightning-combobox>
+                        </div>
+                        <div class="form-field">
+                            <label for="city">Ciudad / Municipio <span class="required">*</span></label>
+                            <lightning-input type="text" id="city" value={city} onchange={handleInputChange} required></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="address">Dirección</label>
+                            <lightning-textarea id="address" value={address} onchange={handleInputChange} rows="2"></lightning-textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row two-columns">
+                        <div class="form-field">
+                            <label for="postalCode">Código Postal</label>
+                            <lightning-input type="text" id="postalCode" value={postalCode} onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="form-field">
+                            <label for="colony">Colonia</label>
+                            <lightning-input type="text" id="colony" value={colony} onchange={handleInputChange}></lightning-input>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información de Interés -->
+                <div class="form-section">
+                    <h3>Información de Interés</h3>
+                    <div class="form-row two-columns">
+                        <div class="form-field">
+                            <label for="interestType">Tipo de interés <span class="required">*</span></label>
+                            <lightning-combobox id="interestType" label="" value={interestType} options={interestOptions} onchange={handleComboboxChange} placeholder="Selecciona una opción" required></lightning-combobox>
+                        </div>
+                        <div class="form-field">
+                            <label for="vehicleModel">Modelo de interés</label>
+                            <lightning-combobox id="vehicleModel" label="" value={vehicleModel} options={modelOptions} onchange={handleComboboxChange} placeholder="Selecciona un modelo"></lightning-combobox>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="comments">Comentarios o preguntas</label>
+                            <lightning-textarea id="comments" value={comments} onchange={handleInputChange} rows="3" placeholder="¿Necesitas cotización? ¿Tienes alguna pregunta específica?"></lightning-textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row two-columns">
+                        <div class="form-field">
+                            <label for="preferredContact">Medio de contacto preferido</label>
+                            <lightning-combobox id="preferredContact" label="" value={preferredContact} options={contactMethodOptions} onchange={handleComboboxChange} placeholder="Selecciona una opción"></lightning-combobox>
+                        </div>
+                        <div class="form-field">
+                            <label for="bestTime">Mejor horario para contactar</label>
+                            <lightning-combobox id="bestTime" label="" value={bestTime} options={timeOptions} onchange={handleComboboxChange} placeholder="Selecciona un horario"></lightning-combobox>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información Adicional -->
+                <div class="form-section">
+                    <h3>Información Adicional</h3>
+                    <div class="form-row two-columns">
+                        <div class="form-field">
+                            <label for="companyName">Nombre de la empresa / flota</label>
+                            <lightning-input type="text" id="companyName" value={companyName} onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="form-field">
+                            <label for="fleetSize">Tamaño de la flota (unidades)</label>
+                            <lightning-input type="number" id="fleetSize" value={fleetSize} onchange={handleInputChange}></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="form-row two-columns">
+                        <div class="form-field">
+                            <label for="position">Cargo / Puesto</label>
+                            <lightning-input type="text" id="position" value={position} onchange={handleInputChange} placeholder="Ej: Dueño, Gerente de flota, Operador"></lightning-input>
+                        </div>
+                        <div class="form-field">
+                            <label for="howDidYouHear">¿Cómo nos conociste?</label>
+                            <lightning-combobox id="howDidYouHear" label="" value={howDidYouHear} options={referralOptions} onchange={handleComboboxChange} placeholder="Selecciona una opción"></lightning-combobox>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Términos y Condiciones -->
+                <div class="form-section">
+                    <div class="form-field checkbox">
+                        <lightning-input type="checkbox" id="privacyPolicy" checked={privacyPolicy} onchange={handleCheckboxChange} label="Acepto la Política de Privacidad y el tratamiento de mis datos personales." required></lightning-input>
+                    </div>
+                    <div class="form-field checkbox">
+                        <lightning-input type="checkbox" id="newsletter" checked={newsletter} onchange={handleCheckboxChange} label="Deseo recibir información sobre promociones, nuevos modelos y servicios de Kenworth del Este."></lightning-input>
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="form-actions">
+                    <lightning-button type="reset" label="Limpiar" variant="neutral" onclick={handleReset}></lightning-button>
+                    <lightning-button type="submit" label="Enviar mensaje" variant="brand" disabled={isSubmitting}></lightning-button>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,364 @@
+.containerHero{
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 40rem;
+}
+.imgHero{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.containerTextHero{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 90%;
+    height: 100%;
+    margin: auto;
+    justify-content: center;
+}
+.textCenter{
+    text-align: center;
+}
+.textBold{
+    font-weight: bold;
+}
+.textMayus{
+    text-transform: uppercase;
+}
+.textHeroSpan{
+    font-size: 58px;
+    color: #BF0029;
+}
+.textHeroSlogan{
+    font-size: 40px;
+    color: #E4E2E1;
+}
+.containerBotonesHero{
+    display: flex;
+    gap: 15px;
+}
+.btnHero{
+    background-color: #BF0029;
+    border:none;
+    border-radius: 4px;
+    padding: 10px;
+    color: #E4E2E1;
+    margin-top: 10px;
+    width: 200px;
+}
+.btnHero:hover{
+    background-color: #e70032;
+}
+.btnHero:active{
+    background-color: #8f0120;
+}
+.btnHero2{
+    background-color: #7877774d;
+    border:none;
+    border-radius: 4px;
+    padding: 10px;
+    color: #E4E2E1;
+    margin-top: 10px;
+    backdrop-filter: blur(20px);
+    width: 200px;
+}
+.btnHero2:hover{
+    background-color: #5F5E5E;
+}
+.btnHero2:active{
+    background-color: #474746;
+}
+.subContainerHistory{
+    display: flex;
+    flex-direction: column;
+}
+.container1923 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 90%;
+    height: 27rem;
+    margin: 2rem auto;
+    gap: 2rem;
+    align-items: center;
+}
+.container1928 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 90%;
+    height: 27rem;
+    margin: 2rem auto;
+    gap: 2rem;
+    align-items: center;
+    direction: rtl;
+}
+
+.containerImage1923 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.img1923 {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.img1923:hover {
+    transform: scale(1.05);
+}
+.containerText1923 {
+    padding: 1.5rem;
+}
+.containerText1923{
+    display: flex;
+    flex-direction: column;
+}
+.badge1923{
+    background-color: #8f0120;
+    color: #E4E2E1;
+    padding: 5px;
+    width: fit-content;
+    font-size: 14px;
+}
+.titleBadge1923{
+    font-size: 45px;
+}
+.textBadge1923{
+    font-size: 18px;
+    opacity: 0.8;
+}
+.containerStadistics1923{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 2px solid #00000026;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+.containerSpanStadistics{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.spanEstadistic1923{
+    font-size: 30px;
+}
+.spanStatistics1923Text{
+    font-size: 14px;
+    opacity: 0.8;
+}
+.containerEcosystem{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    gap: 2rem;
+    align-items: center;
+    background-color: #e4e2e124;
+    padding: 2rem 0rem;
+}
+.containerTitleEcosystem{
+    width: 90%;
+}
+.containerTextEcosystem{
+    display: flex;
+    justify-content: space-between;
+}
+.titleEcosystem{
+    font-size: 45px;
+}
+.brandTitle {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: auto;
+    padding: 1rem;
+    border-bottom: 4px solid;
+    width: fit-content;
+    letter-spacing: 2px;
+}
+
+/* Color distintivo para DAF */
+.brandTitle:first-of-type {
+    color: #003366;  /* Azul DAF */
+    border-bottom-color: #ff6600;  /* Naranja DAF */
+}
+.btnEcosystem {
+    background: transparent;
+    border: none;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: fit-content;
+    height: fit-content;
+}
+.btnEcosystem:hover .arrowEcosystem {
+    transform: translateX(5px);
+}
+
+.btnEcosystem:hover {
+    opacity: 1;
+    gap: 12px;
+}
+
+.arrowEcosystem {
+    transition: transform 0.3s ease;
+}
+.containerGridEcosystem {
+    display: grid;
+    grid-template-areas: 
+        "tablero tablero tablero"
+        "nextgen motor dormitorio";
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.containerGridEcosystem > div:first-child {
+    grid-area: tablero;
+}
+
+.containerGridEcosystem > div:nth-child(2) {
+    grid-area: nextgen;
+}
+
+.containerGridEcosystem > div:nth-child(3) {
+    grid-area: motor;
+}
+
+.containerGridEcosystem > div:nth-child(4) {
+    grid-area: dormitorio;
+}
+
+/* Estilos de imágenes */
+.imgTablero,
+.imgNextGen,
+.imgMotorMX13,
+.imgDormitorioNextGen {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit:fill;
+    border-radius: 12px;
+}
+
+.imgTablero {
+    height: 400px;
+}
+
+.imgNextGen,
+.imgMotorMX13,
+.imgDormitorioNextGen {
+    height: 250px;
+}
+/* estilos de la cintilla */
+/* Cinta a todo lo ancho */
+.certification-ribbon {
+    width: 100%;
+    background-image: linear-gradient(to left, #BDBBBE 0%, #9D9EA3 100%), radial-gradient(88% 271%, rgba(255, 255, 255, 0.25) 0%, rgba(254, 254, 254, 0.25) 1%, rgba(0, 0, 0, 0.25) 100%), radial-gradient(50% 100%, rgba(255, 255, 255, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%);
+ background-blend-mode: normal, lighten, soft-light;
+    padding: 2rem 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: thin;
+}
+
+/* Contenedor flex que permite scroll en móviles */
+.certification-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Tarjeta individual */
+.cert-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    min-width: 220px;
+    max-width: 260px;
+    flex: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cert-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo (simulado con íconos, reemplaza con tus imágenes reales) */
+.cert-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border-radius: 50%;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0f3460;
+}
+
+/* Si usas imágenes reales */
+.cert-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Título de la certificación */
+.cert-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+/* Descripción de 20 palabras aprox */
+.cert-description {
+    font-size: 0.8rem;
+    color: #333;
+    line-height: 1.4;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+/* Responsive: en móviles se apilan */
+@media (max-width: 768px) {
+    .certification-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    .cert-card {
+        min-width: 280px;
+    }
+}

@@ -78,9 +78,41 @@
     </head>
     <html>
         <body>
-            <div class="containerWaterMark">
-                <apex:image styleClass="waterMark" url="{!URLFOR($Resource.tractoT680BlueFront)}"/>
-            </div>
+            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Modelo__c) == 't880'}">
+                <div class="containerWaterMark">
+                    <apex:image styleClass="waterMark" url="{!URLFOR($Resource.CotizacionImage_KWT880)}"/>
+                </div>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Modelo__c) == 't680'}">
+                <div class="containerWaterMark">
+                    <apex:image styleClass="waterMark" url="{!URLFOR($Resource.tractoT680BlueFront)}"/>
+                </div>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Modelo__c) == 't480'}">
+                <div class="containerWaterMark">
+                    <apex:image styleClass="waterMark" url="{!URLFOR($Resource.CotizacionImage_KWT480)}"/>
+                </div>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Modelo__c) == 'xf'}">
+                <div class="containerWaterMark">
+                    <apex:image styleClass="waterMark" url="{!URLFOR($Resource.CotizacionImage_DAFXF)}"/>
+                </div>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Modelo__c) == 'cf'}">
+                <div class="containerWaterMark">
+                    <apex:image styleClass="waterMark" url="{!URLFOR($Resource.CotizacionImage_DAFCF)}"/>
+                </div>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Modelo__c) == 'xb'}">
+                <div class="containerWaterMark">
+                    <apex:image styleClass="waterMark" url="{!URLFOR($Resource.CotizacionImage_DAFXB)}"/>
+                </div>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Modelo__c) == 'xg'}">
+                <div class="containerWaterMark">
+                    <apex:image styleClass="waterMark" url="{!URLFOR($Resource.CotizacionImage_DAFCFMIX)}"/>
+                </div>
+            </apex:outputPanel>
             <table class="maxWidthContent">
                 <tr>
                     <td class="widthMedium">
@@ -100,70 +132,63 @@
                             <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'villahermosa'}">
                                 <span class="textBold colorSucursal">
                                 <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
-                                - RANCHERÍA LAZARO CARDENAS
                                 </span><br/>
-                                Carretera Villahermosa-Cárdenas Km. 8.5 s/n<br/>
-                                Ranchería Lazaro Cardenas 2da Sección Del municipio del Centro Villahermosa, Tabasco C.P. 86280<br/>
-                                Tel: (993) 317 0071
+                                Carretera Villahermosa-Cárdenas Km. 8.5 S/N<br/>
+                                Col. Ranchería Lázaro Cárdenas 2A Sección. C.P. 86287<br/>
+                                Tel: 993-317-0071
                             </apex:outputPanel>
-                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'trebol'}">
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'trébol'}">
                                 <span class="textBold colorSucursal">
                                 <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
-                                - Cordoba
                                 </span><br/>
-                                Autopista Córdoba-México s/n<br/>
-                                La Luz Francisco I. Madero, Córdoba Veracruz. C.P. 94542<br/>
-                                Tels. : 271-714-7727 y 271-714-5533
+                                Autopista Córdoba-México S/N<br/>
+                                Trébol de la Luz, Col. Francisco I. Madero<br/>
+                                Cordoba, Ver. C.P. 94542<br/>
+                                Tels. : 271-714-7727 y 271-714-7788
                             </apex:outputPanel>
                             <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'veracruz'}">
                                 <span class="textBold colorSucursal">
                                 <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
-                                - EX HACIENDA SANTA FE
                                 </span><br/>
                                 Carretera Federal 180 Tramo Náutla-Veracruz<br/>
-                                Col. Ex Hacienda Santa Fe, Veracruz, Ver. C.P. 91808.<br/>
-                                Tels: 229-924-7382 , 229-924-5501
+                                Chalchihuecan, Veracruz, Ver. C.P. 91808.<br/>
+                                Tels: 229-924-0155
                             </apex:outputPanel>
                             <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'orizaba'}">
                                 <span class="textBold colorSucursal">
                                 <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
-                                - RÍO BLANCO
                                 </span><br/>
                                 Camino Nacional, Número 48-A<br/>
                                 Col. Los Pinos, Río Blanco, Ver. CP. 94732.<br/>
-                                Tel.: 272-727-5422
+                                Tel.: 272-727-5422 y 272-727-3432
                             </apex:outputPanel>
-                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'tehuacan'}">
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'tehuacán'}">
                                 <span class="textBold colorSucursal">
                                 <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
-                                - SAN LORENZO TEOTIPILCO
                                 </span><br/>
                                 Calz. Adolfo López Mateos No.4210<br/>
-                                Col. San Lorenzo Teotipilco, Tehuacán, Pue. CP. 75855<br/>
+                                Col. San Lorenzo Teotipilco, Tehuacán, Pue. C.P. 75855<br/>
                                 Tel.: 238-392-0140
                             </apex:outputPanel>
                             <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'coatzacoalcos'}">
                                 <span class="textBold colorSucursal">
                                 <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
-                                - PALMA SOLA
                                 </span><br/>
-                                Aquiles Serdán No. 612. Entre Constitución y Av. Universidad Veracruzana<br/>
-                                Col. Palma Sola, Coatzacoalcos, Ver. C.P. 96579.<br/>
+                                Aquiles Serdán No. 612.<br/>
+                                Manuel Ávila Camacho, Coatzacoalcos, Ver. C.P.96420<br/>
                                 Tel.: 921-215-5406
                             </apex:outputPanel>
                             <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'oaxaca'}">
                                 <span class="textBold colorSucursal">
                                 <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
-                                - SAN JACINTO AMILPAS
                                 </span><br/>
-                                San Jacinto Amilpas No. 174. Camino a San Jacinto<br/>
-                                Col. Granjas y Huertos Brenamiel. San Jancinto Amilpas, Oaxaca. C.P. 68285.<br/>
+                                Camino a San Jacinto Amilpas No. 174.<br/>
+                                Col. Granjas y Huertos Brenamiel. San Jancinto Amilpas, Oax. C.P. 68285.<br/>
                                 Tel.: 951-549-2510
                             </apex:outputPanel>
-                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'merida'}">
+                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'mérida'}">
                                 <span class="textBold colorSucursal">
                                 <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
-                                - YUCATÁN
                                 </span><br/>
                                 Calle 32 Numero 600<br/>
                                 Col. El Roble Agricola Mérida, Yucatán. C.P. 97295<br/>
@@ -171,21 +196,11 @@
                             </apex:outputPanel>
                             <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'tuxtla1'}">
                                 <span class="textBold colorSucursal">
-                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
-                                - TUXTLA GUTIÉRREZ
+                                TUXTLA GUTIÉRREZ, CHIAPAS
                                 </span><br/>
-                                Bosques de la Trinidad S/N<br/>
-                                Col. Plan de Ayala Tuxtla Gutiérrez Chiapas C.P. 29096<br/>
-                                Tel.: 961-125-2233
-                            </apex:outputPanel>
-                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'tuxtla2'}">
-                                <span class="textBold colorSucursal">
-                                <apex:outputText value="{!UPPER(Cotizacion__c.Sucursal__c)}"/>
-                                - TUXTLA GUTIÉRREZ 2
-                                </span><br/>
-                                Lateral Libramiento Sur Oriente No. 4281<br/>
-                                Col. Los Pájaros Tuxtla Gutiérrez Chiapas C.P. 29096<br/>
-                                Tel.: 961-125-2233
+                                Col. Plan de Ayala Ampliación Sur.<br/>
+                                Blv. Bosques de la Trinidad. C.P. 29020<br/>
+                                Tel.: 961-689-0751
                             </apex:outputPanel>
                         </p>
                     </td>
@@ -220,9 +235,6 @@
                             <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'tuxtla1'}">
                                 TUXTLA GUTIÉRREZ, CHIS. 
                             </apex:outputPanel>
-                            <apex:outputPanel rendered="{!LOWER(Cotizacion__c.Sucursal__c) == 'tuxtla2'}">
-                                TUXTLA GUTIÉRREZ, CHIS. 
-                            </apex:outputPanel>
                             <span id="fechaFormateada"></span>
                             <script>
                                 // Obtener la fecha del registro
@@ -252,14 +264,26 @@
                 </tr>
                 <tr>
                     <td class="widthMedium spaceTopCell">
-                        <p>
-                            <strong class="textMayus">
+                        <p class="textMayus">
+                            <strong>
                                 <apex:outputText value="{!Cotizacion__c.Cliente__r.Name}"/>
                             </strong><br/>
-                            <apex:outputText value="{!Cotizacion__c.Cliente__r.BillingStreet}"/><br/>
-                            <apex:outputText value="{!Cotizacion__c.Cliente__r.BillingCity}"/><br/>
-                            <apex:outputText value="{!Cotizacion__c.Cliente__r.BillingState}"/><br/>
-                            <apex:outputText value="C.P.{!Cotizacion__c.Cliente__r.BillingPostalCode}"/>
+
+                            <apex:outputPanel rendered="{!NOT(ISBLANK(Cotizacion__c.Cliente__r.BillingStreet))}">
+                                <apex:outputText value="{!Cotizacion__c.Cliente__r.BillingStreet}"/><br/>
+                            </apex:outputPanel>
+
+                            <apex:outputPanel rendered="{!NOT(ISBLANK(Cotizacion__c.Cliente__r.BillingCity))}">
+                                <apex:outputText value="{!Cotizacion__c.Cliente__r.BillingCity}"/><br/>
+                            </apex:outputPanel>
+
+                            <apex:outputPanel rendered="{!NOT(ISBLANK(Cotizacion__c.Cliente__r.BillingState))}">
+                                <apex:outputText value="{!Cotizacion__c.Cliente__r.BillingState}"/><br/>
+                            </apex:outputPanel>
+
+                            <apex:outputPanel rendered="{!NOT(ISBLANK(Cotizacion__c.Cliente__r.BillingPostalCode))}">
+                                <apex:outputText value="{!Cotizacion__c.Cliente__r.BillingPostalCode}"/><br/>
+                            </apex:outputPanel>
                         </p>
                     </td>
                     <td class="widthMedium">
