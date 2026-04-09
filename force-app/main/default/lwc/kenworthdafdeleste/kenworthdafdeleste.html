@@ -1,4 +1,28 @@
 <template>
-    <c-navbar-oficial-page></c-navbar-oficial-page>
-    <c-home-page-kenworth-este></c-home-page-kenworth-este>
+    <c-navbar-oficial-page onnavchange={handleNavChange}></c-navbar-oficial-page>
+    
+    <!-- Renderizado condicional de páginas -->
+    <template if:true={showInicio}>
+        <c-page-oficial-home-component></c-page-oficial-home-component>
+    </template>
+<!--     
+    <template if:true={showServicio}>
+        <c-page-oficial-servicio-component></c-page-oficial-servicio-component>
+    </template>
+    
+    <template if:true={showRefacciones}>
+        <c-page-oficial-refacciones-component></c-page-oficial-refacciones-component>
+    </template>
+    
+    <template if:true={showUnidades}>
+        <c-page-oficial-unidades-component></c-page-oficial-unidades-component>
+    </template>
+    
+    <template if:true={showSucursales}>
+        <c-page-oficial-sucursales-component></c-page-oficial-sucursales-component>
+    </template>
+    
+    <template if:true={showEmpresa}>
+        <c-page-oficial-empresa-component></c-page-oficial-empresa-component>
+    </template> -->
 </template>

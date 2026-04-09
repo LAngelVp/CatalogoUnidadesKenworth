@@ -3,13 +3,47 @@ import LOGO_KENWORTH from '@salesforce/resourceUrl/LogoKenworthKreiDaf';
 
 export default class NavbarOficialPage extends LightningElement {
     logoUrl = LOGO_KENWORTH;
-    
-    // ✅ IMPORTANTE: Declarar isModalOpen como @track para que sea reactivo
     @track isModalOpen = false;
+
+    activePage = 'inicio';
+    
+    // Métodos específicos para cada página
+    selectInicio() {
+        this.activePage = 'inicio';
+        this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'inicio' } }));
+    }
+    
+    selectServicio() {
+        this.activePage = 'servicio';
+        this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'servicio' } }));
+    }
+    
+    selectRefacciones() {
+        this.activePage = 'refacciones';
+        this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'refacciones' } }));
+    }
+    
+    selectUnidades() {
+        this.activePage = 'unidades';
+        this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'unidades' } }));
+    }
+    
+    selectSucursales() {
+        this.activePage = 'sucursales';
+        this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'sucursales' } }));
+    }
+    
+    selectEmpresa() {
+        this.activePage = 'empresa';
+        this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'empresa' } }));
+    }
+    
+    getTabClass(page) {
+        return this.activePage === page ? 'active' : '';
+    }
 
     openContactModal() {
         this.isModalOpen = true;
-        // Prevenir scroll del body
         document.body.style.overflow = 'hidden';
     }
 

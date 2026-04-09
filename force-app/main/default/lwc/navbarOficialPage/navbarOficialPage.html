@@ -3,25 +3,26 @@
     <img src={logoUrl} alt="Logo Kenworth" class="logo">
 
     <div class="textNavbar">
-      <p class="nav-link">Servicio</p>
-      <p class="nav-link">Refacciones</p>
-      <p class="nav-link">Unidades</p>
-      <p class="nav-link">Sucursales</p>
-      <p class="nav-link">Empresa</p>
-      <p class="nav-link contact-btn" onclick={openContactModal}>Contacto</p>
+      <p class="nav-link {getTabClass('inicio')}" onclick={selectInicio}>Inicio</p>
+      <p class="nav-link {getTabClass('servicio')}" onclick={selectServicio}>Servicio</p>
+      <p class="nav-link {getTabClass('refacciones')}" onclick={selectRefacciones}>Refacciones</p>
+      <p class="nav-link {getTabClass('unidades')}" onclick={selectUnidades}>Unidades</p>
+      <p class="nav-link {getTabClass('sucursales')}" onclick={selectSucursales}>Sucursales</p>
+      <p class="nav-link {getTabClass('empresa')}" onclick={selectEmpresa}>Empresa</p>
     </div>
+    <p class="nav-link contact-btn" onclick={openContactModal}>Contacto</p>
   </nav>
   <template if:true={isModalOpen}>
-        <div class="modal-overlay" onclick={closeModalOnOverlay}>
-            <div class="modal-container">
-                <div class="modal-header">
-                    <h2 class="textMayus">Contacto Kenworth DAF del Este</h2>
-                    <button class="modal-close" onclick={closeContactModal}>&times;</button>
-                </div>
-                <div class="modal-body">
-                    <c-page-oficial-contact-form></c-page-oficial-contact-form>
-                </div>
+    <div class="modal-overlay" onclick={closeModalOnOverlay}>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="textMayus">Contacto Kenworth DAF del Este</h2>
+                <button class="modal-close" onclick={closeContactModal}>&times;</button>
+            </div>
+            <div class="modal-body">
+                <c-page-oficial-contact-form></c-page-oficial-contact-form>
             </div>
         </div>
-    </template>
+    </div>
+  </template>
 </template>

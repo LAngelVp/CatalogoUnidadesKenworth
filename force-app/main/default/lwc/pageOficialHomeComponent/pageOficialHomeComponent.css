@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'Saira';
+    src: url('/resource/fuente_saira_regular') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Saira';
+}
 .containerHero{
     display: flex;
     position: relative;
@@ -178,7 +188,6 @@
 }
 .brandTitle {
     text-align: center;
-    font-family: 'Arial', sans-serif;
     font-size: 2rem;
     font-weight: bold;
     margin: auto;

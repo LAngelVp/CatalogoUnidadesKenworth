@@ -14,7 +14,8 @@ import IMAGE_REDTOTAL from '@salesforce/resourceUrl/PageOficial_RedTotal';
 import IMAGE_ISO14001 from '@salesforce/resourceUrl/PageOficial_iso14001';
 import IMAGE_ISO9001 from '@salesforce/resourceUrl/PageOficial_iso9001';
 import IMAGE_EPA from '@salesforce/resourceUrl/PageOficial_EPACertificate';
-export default class HomePageKenworthEste extends LightningElement {
+
+export default class PageOficialHomeComponent extends LightningElement {
     imgHero = IMAGE_HERO;
     img1923 = IMAGE_PATRIMONIO;
     img1928 = IMAGE_PATRIMONIODAF;
