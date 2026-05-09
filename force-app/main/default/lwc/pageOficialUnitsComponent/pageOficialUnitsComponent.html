@@ -1,0 +1,115 @@
+<template>
+    <div class="units-container">
+        <!-- Hero Section -->
+        <section class="hero-section fade-in">
+            <img class="hero-image-bg" src={imgHeroUnits} alt="Fondo unidades">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Potencia y Confiabilidad en Cada Kilómetro</h1>
+                <p class="hero-subtitle">Descubre nuestra gama de unidades Kenworth y DAF, diseñadas para superar cualquier desafío en el camino con la más alta tecnología y rentabilidad.</p>
+                <button class="cta-button primary" onclick={scrollToContact}>Cotiza tu Unidad</button>
+            </div>
+        </section>
+
+        <!-- Marcas / Introducción -->
+        <section class="brands-section slide-up">
+            <h2 class="section-title">Nuestras Marcas de Clase Mundial</h2>
+            <div class="brands-grid">
+                <div class="brand-card kenworth">
+                    <div class="brand-logo">KENWORTH</div>
+                    <p>Líderes indiscutibles en el mercado. Resistencia, durabilidad, tecnología de punta y el confort inigualable que tu operador merece.</p>
+                </div>
+                <div class="brand-card daf">
+                    <div class="brand-logo">DAF</div>
+                    <p>Eficiencia europea superior, diseño aerodinámico inteligente y el mejor rendimiento de combustible para maximizar tus ganancias.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unidades Nuevas -->
+        <section class="units-section new-units slide-up">
+            <div class="section-header">
+                <h2 class="section-title">Unidades Nuevas</h2>
+                <p class="section-desc">Incorpora el último modelo en tecnología, seguridad y rendimiento aerodinámico para tu flotilla.</p>
+            </div>
+            <div class="units-grid">
+                <div class="unit-card">
+                    <div class="card-image new-kw">
+                        <img class="card-img-element" src={imgNewKw} alt="Kenworth T680 Next Gen">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-badge new">NUEVO</div>
+                        <h3>Kenworth T680 Next Gen</h3>
+                        <p>Aerodinámica superior, máxima eficiencia de combustible y pantalla digital de última generación.</p>
+                        <button class="outline-button" onclick={scrollToContact}>Solicitar Cotización</button>
+                    </div>
+                </div>
+                <div class="unit-card">
+                    <div class="card-image new-daf-truck">
+                        <img class="card-img-element" src={imgNewDaf} alt="DAF XF / CF">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-badge new">NUEVO</div>
+                        <h3>DAF XF / CF</h3>
+                        <p>Lujo, espacio inigualable en cabina y rentabilidad pura para viajes de largas distancias.</p>
+                        <button class="outline-button" onclick={scrollToContact}>Solicitar Cotización</button>
+                    </div>
+                </div>
+                <div class="unit-card">
+                    <div class="card-image new-kw-vocacional">
+                        <img class="card-img-element" src={imgNewVocational} alt="Kenworth T880">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-badge new">NUEVO</div>
+                        <h3>Kenworth T880</h3>
+                        <p>El caballo de batalla vocacional. Listo para la construcción, minería y carga pesada.</p>
+                        <button class="outline-button" onclick={scrollToContact}>Solicitar Cotización</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unidades Seminuevas / Usadas -->
+        <section class="units-section used-units slide-up">
+            <div class="section-header">
+                <h2 class="section-title">Unidades Seminuevas</h2>
+                <p class="section-desc">Calidad y rendimiento garantizados. Cada unidad ha sido rigurosamente inspeccionada por nuestros expertos certificados.</p>
+            </div>
+            <div class="units-grid">
+                <div class="unit-card">
+                    <div class="card-image used-1">
+                        <img class="card-img-element" src={imgUsed1} alt="Kenworth T680 Clásico">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-badge used">SEMINUEVO</div>
+                        <h3>Kenworth T680 Clásico</h3>
+                        <p>Excelentes condiciones mecánicas y estéticas. Listo para salir a carretera de inmediato.</p>
+                        <button class="outline-button" onclick={scrollToContact}>Me interesa</button>
+                    </div>
+                </div>
+                <div class="unit-card">
+                    <div class="card-image used-2">
+                        <img class="card-img-element" src={imgUsed2} alt="Kenworth W900">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-badge used">SEMINUEVO</div>
+                        <h3>Kenworth W900</h3>
+                        <p>Un clásico poderoso de diseño tradicional en perfectas condiciones operativas.</p>
+                        <button class="outline-button" onclick={scrollToContact}>Me interesa</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="contact-cta slide-up" lwc:ref="contactSection">
+            <div class="cta-banner">
+                <h2>¿Listo para hacer crecer tu negocio?</h2>
+                <p>Nuestros asesores expertos están listos para ofrecerte la mejor atención personalizada, cotizaciones a la medida y atractivas opciones de financiamiento para tus unidades.</p>
+                <div class="contact-actions">
+                    <button class="cta-button secondary large">Contactar a un Asesor de Ventas</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</template>

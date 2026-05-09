@@ -1,0 +1,151 @@
+<template>
+    <div class="jobs-container">
+        <!-- Hero Section -->
+        <section class="jobs-hero animate-on-scroll">
+            <img class="hero-image-bg" src={imgHeroJobBoard} alt="Fondo Bolsa de Trabajo">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Bolsa de <span class="text-red">Trabajo</span></h1>
+                <p class="hero-subtitle">Únete al equipo Kenworth del Este. Descubre oportunidades para desarrollar tu carrera con los líderes en transporte.</p>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <section class="jobs-main-content">
+            
+            <!-- Vista de Lista de Puestos (Oculta si hay un puesto seleccionado) -->
+            <template if:false={hasSelectedJob}>
+                <div class="section-header animate-on-scroll">
+                    <h2 class="section-title">Vacantes Disponibles</h2>
+                    <div class="separator-line"></div>
+                    <p class="section-desc">Explora las posiciones que tenemos abiertas actualmente en nuestras diferentes sucursales y áreas de especialidad.</p>
+                </div>
+
+                <div class="jobs-list animate-on-scroll">
+                    <template for:each={jobs} for:item="job">
+                        <div key={job.id} class="job-card">
+                            <div class="job-card-header">
+                                <h3 class="job-title">{job.title}</h3>
+                                <span class="job-type-badge">{job.type}</span>
+                            </div>
+                            
+                            <div class="job-meta">
+                                <div class="meta-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>{job.branch}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                    </svg>
+                                    <span>{job.department}</span>
+                                </div>
+                            </div>
+                            
+                            <p class="job-short-desc">{job.shortDescription}</p>
+                            
+                            <div class="job-actions">
+                                <button class="btn-outline" data-id={job.id} onclick={handleViewDetails}>
+                                    Ver Detalles
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Vista de Detalles del Puesto (Visible cuando hay un puesto seleccionado) -->
+            <template if:true={hasSelectedJob}>
+                <div class="job-details-view animate-on-scroll">
+                    
+                    <button class="btn-back" onclick={handleBackToList}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        Volver a las vacantes
+                    </button>
+
+                    <div class="details-header">
+                        <div class="details-title-row">
+                            <h2 class="details-title">{selectedJob.title}</h2>
+                            <span class="job-type-badge large">{selectedJob.type}</span>
+                        </div>
+                        
+                        <div class="details-meta">
+                            <div class="meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <strong>Sucursal:</strong> {selectedJob.branch}
+                            </div>
+                            <div class="meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                                <strong>Departamento:</strong> {selectedJob.department}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="details-body">
+                        <div class="details-section">
+                            <h3>Descripción del Puesto</h3>
+                            <p>{selectedJob.fullDescription}</p>
+                        </div>
+                        
+                        <div class="details-section">
+                            <h3>Requisitos</h3>
+                            <ul class="styled-list">
+                                <template for:each={selectedJob.requirements} for:item="req" for:index="index">
+                                    <li key={req}>
+                                        <span class="list-icon">✓</span>
+                                        {req}
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                        
+                        <div class="details-section">
+                            <h3>Ofrecemos</h3>
+                            <ul class="styled-list">
+                                <template for:each={selectedJob.benefits} for:item="benefit" for:index="index">
+                                    <li key={benefit}>
+                                        <span class="list-icon">★</span>
+                                        {benefit}
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="details-footer">
+                        <div class="apply-box">
+                            <h3>¿Te interesa esta posición?</h3>
+                            <p>Envía tu currículum actualizado mencionando en el asunto el nombre de la vacante a nuestro correo de Atracción de Talento.</p>
+                            <a href="mailto:reclutamiento@kenworthdeleste.com" class="btn-primary apply-btn">
+                                Postularme Ahora
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </template>
+
+        </section>
+    </div>
+</template>

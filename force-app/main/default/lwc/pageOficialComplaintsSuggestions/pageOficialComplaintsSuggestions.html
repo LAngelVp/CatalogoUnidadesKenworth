@@ -1,0 +1,114 @@
+<template>
+    <div class="complaints-container">
+        <!-- Encabezado de la sección -->
+        <section class="section-header animate-on-scroll">
+            <h1 class="section-title">Quejas y <span class="text-red">Sugerencias</span></h1>
+            <div class="separator-line"></div>
+            <p class="section-desc">Tu opinión es fundamental para nuestro crecimiento. Ayúdanos a mejorar continuamente nuestro servicio en Kenworth del Este.</p>
+        </section>
+
+        <!-- Contenedor del Formulario -->
+        <section class="form-section animate-on-scroll">
+            <div class="form-card">
+                
+                <!-- Mensaje de Éxito -->
+                <template if:true={isSubmitted}>
+                    <div class="success-message">
+                        <div class="success-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <h2>¡Mensaje Enviado con Éxito!</h2>
+                        <p>Agradecemos tu tiempo. Hemos recibido tu {formData.type} y nuestro equipo de calidad le dará el seguimiento correspondiente.</p>
+                        <button class="btn-primary mt-4" onclick={resetForm}>Enviar otro mensaje</button>
+                    </div>
+                </template>
+
+                <!-- Formulario -->
+                <template if:false={isSubmitted}>
+                    <form onsubmit={handleSubmit} class="complaints-form">
+                        
+                        <!-- Tipo de Mensaje -->
+                        <div class="form-group type-selector">
+                            <label class="form-label">Tipo de mensaje</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="type" value="Sugerencia" checked={isSuggestion} onchange={handleChange} required>
+                                    <span class="radio-custom"></span> Sugerencia
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="type" value="Queja" checked={isComplaint} onchange={handleChange} required>
+                                    <span class="radio-custom"></span> Queja
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Grid de dos columnas -->
+                        <div class="form-row">
+                            <div class="form-group half-width">
+                                <label for="name" class="form-label">Nombre Completo</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Ej. Juan Pérez" value={formData.name} onchange={handleChange} required>
+                            </div>
+                            <div class="form-group half-width">
+                                <label for="email" class="form-label">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="ejemplo@correo.com" value={formData.email} onchange={handleChange} required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group half-width">
+                                <label for="phone" class="form-label">Teléfono (Opcional)</label>
+                                <input type="tel" id="phone" name="phone" class="form-input" placeholder="A 10 dígitos" value={formData.phone} onchange={handleChange}>
+                            </div>
+                            <div class="form-group half-width">
+                                <label for="branch" class="form-label">Sucursal / Departamento implicado</label>
+                                <select id="branch" name="branch" class="form-input form-select" value={formData.branch} onchange={handleChange} required>
+                                    <option value="" disabled>Selecciona una opción...</option>
+                                    <option value="Matriz Venta Parada">Matriz Venta Parada</option>
+                                    <option value="Veracruz">Veracruz</option>
+                                    <option value="Servicio Técnico">Servicio Técnico</option>
+                                    <option value="Refacciones">Refacciones</option>
+                                    <option value="Ventas">Ventas</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Mensaje -->
+                        <div class="form-group">
+                            <label for="message" class="form-label">Detalles de la {formData.type}</label>
+                            <textarea id="message" name="message" class="form-input form-textarea" rows="5" placeholder="Por favor, describe detalladamente la situación..." value={formData.message} onchange={handleChange} required></textarea>
+                        </div>
+
+                        <!-- Botón Submit -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary submit-btn">
+                                <span>Enviar Mensaje</span>
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </template>
+            </div>
+            
+            <!-- Info Adicional -->
+            <div class="contact-info-cards animate-on-scroll">
+                <div class="info-card">
+                    <div class="icon">📞</div>
+                    <h3>Atención Telefónica</h3>
+                    <p>También puedes realizar tu reporte llamando al:<br><strong>01 800 KENWORTH</strong></p>
+                </div>
+                <div class="info-card">
+                    <div class="icon">🔒</div>
+                    <h3>Confidencialidad</h3>
+                    <p>Tu reporte será tratado de manera estrictamente confidencial por nuestro departamento de calidad.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</template>

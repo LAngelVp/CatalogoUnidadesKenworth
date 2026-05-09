@@ -1,28 +1,35 @@
 <template>
     <c-navbar-oficial-page onnavchange={handleNavChange}></c-navbar-oficial-page>
     
-    <!-- Renderizado condicional de páginas -->
     <template if:true={showInicio}>
         <c-page-oficial-home-component></c-page-oficial-home-component>
     </template>
-<!--     
-    <template if:true={showServicio}>
-        <c-page-oficial-servicio-component></c-page-oficial-servicio-component>
+    
+    <template if:true={showSucursales}>
+        <c-page-oficial-branches-component></c-page-oficial-branches-component>
     </template>
     
     <template if:true={showRefacciones}>
-        <c-page-oficial-refacciones-component></c-page-oficial-refacciones-component>
+        <c-page-oficial-parts-component></c-page-oficial-parts-component>
     </template>
     
+    <template if:true={showServicio}>
+        <c-page-oficial-repair-services></c-page-oficial-repair-services>
+    </template>
     <template if:true={showUnidades}>
-        <c-page-oficial-unidades-component></c-page-oficial-unidades-component>
-    </template>
-    
-    <template if:true={showSucursales}>
-        <c-page-oficial-sucursales-component></c-page-oficial-sucursales-component>
+        <c-page-oficial-units-component></c-page-oficial-units-component>
     </template>
     
     <template if:true={showEmpresa}>
-        <c-page-oficial-empresa-component></c-page-oficial-empresa-component>
-    </template> -->
+        <c-page-oficial-enterprise-component></c-page-oficial-enterprise-component>
+    </template>
+
+    <template if:true={showQuejasSugerencias}>
+        <c-page-oficial-complaints-suggestions></c-page-oficial-complaints-suggestions>
+    </template>
+
+    <template if:true={showTrabajaConNosotros}>
+        <c-page-oficial-job-board></c-page-oficial-job-board>
+    </template>
+    
 </template>

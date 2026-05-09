@@ -37,6 +37,16 @@ export default class NavbarOficialPage extends LightningElement {
         this.activePage = 'empresa';
         this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'empresa' } }));
     }
+
+    selectQuejasSugerencias() {
+        this.activePage = 'quejasSugerencias';
+        this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'quejasSugerencias' } }));
+    }
+    
+    selectTrabajaConNosotros() {
+        this.activePage = 'trabajaConNosotros';
+        this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'trabajaConNosotros' } }));
+    }
     
     getTabClass(page) {
         return this.activePage === page ? 'active' : '';

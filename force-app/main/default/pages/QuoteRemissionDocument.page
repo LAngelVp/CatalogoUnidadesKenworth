@@ -1,0 +1,69 @@
+<apex:page standardController="Cotizacion__c" showHeader="false" sidebar="false">
+    <div class="containerWaterMark" style="width: 100%; height: 100vh;">
+        <iframe id="pdfFrame" 
+                width="100%" 
+                height="100%" 
+                frameborder="0"
+                allow="fullscreen">
+        </iframe>
+    </div>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .containerWaterMark {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+    
+    <script>
+        (function() {
+            // Obtener el modelo con manejo de null/undefined
+            var modelo = '{!JSENCODE(Cotizacion__c.Modelo__c)}';
+            // Validar que el modelo existe
+            if (!modelo || modelo === '') {
+                console.error('Error: No se encontró el modelo del producto');
+                document.getElementById('pdfFrame').srcdoc = '<html><body style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;"><h3>Error: No se pudo cargar el documento. Modelo no especificado.</h3></body></html>';
+                return;
+            }
+            
+            // Construir nombre del recurso
+            var nombreRecurso = 'QuoteRemission_' + modelo;
+            
+            // Usar el dominio actual automáticamente
+            var currentDomain = window.location.origin;
+            var pdfUrl = currentDomain + '/resource/' + nombreRecurso;
+            
+            // Opcional: Agregar timestamp para evitar caché (descomentar si es necesario)
+            // var timestamp = new Date().getTime();
+            // var pdfUrl = currentDomain + '/resource/' + nombreRecurso + '?v=' + timestamp;
+            
+            // Asignar URL al iframe
+            var pdfFrame = document.getElementById('pdfFrame');
+            pdfFrame.src = pdfUrl;
+            
+            // Manejar errores de carga del PDF
+            pdfFrame.onerror = function() {
+                console.error('Error al cargar el PDF:', pdfUrl);
+                pdfFrame.srcdoc = '<html><body style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;"><h3>Error: No se pudo cargar el documento. El recurso no existe o no es accesible.</h3><p>Recurso buscado: ' + nombreRecurso + '</p></body></html>';
+            };
+            
+            // Timeout para detectar carga lenta
+            setTimeout(function() {
+                try {
+                    var iframeDoc = pdfFrame.contentDocument || pdfFrame.contentWindow.document;
+                    if (!iframeDoc || iframeDoc.body.innerHTML === '') {
+                        console.warn('La carga del PDF está tomando más tiempo de lo esperado');
+                    }
+                } catch(e) {
+                    // Error cross-origin, es normal con PDFs
+                    console.log('PDF cargando correctamente (cross-origin)');
+                }
+            }, 5000);
+        })();
+    </script>
+</apex:page>

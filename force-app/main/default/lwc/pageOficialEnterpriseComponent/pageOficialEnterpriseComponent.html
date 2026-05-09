@@ -1,0 +1,104 @@
+<template>
+    <div class="enterprise-container">
+        <!-- Hero Section -->
+        <section class="enterprise-hero animate-on-scroll">
+            <img class="hero-image-bg" src={imgHeroEnterprise} alt="Fondo Empresa">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Nuestra Empresa</h1>
+                <p class="hero-subtitle">Comprometidos con la excelencia, la integridad y el desarrollo continuo en el transporte.</p>
+            </div>
+        </section>
+
+        <!-- Mission, Vision, Values -->
+        <section class="mvv-section">
+            <div class="mvv-grid">
+                <!-- Misión -->
+                <div class="mvv-card animate-on-scroll">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="2" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h2>Misión</h2>
+                    <p>Brindar soluciones integrales de transporte de carga con los más altos estándares de calidad, satisfaciendo las necesidades de nuestros clientes a través de un servicio excepcional y tecnología de vanguardia.</p>
+                </div>
+
+                <!-- Visión -->
+                <div class="mvv-card animate-on-scroll">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h2>Visión</h2>
+                    <p>Ser reconocidos como el concesionario líder a nivel nacional, superando continuamente las expectativas del mercado mediante la innovación, la rentabilidad y el compromiso con nuestro talento humano y la sociedad.</p>
+                </div>
+
+                <!-- Valores -->
+                <div class="mvv-card animate-on-scroll">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <path d="M9 12l2 2 4-4"></path>
+                        </svg>
+                    </div>
+                    <h2>Valores</h2>
+                    <ul class="values-list">
+                        <li><span>✓</span> Integridad y Ética</li>
+                        <li><span>✓</span> Excelencia en el Servicio</li>
+                        <li><span>✓</span> Trabajo en Equipo</li>
+                        <li><span>✓</span> Innovación Constante</li>
+                        <li><span>✓</span> Responsabilidad Social</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Políticas y Documentos -->
+        <section class="policies-section">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Políticas y Documentos Corporativos</h2>
+                <div class="separator-line"></div>
+                <p class="section-desc">Conoce nuestras políticas, lineamientos y compromisos como empresa responsable.</p>
+            </div>
+
+            <div class="policies-grid">
+                <button class="policy-button animate-on-scroll" data-pdf="pdfCalidad" onclick={handleOpenPdf}>
+                    <div class="btn-icon">📋</div>
+                    <span>Política y Objetivos de Calidad</span>
+                </button>
+                <button class="policy-button animate-on-scroll" data-pdf="pdfPrivacidad" onclick={handleOpenPdf}>
+                    <div class="btn-icon">🔒</div>
+                    <span>Avisos de Privacidad</span>
+                </button>
+                <button class="policy-button animate-on-scroll" data-pdf="pdfComunicacion" onclick={handleOpenPdf}>
+                    <div class="btn-icon">🗣️</div>
+                    <span>Política de Comunicación Interna</span>
+                </button>
+                <button class="policy-button animate-on-scroll" data-pdf="pdfDenuncia" onclick={handleOpenPdf}>
+                    <div class="btn-icon">⚖️</div>
+                    <span>Política de Denuncia</span>
+                </button>
+                <button class="policy-button animate-on-scroll" data-pdf="pdfDiversidad" onclick={handleOpenPdf}>
+                    <div class="btn-icon">🤝</div>
+                    <span>Política de Diversidad</span>
+                </button>
+                <button class="policy-button animate-on-scroll" data-pdf="pdfEtica" onclick={handleOpenPdf}>
+                    <div class="btn-icon">👔</div>
+                    <span>Política de Ética y Conducta Empresarial</span>
+                </button>
+                <button class="policy-button animate-on-scroll" data-pdf="pdfSeguridad" onclick={handleOpenPdf}>
+                    <div class="btn-icon">🛡️</div>
+                    <span>Política de Seguridad</span>
+                </button>
+                <button class="policy-button animate-on-scroll" data-pdf="pdfProveedores" onclick={handleOpenPdf}>
+                    <div class="btn-icon">🏢</div>
+                    <span>Política para Ingreso y Estadía de Proveedores</span>
+                </button>
+            </div>
+        </section>
+    </div>
+</template>

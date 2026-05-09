@@ -1,0 +1,71 @@
+<template>
+    <!-- HERO SECTION -->
+    <div class="parts-hero">
+        <div class="hero-overlay"></div>
+        <img class="hero-image" src={imgHeroRefacciones} alt="Refacciones Kenworth">
+        <div class="hero-content animate-on-scroll">
+            <h1 class="hero-title">Refacciones <span class="text-red">Originales</span></h1>
+            <p class="hero-subtitle">Máximo rendimiento para mantener tu flota en movimiento</p>
+        </div>
+    </div>
+
+    <!-- QUALITY & BENEFITS SECTION -->
+    <div class="parts-benefits-section">
+        <div class="section-header animate-on-scroll">
+            <h2 class="section-title">¿Por qué comprar con Kenworth del Este?</h2>
+            <div class="separator-line center-line"></div>
+            <p class="section-desc">Nos comprometemos a entregar la más alta calidad y el mejor servicio para proteger la inversión de tu negocio.</p>
+        </div>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card animate-on-scroll">
+                <div class="benefit-icon-wrapper">
+                    <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+                <h3 class="benefit-title">Calidad Garantizada</h3>
+                <p class="benefit-text">Piezas 100% originales y certificadas por los fabricantes líderes en la industria pesada.</p>
+            </div>
+            
+            <div class="benefit-card animate-on-scroll">
+                <div class="benefit-icon-wrapper">
+                    <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                </div>
+                <h3 class="benefit-title">Alta Disponibilidad</h3>
+                <p class="benefit-text">El inventario más grande de la región para que tu unidad regrese al camino lo antes posible.</p>
+            </div>
+            
+            <div class="benefit-card animate-on-scroll">
+                <div class="benefit-icon-wrapper">
+                    <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <h3 class="benefit-title">Asesoría Especializada</h3>
+                <p class="benefit-text">Nuestro equipo técnico cuenta con el conocimiento exacto para ofrecerte la solución correcta.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- BRANDS SECTION -->
+    <div class="parts-brands-section">
+        <div class="section-header animate-on-scroll">
+            <h2 class="section-title">Principales <span class="text-red">Marcas</span></h2>
+            <div class="separator-line center-line"></div>
+            <p class="section-desc">Trabajamos de la mano con los mejores proveedores de componentes a nivel mundial para garantizar durabilidad.</p>
+        </div>
+
+        <div class="brands-grid">
+            <template for:each={brands} for:item="brand">
+                <div key={brand.id} class="brand-card animate-on-scroll">
+                    <div class="brand-header">
+                        <h3 class={brand.colorClass}>{brand.name}</h3>
+                    </div>
+                    <div class="brand-body">
+                        <p class="brand-description">{brand.description}</p>
+                    </div>
+                    <div class="brand-footer">
+                        <button class="brand-btn">Ver Más</button>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

@@ -306,7 +306,7 @@
                         </td>
                         <td class="alineCenterField thickRowEdgeBottom textBold">
                             <p class="textMayus">
-                                <apex:outputText value="cotización: {!Cotizacion__c.Name}"/>
+                                <apex:outputText value="cotización: {!Cotizacion__c.Cotizacion__c}"/>
                             </p>    
                         </td>
                     </th>

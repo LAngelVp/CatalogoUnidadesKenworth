@@ -28,6 +28,14 @@ export default class Kenworthdafdeleste extends LightningElement {
         return this.activePage === 'empresa';
     }
     
+    get showQuejasSugerencias() {
+        return this.activePage === 'quejasSugerencias';
+    }
+
+    get showTrabajaConNosotros() {
+        return this.activePage === 'trabajaConNosotros';
+    }
+    
     handleNavChange(event) {
         this.activePage = event.detail.page;
     }

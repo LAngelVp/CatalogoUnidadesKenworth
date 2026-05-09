@@ -1,0 +1,315 @@
+@font-face {
+    font-family: 'Saira';
+    src: url('/resource/fuente_saira_regular') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Saira', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Scroll Animation */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Colors & Utilities */
+.text-red {
+    color: #d31118;
+}
+
+.separator-line {
+    width: 80px;
+    height: 4px;
+    background-color: #d31118; /* Kenworth Red */
+    margin: 1.5rem 0;
+    border-radius: 2px;
+}
+
+.center-line {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Hero Section */
+.parts-hero {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 0 2rem;
+    max-width: 1000px;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    color: #ffffff;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: #f4f4f4;
+    font-weight: 500;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    border-top: 2px solid #d31118;
+    border-bottom: 2px solid #d31118;
+    padding: 1rem 0;
+    display: inline-block;
+}
+
+/* Sections Base */
+.section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 4rem auto;
+}
+
+.section-title {
+    font-size: 3rem;
+    color: #111;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.section-desc {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Benefits Section */
+.parts-benefits-section {
+    padding: 6rem 2rem;
+    background-color: #ffffff;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.benefit-card {
+    background: #f8f9fa;
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border-bottom: 4px solid transparent;
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    border-bottom-color: #d31118;
+}
+
+.benefit-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    box-shadow: 0 5px 15px rgba(211, 17, 24, 0.15);
+}
+
+.benefit-icon {
+    width: 40px;
+    height: 40px;
+    stroke: #d31118;
+}
+
+.benefit-title {
+    font-size: 1.5rem;
+    color: #222;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.benefit-text {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Brands Section */
+.parts-brands-section {
+    padding: 6rem 2rem;
+    background-color: #1a1a1a; /* Dark background for WOW effect */
+    color: #ffffff;
+}
+
+.parts-brands-section .section-title {
+    color: #ffffff;
+}
+
+.parts-brands-section .section-desc {
+    color: #aaaaaa;
+}
+
+.brands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.brand-card {
+    background: #242424;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.4s ease;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #d31118, #ff4d4d);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.brand-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    border-color: #444;
+}
+
+.brand-card:hover::before {
+    transform: scaleX(1);
+}
+
+.brand-header {
+    padding: 2.5rem 2rem 1rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid #333;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, transparent 100%);
+}
+
+.brand-name {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    transition: color 0.3s ease;
+}
+
+/* Specific Brand Colors (Dynamic coloring) */
+.trp-brand { color: #facc15; } /* Gold/Yellow */
+.fuller-brand { color: #60a5fa; } /* Blue */
+.holland-brand { color: #ffffff; } /* White */
+.meritor-brand { color: #34d399; } /* Greenish/Corporate */
+.horton-brand { color: #f87171; } /* Custom */
+
+.brand-body {
+    padding: 2rem;
+    flex-grow: 1;
+}
+
+.brand-description {
+    font-size: 1.15rem;
+    color: #cccccc;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.brand-footer {
+    padding: 0 2rem 2.5rem 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.brand-btn {
+    padding: 0.8rem 2rem;
+    background-color: transparent;
+    border: 2px solid #555;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.brand-card:hover .brand-btn {
+    border-color: #d31118;
+    background-color: #d31118;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    .section-title {
+        font-size: 2.2rem;
+    }
+    .benefits-grid, .brands-grid {
+        grid-template-columns: 1fr;
+    }
+}
