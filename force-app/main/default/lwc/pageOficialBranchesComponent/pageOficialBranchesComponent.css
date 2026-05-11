@@ -7,6 +7,16 @@
 * {
     font-family: 'Saira';
 }
+/* .containerImageHeroBranch{ */
+@font-face {
+    font-family: 'Saira';
+    src: url('/resource/fuente_saira_regular') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-family: 'Saira';
+}
 .containerImageHeroBranch{
     display: flex;
     position: relative;
@@ -17,7 +27,8 @@
 .imageBranchHero{
     display: block;
     width: 100%;
-    object-fit: fill;
+    height: 100%;
+    object-fit: cover;
 }
 .containerSloganBranches{
     position: absolute;
@@ -254,21 +265,66 @@
 
 /* Responsive adjust */
 @media (max-width: 900px) {
+    /* Hero Section */
+    .containerImageHeroBranch {
+        height: 28rem;
+    }
+    .containerSloganBranches {
+        align-items: center;
+        text-align: center;
+        width: 95%;
+    }
+    .spanSloganBranch {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        margin: 0 auto;
+    }
+    .spanSloganComplementBranch {
+        font-size: 2.5rem;
+        width: 100%;
+        line-height: 40px;
+        letter-spacing: 5px;
+    }
+
+    /* Branches Section */
+    .sectionBranches {
+        padding: 3rem 1rem;
+        gap: 3rem;
+    }
     .branch-section {
         flex-direction: column !important;
     }
-    .branch-image-wrapper, .branch-info-wrapper {
+    .branch-image-wrapper {
         width: 100%;
         clip-path: none !important;
         margin: 0 !important;
-        padding: 3rem 2rem !important;
+    }
+    .branch-info-wrapper {
+        width: 100%;
+        clip-path: none !important;
+        margin: 0 !important;
+        padding: 2.5rem 1.5rem !important;
+        align-items: center;
+        text-align: center;
     }
     .branch-image {
         min-height: 250px;
     }
+    .branch-title {
+        font-size: 2rem;
+    }
+    .branch-desc {
+        font-size: 1rem;
+    }
+    
+    .separator-line {
+        margin: 0 auto 1.5rem auto !important;
+    }
+
+    /* Reset right-image specific overrides */
     .right-image .branch-info-wrapper {
-        align-items: flex-start;
-        text-align: left;
+        align-items: center;
+        text-align: center;
     }
     .right-image .branch-details p {
         flex-direction: row;
@@ -277,7 +333,10 @@
         margin-left: 0;
         margin-right: 1rem;
     }
-    .right-image .separator-line {
-        margin-left: 0;
+
+    /* Align text within branch details */
+    .branch-details p {
+        justify-content: flex-start;
+        text-align: left;
     }
 }

@@ -18,6 +18,7 @@
     display: block;
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 .containerTextHero{
     display: flex;
@@ -360,8 +361,109 @@
     word-wrap: break-word;
 }
 
-/* Responsive: en móviles se apilan */
-@media (max-width: 768px) {
+/* Responsive adjustments for mobile */
+@media (max-width: 900px) {
+    /* Hero */
+    .containerHero {
+        height: 30rem;
+    }
+    .containerTextHero {
+        align-items: center;
+        text-align: center;
+    }
+    .textHeroSpan {
+        font-size: 40px;
+    }
+    .textHeroSlogan {
+        font-size: 24px;
+    }
+    .containerBotonesHero {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        align-items: center;
+    }
+    .btnHero, .btnHero2 {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    /* History / Info Cards */
+    .container1923, .container1928 {
+        grid-template-columns: 1fr;
+        height: auto;
+        gap: 1.5rem;
+        margin: 1.5rem auto;
+    }
+    .container1928 {
+        direction: ltr; /* Restablecer para que la imagen quede arriba */
+    }
+    .containerImage1923 {
+        height: 250px;
+    }
+    .containerText1923 {
+        padding: 0;
+        align-items: center;
+        text-align: center;
+    }
+    .titleBadge1923 {
+        font-size: 30px;
+        margin: 10px 0;
+        line-height: 1.2;
+    }
+    .textBadge1923 {
+        font-size: 16px;
+    }
+    .containerStadistics1923 {
+        width: 100%;
+    }
+    .spanEstadistic1923 {
+        font-size: 24px;
+    }
+
+    /* Ecosystem */
+    .containerEcosystem {
+        padding: 2rem 0;
+    }
+    .containerTitleEcosystem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .containerTextEcosystem {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        text-align: center;
+        margin-top: 10px;
+    }
+    .titleEcosystem {
+        font-size: 32px;
+    }
+    .badge1923 {
+        margin: 0 auto;
+    }
+    .brandTitle {
+        font-size: 1.5rem;
+    }
+    .containerGridEcosystem {
+        grid-template-areas: 
+            "tablero"
+            "nextgen"
+            "motor"
+            "dormitorio";
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
+    .imgTablero,
+    .imgNextGen,
+    .imgMotorMX13,
+    .imgDormitorioNextGen {
+        height: 220px;
+    }
+
+    /* Certification Ribbon */
     .certification-container {
         flex-direction: column;
         align-items: center;
@@ -369,5 +471,6 @@
     }
     .cert-card {
         min-width: 280px;
+        max-width: 100%;
     }
 }
