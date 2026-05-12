@@ -1,0 +1,236 @@
+:host {
+    --kw-red: #e53935;
+    --kw-dark: #0f172a;
+    --kw-darker: #0a0f1d;
+    --kw-text-light: #cbd5e1;
+    --kw-text-muted: #94a3b8;
+    --kw-white: #ffffff;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-container {
+    background-color: var(--kw-dark);
+    color: var(--kw-white);
+    position: relative;
+    padding-top: 100px;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    overflow: hidden;
+    margin-top: 4rem;
+
+}
+
+.wave-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.wave-container svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 80px;
+}
+
+.wave-container .shape-fill {
+    fill: #ffffff; /* Should match the section color above the footer */
+}
+
+.footer-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 60px 5% 40px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 80px;
+}
+
+/* Branding Section */
+.brand-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.logo-wrapper {
+    max-width: 200px;
+}
+
+.footer-logo {
+    width: 100%;
+    height: auto;
+    /* filter: brightness(0) invert(1);  */
+}
+
+.brand-description {
+    color: var(--kw-text-light);
+    line-height: 1.7;
+    font-size: 1.05rem;
+    max-width: 400px;
+}
+
+/* Titles and Links */
+.footer-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    position: relative;
+    color: var(--kw-white);
+}
+
+.footer-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 40px;
+    height: 3px;
+    background-color: var(--kw-red);
+}
+
+.footer-links, .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer-links a {
+    color: var(--kw-text-light);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    font-size: 1rem;
+}
+
+.footer-links a:hover {
+    color: var(--kw-red);
+    padding-left: 8px;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--kw-text-light);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.icon-small {
+    font-size: 1.2rem;
+}
+
+/* Social Media */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    color: var(--kw-white);
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.svg-icon {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.social-link:hover {
+    background-color: var(--kw-red);
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(229, 57, 53, 0.3);
+    border-color: var(--kw-red);
+}
+
+/* Bottom Bar */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.copyright {
+    color: var(--kw-text-muted);
+    font-size: 0.95rem;
+}
+
+.bottom-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.bottom-link {
+    color: var(--kw-text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+}
+
+.bottom-link:hover {
+    color: var(--kw-white);
+}
+
+.separator {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .footer-content {
+        padding-top: 40px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .wave-container svg {
+        height: 50px;
+    }
+
+    .footer-container {
+        padding-top: 60px;
+    }
+}

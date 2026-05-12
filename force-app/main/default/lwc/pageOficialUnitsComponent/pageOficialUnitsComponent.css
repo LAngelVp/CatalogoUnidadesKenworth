@@ -3,7 +3,7 @@
     font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: #334155;
     background-color: #f8fafc;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 /* Scroll Animations */

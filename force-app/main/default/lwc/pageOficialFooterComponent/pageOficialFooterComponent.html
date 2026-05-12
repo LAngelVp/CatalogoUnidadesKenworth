@@ -1,0 +1,89 @@
+<template>
+    <footer class="footer-container">
+        <!-- Wave Transition -->
+        <div class="wave-container">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-grid">
+                <!-- Branding Section -->
+                <div class="footer-section brand-info">
+                    <div class="logo-wrapper">
+                        <img src={logoUrl} alt="Kenworth Logo" class="footer-logo">
+                    </div>
+                    <p class="brand-description">
+                        Líderes en transporte de carga pesada, ofreciendo soluciones integrales de venta, servicio y refacciones con la calidad y respaldo de Kenworth.
+                    </p>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Unidades Kenworth</a></li>
+                        <li><a href="#">Servicio y Mantenimiento</a></li>
+                        <li><a href="#">Refacciones Originales</a></li>
+                        <li><a href="#">Nuestras Sucursales</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Contacto</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <span class="icon-small">📍</span>
+                            <span>Sucursal Matriz, México</span>
+                        </li>
+                        <li>
+                            <span class="icon-small">📞</span>
+                            <span>800 KENWORTH (536 9678)</span>
+                        </li>
+                        <li>
+                            <span class="icon-small">✉️</span>
+                            <span>contacto@kenworthdeleste.com.mx</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Social Media -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Síguenos</h3>
+                    <div class="social-icons">
+                        <a href="https://facebook.com" target="_blank" class="social-link" title="Facebook">
+                            <svg viewBox="0 0 24 24" class="svg-icon"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="social-link" title="Instagram">
+                            <svg viewBox="0 0 24 24" class="svg-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" class="social-link" title="YouTube">
+                            <svg viewBox="0 0 24 24" class="svg-icon"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="social-link" title="LinkedIn">
+                            <svg viewBox="0 0 24 24" class="svg-icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </a>
+                        <a href="https://x.com" target="_blank" class="social-link" title="X">
+                            <svg viewBox="0 0 24 24" class="svg-icon"><path d="M4 4l11.733 16h4.267l-11.733-16z M4 20l6.768-6.768 M12.456 11.544l7.544-7.544"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © {currentYear} Kenworth del Este. Todos los derechos reservados.
+                </div>
+                <div class="bottom-links">
+                    <a href="#" class="bottom-link">Aviso de Privacidad</a>
+                    <span class="separator">|</span>
+                    <a href="#" class="bottom-link">Términos y Condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</template>
