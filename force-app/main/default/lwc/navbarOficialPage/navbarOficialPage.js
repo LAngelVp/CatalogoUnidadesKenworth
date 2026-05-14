@@ -1,4 +1,4 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 import LOGO_KENWORTH from '@salesforce/resourceUrl/LogoKenworthKreiDaf';
 
 export default class NavbarOficialPage extends LightningElement {
@@ -6,7 +6,24 @@ export default class NavbarOficialPage extends LightningElement {
     @track isModalOpen = false;
     @track isMobileMenuOpen = false;
 
-    activePage = 'inicio';
+    _activePage = 'inicio';
+
+    @api 
+    get activePage() {
+        return this._activePage;
+    }
+    set activePage(value) {
+        this._activePage = value || 'inicio';
+    }
+
+    get tabClass() {
+        const pages = ['inicio', 'servicio', 'refacciones', 'unidades', 'sucursales', 'empresa', 'quejasSugerencias', 'trabajaConNosotros'];
+        const classes = {};
+        pages.forEach(p => {
+            classes[p] = this._activePage === p ? 'nav-link active' : 'nav-link';
+        });
+        return classes;
+    }
 
     get mobileMenuClass() {
         return this.isMobileMenuOpen ? 'textNavbar open' : 'textNavbar';
@@ -26,55 +43,51 @@ export default class NavbarOficialPage extends LightningElement {
     
     // Métodos específicos para cada página
     selectInicio() {
-        this.activePage = 'inicio';
+        this._activePage = 'inicio';
         this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'inicio' } }));
         this.closeMobileMenu();
     }
     
     selectServicio() {
-        this.activePage = 'servicio';
+        this._activePage = 'servicio';
         this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'servicio' } }));
         this.closeMobileMenu();
     }
     
     selectRefacciones() {
-        this.activePage = 'refacciones';
+        this._activePage = 'refacciones';
         this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'refacciones' } }));
         this.closeMobileMenu();
     }
     
     selectUnidades() {
-        this.activePage = 'unidades';
+        this._activePage = 'unidades';
         this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'unidades' } }));
         this.closeMobileMenu();
     }
     
     selectSucursales() {
-        this.activePage = 'sucursales';
+        this._activePage = 'sucursales';
         this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'sucursales' } }));
         this.closeMobileMenu();
     }
     
     selectEmpresa() {
-        this.activePage = 'empresa';
+        this._activePage = 'empresa';
         this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'empresa' } }));
         this.closeMobileMenu();
     }
 
     selectQuejasSugerencias() {
-        this.activePage = 'quejasSugerencias';
+        this._activePage = 'quejasSugerencias';
         this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'quejasSugerencias' } }));
         this.closeMobileMenu();
     }
     
     selectTrabajaConNosotros() {
-        this.activePage = 'trabajaConNosotros';
+        this._activePage = 'trabajaConNosotros';
         this.dispatchEvent(new CustomEvent('navchange', { detail: { page: 'trabajaConNosotros' } }));
         this.closeMobileMenu();
-    }
-    
-    getTabClass(page) {
-        return this.activePage === page ? 'active' : '';
     }
 
     openContactModal() {

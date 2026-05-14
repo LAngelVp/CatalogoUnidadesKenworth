@@ -1,0 +1,268 @@
+<template>
+    <div class="quality-container">
+        <!-- Main Tabs -->
+        <div class="tabs-header">
+            <button class={tab5SClass} onclick={handleTab5S}>
+                <lightning-icon icon-name="utility:priority" size="small" class="tab-icon"></lightning-icon>
+                <span>5S</span>
+            </button>
+            <button class={tabSGCClass} onclick={handleTabSGC}>
+                <lightning-icon icon-name="utility:shield" size="small" class="tab-icon"></lightning-icon>
+                <span>Sistema de Gestión de Calidad</span>
+            </button>
+        </div>
+
+        <!-- 5S Content -->
+        <template lwc:if={is5S}>
+            <div class="content-fade-in">
+                <div class="s5-grid">
+                    <!-- Results Card (Special Selection) -->
+                    <div class="card s5-card results-special">
+                        <div class="card-title">
+                            <lightning-icon icon-name="utility:chart" size="small" class="icon-red"></lightning-icon>
+                            <h3>Resultados de Evaluación 5S</h3>
+                        </div>
+                        <div class="selection-box">
+                            <lightning-combobox
+                                name="branch"
+                                label="Sucursal"
+                                value={selectedBranch}
+                                options={branches}
+                                onchange={handleBranchChange}
+                                placeholder="Selecciona sucursal">
+                            </lightning-combobox>
+                            <lightning-combobox
+                                name="dept"
+                                label="Departamento"
+                                value={selectedDept5S}
+                                options={departments5S}
+                                onchange={handleDept5SChange}
+                                placeholder="Selecciona departamento">
+                            </lightning-combobox>
+                        </div>
+                        <button class="download-btn" onclick={handleDownloadEvaluation}>
+                            <lightning-icon icon-name="utility:download" size="xx-small" variant="inverse" class="mr-2"></lightning-icon>
+                            Descargar Reporte (PDF/Excel)
+                        </button>
+                    </div>
+
+                    <!-- Other 5S Cards -->
+                    <template for:each={s5SubSections} for:item="section">
+                        <div key={section.id} lwc:if={section.isNotResults} class="card s5-card interactive" data-type={section.type} onclick={handleS5Click}>
+                            <div class="card-icon-wrapper">
+                                <lightning-icon icon-name={section.icon} size="medium" class="icon-red"></lightning-icon>
+                            </div>
+                            <h3>{section.title}</h3>
+                            <p>Accede a los documentos y guías oficiales.</p>
+                            <lightning-icon icon-name="utility:chevronright" size="xx-small" class="arrow-right"></lightning-icon>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+
+        <!-- SGC Content -->
+        <template lwc:if={isSGC}>
+            <div class="content-fade-in">
+                <div class="sgc-header">
+                    <h2>Directorio de Documentación SGC</h2>
+                    <p>Selecciona un departamento para visualizar su documentación oficial.</p>
+                </div>
+                <div class="sgc-grid">
+                    <template for:each={sgcDepartments} for:item="dept">
+                        <div key={dept.id} class="card sgc-dept-card" data-id={dept.id} onclick={handleSgcDeptClick}>
+                            <div class="dept-icon">
+                                <lightning-icon icon-name={dept.icon} size="large" variant="inverse"></lightning-icon>
+                            </div>
+                            <h3>{dept.name}</h3>
+                            <span class="doc-count">Ver documentación</span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+
+        <!-- SGC Modal -->
+        <template lwc:if={isModalOpen}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+                <div class="slds-modal__container custom-modal">
+                    <header class="slds-modal__header modal-header">
+                        <button class="close-modal" onclick={closeModal} title="Cerrar">✕</button>
+                        <h2 class="slds-modal__title">{modalTitle}</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium modal-body">
+                        <div class="doc-categories-grid">
+                            <template for:each={sgcDocCategories} for:item="cat">
+                                <div key={cat.key} class="category-block">
+                                    <div class="category-header">
+                                        <h4>{cat.label}</h4>
+                                        <span class={cat.statusClass}></span>
+                                    </div>
+                                    <ul class="file-list">
+                                        <template for:each={cat.files} for:item="file">
+                                            <li key={file.name}>
+                                                <lightning-icon icon-name="utility:file" size="xx-small" class="mr-2"></lightning-icon>
+                                                <a href={file.url} target="_blank">{file.name}</a>
+                                            </li>
+                                        </template>
+                                        <template lwc:if={cat.noFiles}>
+                                            <li class="no-docs">Sin documentos cargados</li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <!-- Formatos Evaluación Modal -->
+        <template lwc:if={isFormatsModalOpen}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large">
+                <div class="slds-modal__container formats-modal-container">
+                    <header class="slds-modal__header modal-header">
+                        <button class="close-modal" onclick={closeFormatsModal} title="Cerrar">✕</button>
+                        <h2 class="slds-modal__title">Formatos para tu Evaluación 5S</h2>
+                    </header>
+                    <div class="slds-modal__content formats-modal-body">
+                        <div class="formats-layout">
+                            <!-- Sidebar Areas -->
+                            <aside class="formats-sidebar">
+                                <template for:each={evaluationAreas} for:item="area">
+                                    <button key={area.id} class="area-item" data-id={area.id} onclick={handleAreaSelect}>
+                                        <span>{area.name}</span>
+                                        <lightning-icon icon-name="utility:chevronright" size="xx-small"></lightning-icon>
+                                    </button>
+                                </template>
+                            </aside>
+
+                            <!-- Main Content Area -->
+                            <main class="formats-content">
+                                <template lwc:if={selectedArea}>
+                                    <div class="area-detail-header">
+                                        <h2>{selectedArea.name}</h2>
+                                        <p class="area-note">{selectedArea.note}</p>
+                                    </div>
+
+                                    <div class="formats-info-grid">
+                                        <template for:each={selectedArea.items} for:item="item">
+                                            <div key={item.depto} class="format-info-card">
+                                                <div class="info-row">
+                                                    <strong>Sucursal:</strong> <span>{item.sucursal}</span>
+                                                </div>
+                                                <div class="info-row">
+                                                    <strong>Grupo:</strong> <span>{item.grupo}</span>
+                                                </div>
+                                                <div class="info-row">
+                                                    <strong>Departamento:</strong> <span>{item.depto}</span>
+                                                </div>
+                                                
+                                                <div class="download-section">
+                                                    <p class="download-label">Descargables:</p>
+                                                    <div class="download-icons">
+                                                        <template for:each={downloadFormats} for:item="fmt">
+                                                            <div key={fmt.id} class="excel-card" title={fmt.name}>
+                                                                <lightning-icon icon-name="utility:file" size="small" class="excel-icon"></lightning-icon>
+                                                                <span class="fmt-name">{fmt.name}</span>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+                            </main>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <!-- Normas y Reglas Modal -->
+        <template lwc:if={isNormsModalOpen}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container custom-modal">
+                    <header class="slds-modal__header modal-header">
+                        <button class="close-modal" onclick={closeNormsModal} title="Cerrar">✕</button>
+                        <h2 class="slds-modal__title">Normas y Reglas 5S</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium modal-body">
+                        <ul class="norms-list-styled">
+                            <template for:each={normsList} for:item="norm">
+                                <li key={norm.id} class="norm-item">
+                                    <div class="norm-info">
+                                        <lightning-icon icon-name="utility:rules" size="x-small" class="mr-2 icon-red"></lightning-icon>
+                                        <span>{norm.name}</span>
+                                    </div>
+                                    <button class="norm-download-btn" title="Descargar Norma">
+                                        <lightning-icon icon-name="utility:download" size="xx-small" variant="inverse"></lightning-icon>
+                                    </button>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <!-- Wallpapers Modal -->
+        <template lwc:if={isWallpapersModalOpen}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+                <div class="slds-modal__container custom-modal">
+                    <header class="slds-modal__header modal-header">
+                        <button class="close-modal" onclick={closeWallpapersModal} title="Cerrar">✕</button>
+                        <h2 class="slds-modal__title">Fondos de Escritorio</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium modal-body">
+                        <div class="image-preview-grid">
+                            <template for:each={wallpapers} for:item="wp">
+                                <div key={wp.id} class="image-card">
+                                    <div class="img-wrapper">
+                                        <img src={wp.image} alt={wp.name}>
+                                        <div class="img-overlay">
+                                            <button class="overlay-btn">Descargar</button>
+                                        </div>
+                                    </div>
+                                    <p class="img-name">{wp.name}</p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <!-- Lockscreens Modal -->
+        <template lwc:if={isLockscreensModalOpen}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+                <div class="slds-modal__container custom-modal">
+                    <header class="slds-modal__header modal-header">
+                        <button class="close-modal" onclick={closeLockscreensModal} title="Cerrar">✕</button>
+                        <h2 class="slds-modal__title">Fondos de Bloqueo</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium modal-body">
+                        <div class="image-preview-grid vertical">
+                            <template for:each={lockscreens} for:item="ls">
+                                <div key={ls.id} class="image-card">
+                                    <div class="img-wrapper portrait">
+                                        <img src={ls.image} alt={ls.name}>
+                                        <div class="img-overlay">
+                                            <button class="overlay-btn">Descargar</button>
+                                        </div>
+                                    </div>
+                                    <p class="img-name">{ls.name}</p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </div>
+</template>

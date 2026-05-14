@@ -1,0 +1,94 @@
+<template>
+    <div class="profile-container">
+        <!-- Hero Header -->
+        <div class="profile-header">
+            <div class="user-main-info">
+                <div class="avatar-container">
+                    <img src={userPhoto} alt="User Photo" class="user-photo">
+                    <div class="status-badge">Activo</div>
+                </div>
+                <div class="user-title">
+                    <h1>{userData.name}</h1>
+                    <p class="position">{userData.position}</p>
+                    <p class="department">{userData.department}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <!-- Left Column: Detailed Info -->
+            <div class="info-column">
+                <div class="card section-card">
+                    <div class="section-header">
+                        <lightning-icon icon-name="utility:user" size="small" class="section-icon"></lightning-icon>
+                        <h2>Información Personal</h2>
+                    </div>
+                    <div class="grid-details">
+                        <div class="detail-item">
+                            <label>Email Corporativo</label>
+                            <p>{userData.email}</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Teléfono / Extensión</label>
+                            <p>{userData.phone}</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Fecha de Nacimiento</label>
+                            <p>{userData.birthdate}</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Ubicación / Sucursal</label>
+                            <p>{userData.location}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card section-card">
+                    <div class="section-header">
+                        <lightning-icon icon-name="utility:company" size="small" class="section-icon"></lightning-icon>
+                        <h2>Información Corporativa</h2>
+                    </div>
+                    <div class="grid-details">
+                        <div class="detail-item">
+                            <label>Número de Empleado</label>
+                            <p>{userData.employeeNumber}</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Fecha de Ingreso</label>
+                            <p>{userData.joinDate}</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Jefe Inmediato</label>
+                            <p>{userData.manager}</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Tipo de Contrato</label>
+                            <p>{userData.contractType}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Stats/Badges -->
+            <div class="stats-column">
+                <div class="card stats-card">
+                    <h3>Antigüedad</h3>
+                    <div class="stat-value">{userData.yearsOfService} años</div>
+                    <p>En la familia Kenworth</p>
+                </div>
+
+                <div class="card emergency-card">
+                    <div class="section-header">
+                        <lightning-icon icon-name="utility:priority" size="small" variant="error"></lightning-icon>
+                        <h2>Contacto de Emergencia</h2>
+                    </div>
+                    <div class="emergency-info">
+                        <p class="name">{userData.emergencyContact.name}</p>
+                        <p class="relation">{userData.emergencyContact.relation}</p>
+                        <p class="phone">{userData.emergencyContact.phone}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

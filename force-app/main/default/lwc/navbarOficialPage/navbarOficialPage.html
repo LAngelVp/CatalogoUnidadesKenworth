@@ -1,6 +1,6 @@
 <template>
   <nav class="containerNavbar">
-    <img src={logoUrl} alt="Logo Kenworth" class="logo">
+    <img src={logoUrl} alt="Logo Kenworth" class="logo" onclick={selectInicio}>
 
     <!-- Hamburger menu para móviles -->
     <div class="hamburger-menu" onclick={toggleMobileMenu}>
@@ -8,14 +8,14 @@
     </div>
 
     <div class={mobileMenuClass}>
-      <p class="nav-link {getTabClass('inicio')}" onclick={selectInicio}>Inicio</p>
-      <p class="nav-link {getTabClass('servicio')}" onclick={selectServicio}>Servicio</p>
-      <p class="nav-link {getTabClass('refacciones')}" onclick={selectRefacciones}>Refacciones</p>
-      <p class="nav-link {getTabClass('unidades')}" onclick={selectUnidades}>Unidades</p>
-      <p class="nav-link {getTabClass('sucursales')}" onclick={selectSucursales}>Sucursales</p>
-      <p class="nav-link {getTabClass('empresa')}" onclick={selectEmpresa}>Empresa</p>
-      <p class="nav-link {getTabClass('quejasSugerencias')}" onclick={selectQuejasSugerencias}>Quejas y Sugerencias</p>
-      <p class="nav-link {getTabClass('trabajaConNosotros')}" onclick={selectTrabajaConNosotros}>Trabaja con Nosotros</p>
+      <p class={tabClass.inicio} onclick={selectInicio}>Inicio</p>
+      <p class={tabClass.servicio} onclick={selectServicio}>Servicio</p>
+      <p class={tabClass.refacciones} onclick={selectRefacciones}>Refacciones</p>
+      <p class={tabClass.unidades} onclick={selectUnidades}>Unidades</p>
+      <p class={tabClass.sucursales} onclick={selectSucursales}>Sucursales</p>
+      <p class={tabClass.empresa} onclick={selectEmpresa}>Empresa</p>
+      <p class={tabClass.quejasSugerencias} onclick={selectQuejasSugerencias}>Quejas y Sugerencias</p>
+      <p class={tabClass.trabajaConNosotros} onclick={selectTrabajaConNosotros}>Trabaja con Nosotros</p>
       <p class="nav-link contact-btn" onclick={openContactModal}>Contacto</p>
     </div>
   </nav>

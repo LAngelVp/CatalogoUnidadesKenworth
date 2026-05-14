@@ -1,0 +1,200 @@
+:host {
+    --brand-red: #CE0E2C;
+    --brand-dark-red: #CE0E2C;
+    --brand-black: #000000;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.login-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-black) 100%);
+    font-family: 'Outfit', sans-serif;
+    padding: 1.5rem;
+}
+
+.login-card {
+    background: var(--glass-bg);
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-premium);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.logo-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.brand-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.header-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header-section h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--brand-red);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.header-section p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.error-banner {
+    background: #fff5f5;
+    border-left: 4px solid #f87171;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    color: #CE0E2C;
+    font-size: 0.875rem;
+    animation: slideInRight 0.4s ease-out;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-left: 2px;
+}
+
+/* Override SLDS input styles */
+.input-group lightning-input {
+    --slds-c-input-color-background: var(--white);
+    --slds-c-input-radius-border: 12px;
+    --slds-c-input-spacing-vertical-start: 12px;
+    --slds-c-input-spacing-vertical-end: 12px;
+    --slds-c-input-color-border: #e2e8f0;
+}
+
+.input-group lightning-input:focus-within {
+    --slds-c-input-color-border: var(--brand-red);
+    --slds-c-input-shadow: 0 0 0 3px rgba(146, 0, 29, 0.1);
+}
+
+.action-group {
+    margin-top: 1rem;
+}
+
+.login-button {
+    width: 100%;
+    padding: 0.875rem;
+    background: var(--brand-red);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 50px;
+}
+
+.login-button:hover {
+    background: var(--brand-dark-red);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(146, 0, 29, 0.2);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+.login-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.spinner-container {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.footer-links {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.footer-links a {
+    color: var(--brand-red);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--brand-dark-red);
+    text-decoration: underline;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 1.5rem;
+    }
+    
+    .header-section h1 {
+        font-size: 1.5rem;
+    }
+}

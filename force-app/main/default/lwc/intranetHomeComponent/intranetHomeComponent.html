@@ -1,0 +1,24 @@
+<template>
+    <div class="app-container">
+        <c-intranet-nav-bar-component onnavchange={handleNavChange}></c-intranet-nav-bar-component>
+        
+        <main class="main-content">
+            <!-- Dynamic Content based on Selection -->
+            <template lwc:if={isPerfil}>
+                <c-intranet-perfil-user-component></c-intranet-perfil-user-component>
+            </template>
+
+            <template lwc:if={isDirectorio}>
+                <c-intranet-employes-directory-component></c-intranet-employes-directory-component>
+            </template>
+
+            <template lwc:if={isRecursos}>
+                <c-intranet-human-resources-component></c-intranet-human-resources-component>
+            </template>
+
+            <template lwc:if={isCalidad}>
+                <c-intranet-quality-component></c-intranet-quality-component>
+            </template>
+        </main>
+    </div>
+</template>

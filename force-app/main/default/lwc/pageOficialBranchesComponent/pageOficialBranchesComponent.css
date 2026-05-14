@@ -7,16 +7,6 @@
 * {
     font-family: 'Saira';
 }
-/* .containerImageHeroBranch{ */
-@font-face {
-    font-family: 'Saira';
-    src: url('/resource/fuente_saira_regular') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-* {
-    font-family: 'Saira';
-}
 .containerImageHeroBranch{
     display: flex;
     position: relative;

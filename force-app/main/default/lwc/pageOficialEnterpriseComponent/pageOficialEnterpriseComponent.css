@@ -1,6 +1,14 @@
+@font-face {
+    font-family: 'Saira';
+    src: url('/resource/fuente_saira_regular') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-family: 'Saira';
+}
 /* Base Container */
 .enterprise-container {
-    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: #334155;
     background-color: #f8fafc;
     overflow-x: hidden;
@@ -123,7 +131,7 @@
 }
 
 /* Identificadores visuales de colores para Mision/Vision/Valores */
-.mvv-card:nth-child(1) { border-top-color: #e53935; } /* Rojo */
+.mvv-card:nth-child(1) { border-top-color: #E2051F; } /* Rojo */
 .mvv-card:nth-child(2) { border-top-color: #0284c7; } /* Azul */
 .mvv-card:nth-child(3) { border-top-color: #0f172a; } /* Oscuro */
 
@@ -140,7 +148,7 @@
     transition: all 0.3s ease;
 }
 
-.mvv-card:nth-child(1) .icon-wrapper { color: #e53935; background-color: #fee2e2; }
+.mvv-card:nth-child(1) .icon-wrapper { color: #E2051F; background-color: #fee2e2; }
 .mvv-card:nth-child(2) .icon-wrapper { color: #0284c7; background-color: #e0f2fe; }
 
 .mvv-card:hover .icon-wrapper {
@@ -182,7 +190,7 @@
 }
 
 .values-list span {
-    color: #e53935;
+    color: #E2051F;
     font-weight: bold;
     margin-right: 10px;
     font-size: 1.2rem;
@@ -209,7 +217,7 @@
 .separator-line {
     width: 80px;
     height: 4px;
-    background-color: #e53935;
+    background-color: #E2051F;
     margin: 0 auto 20px auto;
     border-radius: 2px;
 }

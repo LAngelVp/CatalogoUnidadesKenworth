@@ -1,0 +1,68 @@
+<template>
+    <div class="directory-container">
+        <!-- Header & Search -->
+        <div class="directory-header">
+            <div class="title-section">
+                <h1>Directorio de Empleados</h1>
+                <p>Encuentra y contacta a tus compañeros de equipo</p>
+            </div>
+            <div class="search-section">
+                <div class="search-input-wrapper">
+                    <lightning-icon icon-name="utility:search" size="x-small" class="search-icon"></lightning-icon>
+                    <input 
+                        type="text" 
+                        placeholder="Buscar por nombre, puesto, departamento..." 
+                        oninput={handleSearch}
+                        value={searchTerm}
+                        class="custom-search-input">
+                </div>
+            </div>
+        </div>
+
+        <!-- Directory List -->
+        <div class="directory-list-wrapper">
+            <div class="list-header">
+                <span class="col-name">Empleado</span>
+                <span class="col-pos">Puesto / Depto</span>
+                <span class="col-ext">Extensión</span>
+                <span class="col-branch">Sucursal</span>
+                <span class="col-action"></span>
+            </div>
+
+            <div class="employees-scroll-area">
+                <template for:each={filteredEmployees} for:item="emp">
+                    <div key={emp.id} class="employee-row">
+                        <div class="col-name info-main">
+                            <div class="avatar-circle">{emp.initials}</div>
+                            <div class="name-box">
+                                <span class="full-name">{emp.name}</span>
+                                <span class="email-text">{emp.email}</span>
+                            </div>
+                        </div>
+                        <div class="col-pos info-secondary">
+                            <span class="position">{emp.position}</span>
+                            <span class="department">{emp.department}</span>
+                        </div>
+                        <div class="col-ext info-accent">
+                            <lightning-icon icon-name="utility:call" size="xx-small" class="row-icon"></lightning-icon>
+                            <span>{emp.extension}</span>
+                        </div>
+                        <div class="col-branch info-secondary">
+                            <lightning-icon icon-name="utility:location" size="xx-small" class="row-icon"></lightning-icon>
+                            <span>{emp.branch}</span>
+                        </div>
+                    </div>
+                </template>
+
+                <template lwc:if={filteredEmployees.length}>
+                </template>
+                <template lwc:else>
+                    <div class="no-results">
+                        <lightning-icon icon-name="utility:info" size="large"></lightning-icon>
+                        <p>No se encontraron empleados que coincidan con tu búsqueda.</p>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,10 @@
+<template>
+    <template lwc:if={isLoggedIn}>
+        <!-- Si está logueado, muestra el Home -->
+        <c-intranet-home-component></c-intranet-home-component>
+    </template>
+    <template lwc:else>
+        <!-- Si no está logueado, muestra el Login -->
+        <c-intranet-login onloginsuccess={handleLoginSuccess}></c-intranet-login>
+    </template>
+</template>

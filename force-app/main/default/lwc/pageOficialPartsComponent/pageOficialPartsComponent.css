@@ -24,13 +24,13 @@
 
 /* Colors & Utilities */
 .text-red {
-    color: #d31118;
+    color: #E2051F;
 }
 
 .separator-line {
     width: 80px;
     height: 4px;
-    background-color: #d31118; /* Kenworth Red */
+    background-color: #E2051F; /* Kenworth Red */
     margin: 1.5rem 0;
     border-radius: 2px;
 }
@@ -96,8 +96,8 @@
     font-weight: 500;
     letter-spacing: 5px;
     text-transform: uppercase;
-    border-top: 2px solid #d31118;
-    border-bottom: 2px solid #d31118;
+    border-top: 2px solid #E2051F;
+    border-bottom: 2px solid #E2051F;
     padding: 1rem 0;
     display: inline-block;
 }
@@ -148,7 +148,7 @@
 .benefit-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-    border-bottom-color: #d31118;
+    border-bottom-color: #E2051F;
 }
 
 .benefit-icon-wrapper {
@@ -166,7 +166,7 @@
 .benefit-icon {
     width: 40px;
     height: 40px;
-    stroke: #d31118;
+    stroke: #E2051F;
 }
 
 .benefit-title {
@@ -223,7 +223,7 @@
     left: 0;
     width: 100%;
     height: 5px;
-    background: linear-gradient(90deg, #d31118, #ff4d4d);
+    background: linear-gradient(90deg, #E2051F, #ff4d4d);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
@@ -294,8 +294,8 @@
 }
 
 .brand-card:hover .brand-btn {
-    border-color: #d31118;
-    background-color: #d31118;
+    border-color: #E2051F;
+    background-color: #E2051F;
 }
 
 /* Responsive */

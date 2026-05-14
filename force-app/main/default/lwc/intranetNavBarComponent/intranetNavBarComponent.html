@@ -1,0 +1,68 @@
+<template>
+    <aside class={sidebarClass}>
+        <!-- Header Section -->
+        <div class="sidebar-header">
+            <div class="logo-box">
+                <img src={logoUrl} alt="Kenworth Logo" class="brand-logo">
+            </div>
+            <button class="toggle-control" onclick={handleToggleSidebar} aria-label="Toggle Sidebar">
+                <lightning-icon icon-name={toggleIcon} size="x-small" class="icon"></lightning-icon>
+            </button>
+        </div>
+
+        <!-- Navigation Section -->
+        <nav class="sidebar-nav">
+            <ul class="nav-menu">
+                <li class="menu-item" data-id="perfil" onclick={handleNavClick}>
+                    <div class={perfilClass}>
+                        <lightning-icon icon-name="utility:user" size="small" class="icon"></lightning-icon>
+                        <span class="label">Perfil</span>
+                        <div class="active-dot"></div>
+                    </div>
+                </li>
+                <li class="menu-item" data-id="directorio" onclick={handleNavClick}>
+                    <div class={directorioClass}>
+                        <lightning-icon icon-name="utility:groups" size="small" class="icon"></lightning-icon>
+                        <span class="label">Directorio de empleados</span>
+                        <div class="active-dot"></div>
+                    </div>
+                </li>
+                <li class="menu-item" data-id="recursos" onclick={handleNavClick}>
+                    <div class={recursosClass}>
+                        <lightning-icon icon-name="utility:case" size="small" class="icon"></lightning-icon>
+                        <span class="label">Recursos humanos</span>
+                        <div class="active-dot"></div>
+                    </div>
+                </li>
+                <li class="menu-item" data-id="calidad" onclick={handleNavClick}>
+                    <div class={calidadClass}>
+                        <lightning-icon icon-name="utility:shield" size="small" class="icon"></lightning-icon>
+                        <span class="label">Calidad</span>
+                        <div class="active-dot"></div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Illustration Section -->
+        <div class="sidebar-footer">
+            <div class="illustration-wrapper">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="nav-illustration">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#92001D;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="100" cy="100" r="70" fill="url(#grad1)" opacity="0.1" />
+                    <rect x="60" y="80" width="80" height="60" rx="8" fill="white" opacity="0.2" />
+                    <path d="M80,100 L120,100 M80,115 L110,115" stroke="white" stroke-width="3" opacity="0.4" />
+                </svg>
+                <div class="footer-info">
+                    <p class="brand-text">Kenworth</p>
+                    <p class="app-version">v1.2.0</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+</template>

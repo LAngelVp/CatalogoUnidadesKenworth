@@ -1,6 +1,17 @@
+@font-face {
+    font-family: 'Saira';
+    src: url('/resource/fuente_saira_regular') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Saira', sans-serif;
+    box-sizing: border-box;
+}
+
 /* Base Styles */
 .units-container {
-    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: #334155;
     background-color: #f8fafc;
     /* overflow-x: hidden; */
@@ -37,7 +48,7 @@ button {
 }
 
 .cta-button.primary {
-    background-color: #e53935; /* Rojo Kenworth */
+    background-color: #E2051F; /* Rojo Kenworth */
     color: white;
     padding: 16px 32px;
     font-size: 1.1rem;
@@ -71,8 +82,8 @@ button {
 
 .outline-button {
     background: transparent;
-    color: #e53935;
-    border: 2px solid #e53935;
+    color: #E2051F;
+    border: 2px solid #E2051F;
     padding: 12px 20px;
     font-size: 1rem;
     width: 100%;
@@ -88,7 +99,7 @@ button {
     left: 0;
     width: 0%;
     height: 100%;
-    background-color: #e53935;
+    background-color: #E2051F;
     transition: width 0.3s ease;
     z-index: -1;
 }
@@ -163,7 +174,7 @@ button {
     text-align: center;
     font-size: 2.8rem;
     font-weight: 800;
-    color: #0f172a;
+    color: #000000;
     margin-bottom: 15px;
     letter-spacing: -0.5px;
 }
@@ -210,7 +221,7 @@ button {
 }
 
 .brand-card.kenworth {
-    border-top-color: #e53935;
+    border-top-color: #E2051F;
 }
 
 .brand-card.daf {
@@ -225,7 +236,7 @@ button {
 }
 
 .brand-card.kenworth .brand-logo {
-    color: #e53935;
+    color: #E2051F;
 }
 
 .brand-card.daf .brand-logo {

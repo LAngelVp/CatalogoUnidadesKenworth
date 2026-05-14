@@ -1,0 +1,97 @@
+<template>
+    <div class="hr-container">
+        <!-- Main Header -->
+        <header class="hr-main-header">
+            <h1>Recursos Humanos</h1>
+            <p>Gestión de talento y comunidad Kenworth.</p>
+        </header>
+
+        <!-- Top Grid: Birthdays & Anniversaries -->
+        <div class="top-grid">
+            <!-- Birthdays Card -->
+            <section class="card birthday-card">
+                <div class="card-header">
+                    <div class="header-title">
+                        <lightning-icon icon-name="utility:birthday_cake" size="small" class="icon-red"></lightning-icon>
+                        <h2>Cumpleaños del Mes</h2>
+                    </div>
+                    <span class="month-badge">{currentMonth}</span>
+                </div>
+                
+                <div class="birthday-list">
+                    <template for:each={birthdays} for:item="person">
+                        <div key={person.id} class="birthday-item">
+                            <div class="photo-container">
+                                <template lwc:if={person.photo}>
+                                    <img src={person.photo} alt={person.name} class="user-photo">
+                                </template>
+                                <template lwc:else>
+                                    <div class="photo-placeholder">
+                                        <lightning-icon icon-name="utility:user" size="small"></lightning-icon>
+                                    </div>
+                                </template>
+                                <span class="day-badge">{person.day}</span>
+                            </div>
+                            <div class="item-info">
+                                <p class="user-name">{person.name}</p>
+                                <p class="user-dept">{person.dept}</p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </section>
+
+            <!-- Anniversaries Card -->
+            <section class="card anniversary-card">
+                <div class="card-header">
+                    <div class="header-title">
+                        <lightning-icon icon-name="utility:rating" size="small" class="icon-gold"></lightning-icon>
+                        <h2>Antigüedades</h2>
+                    </div>
+                </div>
+
+                <div class="anniversary-list">
+                    <template for:each={anniversaries} for:item="item">
+                        <div key={item.id} class="anniversary-item">
+                            <div class="years-box">
+                                <span>{item.years}</span>
+                            </div>
+                            <div class="anniversary-info">
+                                <p class="name">{item.name}</p>
+                                <p class="label">{item.label}</p>
+                            </div>
+                            <lightning-icon icon-name={item.icon} size="xx-small" class="medal-icon"></lightning-icon>
+                        </div>
+                    </template>
+                </div>
+
+                <button class="btn-all">VER TODOS</button>
+            </section>
+        </div>
+
+        <!-- News Section -->
+        <section class="bulletins-section">
+            <div class="section-header">
+                <lightning-icon icon-name="utility:news" size="small" class="icon-red"></lightning-icon>
+                <h2>Boletines Informativos</h2>
+            </div>
+
+            <div class="bulletins-grid">
+                <template for:each={bulletins} for:item="news">
+                    <article key={news.id} class="bulletin-card">
+                        <div class="image-wrapper">
+                            <img src={news.image} alt={news.title}>
+                        </div>
+                        <div class="bulletin-content">
+                            <div class="meta-info">
+                                <span class={news.tagClass}>{news.tag}</span>
+                                <span class="time-text">{news.time}</span>
+                            </div>
+                            <h3>{news.title}</h3>
+                        </div>
+                    </article>
+                </template>
+            </div>
+        </section>
+    </div>
+</template>

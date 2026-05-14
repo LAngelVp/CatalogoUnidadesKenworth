@@ -15,47 +15,41 @@
     padding: 0;
 }
 
-/* Tarjeta del formulario - minimalista */
+/* Tarjeta del formulario - integrada */
 .form-card {
-    background: #ffffff;
-    border-radius: 8px;
+    background: transparent;
     overflow: hidden;
-}
-
-/* Header minimalista */
-.form-header {
-    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
-    text-align: left;
-    border-bottom: 1px solid #eaeaea;
-}
-
-.form-header h2 {
-    margin: 0 0 0.25rem 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #111111;
-    letter-spacing: -0.3px;
-}
-
-.form-header p {
-    margin: 0;
-    font-size: 0.85rem;
-    color: #666666;
-    line-height: 1.4;
 }
 
 /* Secciones */
 .form-section {
-    padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid #f0f0f0;
+    padding: 2rem;
+    border-bottom: 1px solid #f8f8f8;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
 }
 
 .form-section h3 {
-    color: #111111;
-    margin: 0 0 1rem 0;
-    font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: -0.2px;
+    color: #000000;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-section h3::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    background: #BF0029;
+    border-radius: 2px;
 }
 
 /* Layout de filas */
@@ -123,12 +117,15 @@
 
 /* Botones minimalistas */
 .form-actions {
-    padding: 1rem 1.5rem;
-    background: #fafafa;
+    padding: 1.5rem 2rem;
+    background: #ffffff;
     display: flex;
     justify-content: flex-end;
-    gap: 0.75rem;
-    border-top: 1px solid #eeeeee;
+    gap: 1rem;
+    border-top: 1px solid #f1f1f1;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
 }
 
 /* Ajustes para los botones nativos de lightning */

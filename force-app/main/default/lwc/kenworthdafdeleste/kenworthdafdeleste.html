@@ -1,5 +1,5 @@
 <template>
-    <c-navbar-oficial-page onnavchange={handleNavChange}></c-navbar-oficial-page>
+    <c-navbar-oficial-page onnavchange={handleNavChange} active-page={activePage}></c-navbar-oficial-page>
     
     <template if:true={showInicio}>
         <c-page-oficial-home-component></c-page-oficial-home-component>

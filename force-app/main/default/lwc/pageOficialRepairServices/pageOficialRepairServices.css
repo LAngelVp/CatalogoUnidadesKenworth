@@ -10,14 +10,12 @@
     box-sizing: border-box;
 }
 
-/* Utilities */
-.text-red { color: #d31118; }
-.text-white { color: #ffffff; }
+
 
 .separator-line {
     width: 80px;
     height: 4px;
-    background-color: #d31118;
+    background-color: #E2051F;
     margin: 1.5rem 0;
     border-radius: 2px;
 }
@@ -94,8 +92,8 @@
     font-weight: 500;
     letter-spacing: 5px;
     text-transform: uppercase;
-    border-top: 2px solid #d31118;
-    border-bottom: 2px solid #d31118;
+    border-top: 2px solid #E2051F;
+    border-bottom: 2px solid #E2051F;
     padding: 1rem 0;
     display: inline-block;
 }
@@ -114,14 +112,14 @@
 
 .section-title {
     font-size: 3rem;
-    color: #111;
+    color: Black;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .section-desc {
     font-size: 1.2rem;
-    color: #666;
+    color: #434342;
     line-height: 1.6;
 }
 
@@ -162,13 +160,13 @@
 }
 
 .service-card:hover .service-icon-wrapper {
-    background: #d31118;
+    background: #E2051F;
 }
 
 .service-icon {
     width: 35px;
     height: 35px;
-    stroke: #d31118;
+    stroke: #E2051F;
     transition: stroke 0.4s ease;
 }
 
@@ -185,7 +183,7 @@
 
 .service-text {
     font-size: 1.05rem;
-    color: #666;
+    color: #434342;
     line-height: 1.6;
 }
 
@@ -195,7 +193,7 @@
     left: 0;
     width: 100%;
     height: 4px;
-    background-color: #d31118;
+    background-color: #E2051F;
     transform: scaleX(0);
     transition: transform 0.4s ease;
 }
@@ -243,7 +241,7 @@
 .location-icon {
     width: 40px;
     height: 40px;
-    stroke: #d31118;
+    stroke: #E2051F;
     margin-right: 1.5rem;
     background: rgba(211, 17, 24, 0.1);
     padding: 8px;
@@ -270,12 +268,12 @@
     background-size: 100px 100px;
     background-color: #181818;
     min-height: 400px;
-    border-left: 4px solid #d31118;
+    border-left: 4px solid #E2051F;
 }
 
 .btn-agendar {
     padding: 1rem 2.5rem;
-    background-color: #d31118;
+    background-color: #E2051F;
     color: #ffffff;
     border: none;
     font-size: 1.1rem;
@@ -287,10 +285,14 @@
 }
 
 .btn-agendar:hover {
-    background-color: #b00f14;
+    background-color: #CE0E2C;
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(211, 17, 24, 0.3);
 }
+
+/* Utilities */
+.text-red { color: #E2051F; }
+.text-white { color: #ffffff; }
 
 @media (max-width: 768px) {
     .hero-title { font-size: 2.8rem; }
@@ -299,3 +301,4 @@
     .workshops-text-box { padding: 4rem 2rem; }
     .workshops-image-box { display: none; } /* Hide pattern on mobile */
 }
+
